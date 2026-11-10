@@ -292,6 +292,10 @@ details.fd summary small{font-weight:400;font-size:12px;color:var(--muted)}
 .fvout{flex:none;color:#fff;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.14)}
 .felview iframe{flex:1;width:100%;border:0;background:#fff;margin-bottom:env(safe-area-inset-bottom,0px)}
 body.felon{overflow:hidden}
+.calset{display:flex;flex-direction:column;gap:10px;border-top:1px dashed var(--line);padding-top:10px}
+.howto h4{font-family:var(--f-display);font-size:16px;margin:8px 0 4px}
+.howto ol{margin:0 0 8px;padding-left:1.4em;display:flex;flex-direction:column;gap:4px;font-size:15px}
+.sch .meta span+span::before{content:"・"}
 </style>
 </head>
 <body>
@@ -305,7 +309,7 @@ body.felon{overflow:hidden}
 <script>
 (function(){
 var KEY='steward321.v1',LKEY='steward321.lang';
-var ZS={"並":"并","亞":"亚","來":"来","係":"系","個":"个","們":"们","備":"备","傳":"传","傷":"伤","價":"价","優":"优","儲":"储","兒":"儿","內":"内","兩":"两","冊":"册","別":"别","刪":"删","則":"则","剛":"刚","動":"动","務":"务","勝":"胜","勵":"励","區":"区","協":"协","唸":"念","問":"问","啟":"启","單":"单","嗎":"吗","國":"国","圓":"圆","圖":"图","團":"团","塊":"块","媽":"妈","學":"学","寢":"寝","實":"实","寫":"写","將":"将","專":"专","導":"导","屬":"属","帳":"账","帶":"带","幫":"帮","強":"强","後":"后","從":"从","復":"复","悅":"悦","惡":"恶","愛":"爱","態":"态","慮":"虑","憑":"凭","應":"应","懷":"怀","戰":"战","捨":"舍","掛":"挂","換":"换","撥":"拨","擋":"挡","據":"据","敗":"败","數":"数","斷":"断","於":"于","時":"时","暫":"暂","曆":"历","書":"书","會":"会","東":"东","條":"条","業":"业","榮":"荣","樂":"乐","樓":"楼","標":"标","樣":"样","樹":"树","機":"机","檢":"检","權":"权","歸":"归","殺":"杀","氣":"气","沒":"没","況":"况","淺":"浅","準":"准","溫":"温","滿":"满","潔":"洁","瀏":"浏","灣":"湾","為":"为","無":"无","熱":"热","狀":"状","獎":"奖","獻":"献","現":"现","環":"环","產":"产","畫":"画","當":"当","疇":"畴","療":"疗","發":"发","確":"确","碼":"码","礎":"础","禱":"祷","稱":"称","穌":"稣","筆":"笔","節":"节","範":"范","簡":"简","糧":"粮","紀":"纪","約":"约","紐":"纽","純":"纯","紙":"纸","級":"级","結":"结","絡":"络","給":"给","統":"统","經":"经","網":"网","緊":"紧","緒":"绪","線":"线","編":"编","練":"练","繳":"缴","續":"续","羅":"罗","義":"义","習":"习","聖":"圣","聯":"联","聰":"聪","與":"与","舊":"旧","華":"华","藍":"蓝","蘭":"兰","處":"处","虛":"虚","號":"号","蟲":"虫","裝":"装","裡":"里","製":"制","複":"复","見":"见","視":"视","親":"亲","覺":"觉","覽":"览","觀":"观","訊":"讯","討":"讨","託":"托","記":"记","設":"设","許":"许","訴":"诉","註":"注","評":"评","試":"试","詩":"诗","話":"话","誇":"夸","認":"认","語":"语","誠":"诚","說":"说","誰":"谁","課":"课","調":"调","請":"请","論":"论","謀":"谋","謙":"谦","謝":"谢","謹":"谨","識":"识","議":"议","讀":"读","變":"变","讓":"让","豈":"岂","財":"财","買":"买","費":"费","貼":"贴","資":"资","賜":"赐","賴":"赖","踐":"践","輕":"轻","輪":"轮","轉":"转","這":"这","連":"连","週":"周","進":"进","運":"运","過":"过","適":"适","選":"选","還":"还","邊":"边","醫":"医","釘":"钉","銀":"银","錄":"录","鍵":"键","鐘":"钟","長":"长","閉":"闭","開":"开","間":"间","關":"关","陰":"阴","陳":"陈","隨":"随","險":"险","離":"离","電":"电","靈":"灵","靜":"静","頁":"页","項":"项","預":"预","領":"领","頭":"头","題":"题","額":"额","願":"愿","類":"类","顧":"顾","顯":"显","飯":"饭","飲":"饮","飾":"饰","餘":"余","馬":"马","驕":"骄","驗":"验","驟":"骤","體":"体","麼":"么","點":"点","著":"着","藉":"藉","「":"“","」":"”"};
+var ZS={"並":"并","亞":"亚","來":"来","係":"系","個":"个","們":"们","備":"备","傳":"传","傷":"伤","價":"价","優":"优","儲":"储","兒":"儿","內":"内","兩":"两","冊":"册","別":"别","刪":"删","則":"则","剛":"刚","動":"动","務":"务","勝":"胜","勵":"励","匯":"汇","區":"区","協":"协","唸":"念","問":"问","啟":"启","單":"单","嗎":"吗","國":"国","圓":"圆","圖":"图","團":"团","塊":"块","媽":"妈","學":"学","寢":"寝","實":"实","寫":"写","將":"将","專":"专","對":"对","導":"导","屬":"属","帳":"账","帶":"带","幫":"帮","強":"强","後":"后","從":"从","復":"复","悅":"悦","惡":"恶","愛":"爱","態":"态","慮":"虑","憑":"凭","應":"应","懷":"怀","戰":"战","捨":"舍","掛":"挂","換":"换","撥":"拨","擋":"挡","據":"据","敗":"败","數":"数","斷":"断","於":"于","時":"时","暫":"暂","曆":"历","書":"书","會":"会","東":"东","條":"条","業":"业","榮":"荣","樂":"乐","樓":"楼","標":"标","樣":"样","樹":"树","機":"机","檢":"检","權":"权","歸":"归","殺":"杀","氣":"气","沒":"没","況":"况","淺":"浅","準":"准","溫":"温","滿":"满","潔":"洁","瀏":"浏","灣":"湾","為":"为","無":"无","熱":"热","狀":"状","獎":"奖","獻":"献","現":"现","環":"环","產":"产","畫":"画","當":"当","疇":"畴","療":"疗","發":"发","確":"确","碼":"码","礎":"础","禱":"祷","稱":"称","穌":"稣","筆":"笔","節":"节","範":"范","簡":"简","糧":"粮","紀":"纪","約":"约","紐":"纽","純":"纯","紙":"纸","級":"级","結":"结","絡":"络","給":"给","統":"统","經":"经","網":"网","緊":"紧","緒":"绪","線":"线","編":"编","練":"练","繳":"缴","續":"续","羅":"罗","義":"义","習":"习","聖":"圣","聯":"联","聰":"聪","腦":"脑","與":"与","舊":"旧","華":"华","藍":"蓝","蘭":"兰","處":"处","虛":"虚","號":"号","蟲":"虫","裝":"装","裡":"里","製":"制","複":"复","見":"见","視":"视","親":"亲","覺":"觉","覽":"览","觀":"观","訊":"讯","討":"讨","託":"托","記":"记","設":"设","許":"许","訴":"诉","註":"注","評":"评","試":"试","詩":"诗","話":"话","誇":"夸","認":"认","語":"语","誠":"诚","說":"说","誰":"谁","課":"课","調":"调","請":"请","論":"论","謀":"谋","謙":"谦","謝":"谢","謹":"谨","識":"识","議":"议","讀":"读","變":"变","讓":"让","豈":"岂","財":"财","買":"买","費":"费","貼":"贴","資":"资","賜":"赐","賴":"赖","踐":"践","輕":"轻","輪":"轮","轉":"转","這":"这","連":"连","週":"周","進":"进","運":"运","過":"过","適":"适","選":"选","還":"还","邊":"边","醫":"医","釘":"钉","銀":"银","錄":"录","鍵":"键","鐘":"钟","長":"长","閉":"闭","開":"开","間":"间","關":"关","陰":"阴","陳":"陈","隨":"随","險":"险","離":"离","電":"电","靈":"灵","靜":"静","頁":"页","項":"项","預":"预","領":"领","頭":"头","題":"题","額":"额","願":"愿","類":"类","顧":"顾","顯":"显","飯":"饭","飲":"饮","飾":"饰","餘":"余","馬":"马","驕":"骄","驗":"验","驟":"骤","體":"体","麼":"么","點":"点","齒":"齿","著":"着","藉":"藉","「":"“","」":"”"};
 var L='zh';
 try{L=localStorage.getItem(LKEY)||'';}catch(e){}
 if(L!=='zh'&&L!=='zs'&&L!=='en'){var nl=(navigator.language||'').toLowerCase();L=nl.indexOf('zh')===0?((nl.indexOf('cn')>0||nl.indexOf('hans')>0||nl.indexOf('sg')>0)?'zs':'zh'):(nl?'en':'zh');}
@@ -383,7 +387,7 @@ function seed(){
  var t=ds(),m=t.slice(0,8);
  function h(a,si,ti){return {id:uid(),area:a,si:si,title:T(ti[0],ti[1]),log:{}};}
  function k(a,si,ti,dd,p){return {id:uid(),area:a,si:si,title:T(ti[0],ti[1]),due:addDays(t,dd),pri:p,done:false,ex:true};}
- return {v:2,created:t,name:L==='en'?'':'主耀',feedUrl:'',feed:null,
+ return {v:2,created:t,name:L==='en'?'':'主耀',cals:[],
   habits:[h('god',0,['晨讀321','Morning reading 321']),h('god',1,['安靜禱告 15 分鐘','Quiet prayer, 15 min']),h('self',0,['運動 30 分鐘','Exercise, 30 min']),h('self',0,['11 點前就寢','In bed by 11 pm']),h('people',2,['920：祝福一個人','920: bless one person']),h('work',1,['記帳','Record expenses'])],
   tasks:[k('god',2,['預備週六小家分享','Prepare Saturday small-group sharing'],3,2),k('self',2,['讀完《321學神》第一冊第三課','Finish 321 Theology, Book 1, Lesson 3'],5,1),k('people',0,['和家人一起吃晚飯、一起禱告','Dinner and prayer with family'],0,2),k('work',2,['繳水電費','Pay utility bills'],-1,3),k('work',0,['整理本月工作進度','Review this month\'s work progress'],7,1)],
   people:[{id:uid(),name:T('陳弟兄（範例）','Brother Chen (sample)'),ri:2,last:addDays(t,-20),bday:'',pray:T('工作轉換的方向','Direction in a job change'),ex:true},
@@ -398,7 +402,8 @@ function norm(o){
  if(!o||typeof o!=='object')return seed();
  for(i=0;i<keys.length;i++){if(!(o[keys[i]] instanceof Array))o[keys[i]]=[];}
  if(!o.top3)o.top3={};if(!o.journal)o.journal={};if(!o.reviews)o.reviews={};
- if(o.name==null)o.name='';if(o.feedUrl==null)o.feedUrl='';
+ if(o.name==null)o.name='';if(!(o.cals instanceof Array))o.cals=[];
+ if(o.feedUrl){o.cals.push({id:uid(),name:'每日得勝',url:o.feedUrl,color:'#0a8f84'});}delete o.feedUrl;delete o.feed;
  /* v1 → v2：範疇、關係、類別改存代號，切換語言時才能正確顯示 */
  var mig=[o.habits,o.tasks];
  for(var g=0;g<2;g++){for(i=0;i<mig[g].length;i++){var x=mig[g][i];if(x.si==null){x.si=idxIn(area(x.area).subs,x.sub||'');delete x.sub;}}}
@@ -411,7 +416,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
 var S=load();
 var view='today';
-var ui={wheel:null,backup:false,reset:false,schedOff:0,schedTask:null,aiBusy:false,aiErr:'',feedBusy:false};
+var ui={wheel:null,backup:false,reset:false,schedOff:0,schedTask:null,aiBusy:false,aiErr:'',calBusy:{},calSet:false};
 var tt=null;
 function toast(m){var e=$('toast');e.textContent=m;e.hidden=false;clearTimeout(tt);tt=setTimeout(function(){e.hidden=true;},1800);}
 
@@ -439,40 +444,77 @@ function plannerDay(day){
   out.push({title:r.title,start:r.start||'',end:r.end||'',color:r.color||'',rep:true});}
  return out;
 }
-function icsUnesc(s){return s.replace(/\\n/gi,' ').replace(/\\([,;\\])/g,'$1');}
-function parseICS(txt){
- var evs=[],blocks=txt.replace(/\r?\n[ \t]/g,'').split('BEGIN:VEVENT');
- function get(b,key){var m=new RegExp('(^|\\n)'+key+'([;][^:\\n]*)?:([^\\r\\n]*)').exec(b);return m?m[3]:'';}
- function when(v){var m=/^(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})(Z?))?/.exec(v);if(!m)return null;
-  if(!m[4])return {day:m[1]+'-'+m[2]+'-'+m[3],time:''};
-  var d=m[8]?new Date(Date.UTC(+m[1],+m[2]-1,+m[3],+m[5],+m[6])):new Date(+m[1],+m[2]-1,+m[3],+m[5],+m[6]);
-  return {day:ds(d),time:pad(d.getHours())+':'+pad(d.getMinutes())};}
- for(var i=1;i<blocks.length;i++){var b=blocks[i].split('END:VEVENT')[0],s=when(get(b,'DTSTART')),e=when(get(b,'DTEND'));
-  if(!s)continue;evs.push({day:s.day,start:s.time,end:e&&e.day===s.day?e.time:'',title:icsUnesc(get(b,'SUMMARY'))||T('（無標題）','(untitled)')});}
- return evs;
+/* ---------- 連結的日曆：每日得勝同步網址、Google 日曆私人網址（多個） ---------- */
+var CAL_PROXY='https://ical-proxy.spch321.workers.dev/';
+var CAL_COLORS=['#0a8f84','#4285f4','#d50000','#8e24aa','#f4511e','#0b8043','#f6bf26','#616161'];
+var CACHE_KEY='steward321.calcache',CALC={};
+try{CALC=JSON.parse(localStorage.getItem(CACHE_KEY)||'{}')||{};}catch(e){CALC={};}
+function saveCalc(){try{localStorage.setItem(CACHE_KEY,JSON.stringify(CALC));}catch(e){}}
+function isFeed(u){return String(u||'').indexOf(CAL_PROXY+'feed/')===0;}
+function calUrlFrom(raw){
+ raw=String(raw||'');var m=/(webcal|https):\/\/[^\s"'<>，。]+/i.exec(raw);if(!m)return '';
+ var u=m[0];if(/^webcal:/i.test(u))u='https:'+u.slice(7);return u.replace(/[)）\]】]+$/,'');
 }
-function feedDay(day){var o=[],f=S.feed;if(!f||!f.evs)return o;for(var i=0;i<f.evs.length;i++){if(f.evs[i].day===day)o.push(f.evs[i]);}return o;}
-function refreshFeed(force){
- if(!S.feedUrl||ui.feedBusy)return;
- if(!force&&S.feed&&S.feed.url===S.feedUrl&&Date.now()-S.feed.at<30*60000)return;
- ui.feedBusy=true;
+function calFetch(c,force,cb){
+ var ce=CALC[c.id];
+ if(!force&&ce&&Date.now()-ce.at<20*60000){if(cb)cb();return;}
+ if(ui.calBusy[c.id])return;ui.calBusy[c.id]=1;
+ var url=isFeed(c.url)?c.url+(c.url.indexOf('?')<0?'?':'&')+'t='+Date.now():CAL_PROXY+'?url='+encodeURIComponent(c.url);
  var x=new XMLHttpRequest();
- x.open('GET',S.feedUrl+(S.feedUrl.indexOf('?')<0?'?':'&')+'t='+Date.now());x.timeout=20000;
- x.onload=function(){ui.feedBusy=false;
-  if(x.status>=200&&x.status<300&&x.responseText.indexOf('BEGIN:VCALENDAR')>=0){
-   var t=ds(),lo=addDays(t,-1),hi=addDays(t,14),all=parseICS(x.responseText),keep=[];
-   for(var i=0;i<all.length;i++){if(all[i].day>=lo&&all[i].day<=hi)keep.push(all[i]);}
-   S.feed={url:S.feedUrl,at:Date.now(),evs:keep};save();if(force)toast(T('時程已更新','Schedule updated'));render();}
-  else if(force)toast(T('讀不到這個同步網址','Could not read that sync link'));};
- x.onerror=x.ontimeout=function(){ui.feedBusy=false;if(force)toast(T('連線失敗，請稍後再試','Connection failed, try again later'));};
- try{x.send();}catch(e){ui.feedBusy=false;}
+ function done(err){delete ui.calBusy[c.id];if(err){c.err=err;}else delete c.err;save();if(cb)cb(err);if(view==='today')render();}
+ try{x.open('GET',url);}catch(e){done('net');return;}
+ x.timeout=25000;
+ x.onload=function(){
+  if(x.status===404||x.status===410){done('gone');return;}
+  if(x.status<200||x.status>=300||x.responseText.indexOf('BEGIN:VCALENDAR')<0){done('fmt');return;}
+  var all=gcalBuild(gcalParse(x.responseText)),lo=Date.now()-2*864e5,hi=Date.now()+45*864e5,keep=[];
+  for(var i=0;i<all.length;i++){var e=all[i];if(e.e>=lo&&e.s<=hi)keep.push([e.s,e.e,e.a,e.t,e.l]);}
+  CALC[c.id]={at:Date.now(),ev:keep};saveCalc();done('');
+ };
+ x.onerror=x.ontimeout=function(){done('net');};
+ try{x.send();}catch(e){done('net');}
+}
+function refreshCals(force){for(var i=0;i<S.cals.length;i++)calFetch(S.cals[i],force);}
+function calEventsFor(day){
+ var out=[],d0=pd(day).getTime(),d1=d0+864e5,i,j;
+ for(i=0;i<S.cals.length;i++){var c=S.cals[i],ce=CALC[c.id];if(!ce||c.off)continue;
+  for(j=0;j<ce.ev.length;j++){var e=ce.ev[j];if(e[1]<=d0&&!(e[2]&&e[0]===d0)||e[0]>=d1)continue;
+   var st=new Date(e[0]),en=new Date(e[1]);
+   out.push({title:e[3]||T('（無標題）','(untitled)'),loc:e[4]||'',start:e[2]||e[0]<d0?'':pad(st.getHours())+':'+pad(st.getMinutes()),end:e[2]||e[1]>=d1?'':pad(en.getHours())+':'+pad(en.getMinutes()),color:c.color,cal:c.name,sort:e[2]?-1:e[0]});}}
+ return out;
 }
 function schedFor(day){
- var a=plannerHere()?plannerDay(day):[],b=feedDay(day),seen={},out=[],i,k;
- var all=a.concat(b);
+ var a=plannerHere()?plannerDay(day):[],b=calEventsFor(day),seen={},out=[],i,k,all;
+ for(i=0;i<a.length;i++){a[i].cal=T('每日得勝','Daily Victory');a[i].sort=a[i].start?pd(day).getTime()+(+a[i].start.slice(0,2))*36e5+(+a[i].start.slice(3,5))*6e4:-1;}
+ all=a.concat(b);
  for(i=0;i<all.length;i++){k=all[i].start+'|'+all[i].title;if(seen[k])continue;seen[k]=1;out.push(all[i]);}
- out.sort(function(x,y){return (x.start||'99')<(y.start||'99')?-1:1;});
+ out.sort(function(x,y){return x.sort-y.sort;});
  return out;
+}
+function calSetup(){
+ var h='<div class="calset">',i,c;
+ if(S.cals.length){h+='<div class="list">';
+  for(i=0;i<S.cals.length;i++){c=S.cals[i];var ce=CALC[c.id];
+   h+='<div class="row"><i class="bar2" style="background:'+esc(c.color)+'"></i><div class="grow"><div class="ttl">'+esc(c.name)+'</div><div class="meta">'+
+   (isFeed(c.url)?T('每日得勝時程','Daily Victory schedule'):T('Google 日曆','Google Calendar'))+'・'+
+   (ui.calBusy[c.id]?T('同步中…','Syncing…'):c.err?'<span style="color:var(--warn)">'+(c.err==='gone'?T('對方已停止分享','No longer shared'):c.err==='fmt'?T('網址讀不到日曆，請重新複製','Link did not return a calendar; copy it again'):T('連線失敗','Connection failed'))+'</span>':ce?T('同步於 ','Synced ')+new Date(ce.at).toTimeString().slice(0,5):T('尚未同步','Not synced'))+'</div></div>'+
+   '<button class="x del" data-act="calDel" data-id="'+c.id+'" aria-label="'+T('移除','Remove')+'">×</button></div>';}
+  h+='</div>';}
+ h+='<div class="form"><textarea id="cal_u" class="full" rows="2" placeholder="'+T('貼上同步網址或 iCal 私人網址','Paste a sync link or private iCal address')+'" aria-label="'+T('日曆網址','Calendar link')+'"></textarea>'+
+ '<input id="cal_n" placeholder="'+T('名稱，例如：我的時程、工作','Name, e.g. My schedule, Work')+'" aria-label="'+T('名稱','Name')+'"><button class="btn" data-act="calAdd">'+T('連結','Link')+'</button></div>';
+ h+='<details class="fd"'+(S.cals.length?'':' open')+'><summary>'+ic('list',17)+T('怎麼取得網址','How to get the link')+'</summary><div class="howto">'+
+ '<h4>'+T('每日得勝的時程與日曆活動','Daily Victory schedule and calendar')+'</h4><ol>'+
+ '<li>'+T('打開「321每日得勝」，到「日曆」頁。','Open 321 Daily Victory and go to the Calendar page.')+'</li>'+
+ '<li>'+T('按「📤 匯出到 Google 日曆」。','Tap “📤 Export to Google Calendar”.')+'</li>'+
+ '<li>'+T('按「🔗 建立同步網址」，再按「複製」。','Tap “🔗 Create sync link”, then “Copy”.')+'</li>'+
+ '<li>'+T('回到管家，貼在上面的框，取個名稱，按「連結」。','Come back, paste it above, give it a name and tap “Link”.')+'</li></ol>'+
+ '<h4>'+T('Google 日曆的活動','Google Calendar events')+'</h4><ol>'+
+ '<li>'+T('用電腦打開 Google 日曆，按右上角齒輪 →「設定」。','On a computer, open Google Calendar → gear icon → Settings.')+'</li>'+
+ '<li>'+T('左邊點你的日曆名稱，往下找到「整合日曆」。','Click your calendar on the left, scroll to “Integrate calendar”.')+'</li>'+
+ '<li>'+T('複製「iCal 格式的私人網址」，傳到手機。','Copy the “Secret address in iCal format” and send it to your phone.')+'</li>'+
+ '<li>'+T('貼在上面的框，按「連結」。','Paste it above and tap “Link”.')+'</li></ol>'+
+ '<p class="empty">'+T('🔒 這些網址只存在這支手機，管家只讀取、不會改動你的日曆。','🔒 Links stay on this phone. The Steward only reads your calendars, never changes them.')+'</p></div></details></div>';
+ return h;
 }
 function pushToPlanner(day,title,start,end){
  var key='p4_sched_'+day,arr=lsJ(key)||[];
@@ -545,20 +587,18 @@ function catOpts(keys,sel){var h='';for(var i=0;i<keys.length;i++)h+='<option va
 
 /* ---------- 今日 ---------- */
 function schedCard(){
- var day=addDays(ds(),ui.schedOff),here=plannerHere(),evs=schedFor(day),now=new Date(),hm=pad(now.getHours())+':'+pad(now.getMinutes()),i,h;
- h='<section class="card">'+st('clock',(ui.schedOff?T('明日時程','Tomorrow'):T('今日時程','Today\'s schedule')),T('321每日得勝','321 Daily Victory'))+'';
- if(!here&&!S.feedUrl){
-  h+='<p class="empty">'+T('把管家和每日得勝放在同一個網站（spch321-sudo.github.io）就會自動讀到時程；也可以貼上每日得勝「日曆」頁產生的同步網址。','Install the Steward on the same site as Daily Victory (spch321-sudo.github.io) and your schedule appears automatically, or paste the sync link from the Daily Victory calendar page.')+'</p>'+
-  '<div class="form"><input id="fd_u" class="full" placeholder="https://ical-proxy.spch321.workers.dev/feed/….ics" aria-label="'+T('同步網址','Sync link')+'"><button class="btn" data-act="feedSave">'+T('連結時程','Link schedule')+'</button><a class="btn ghost" href="'+PLANNER_URL+'" target="_blank" rel="noopener">'+T('開啟每日得勝','Open Daily Victory')+'</a></div></section>';
-  return h;
- }
+ var day=addDays(ds(),ui.schedOff),here=plannerHere(),evs=schedFor(day),now=new Date(),hm=pad(now.getHours())+':'+pad(now.getMinutes()),i,h,busy=false,k;
+ for(k in ui.calBusy)busy=true;
+ h='<section class="card">'+st('clock',(ui.schedOff?T('明日時程','Tomorrow'):T('今日時程','Today\'s schedule')),T('每日得勝時程・連結的日曆活動','Daily Victory and linked calendars'));
+ if(!here&&!S.cals.length){h+='<p class="empty">'+T('連結每日得勝的時程和你的日曆，今天要做的事就會全部出現在這裡。','Link your Daily Victory schedule and calendars to see everything for today here.')+'</p>'+calSetup()+'</section>';return h;}
  h+='<div class="list">';
- if(!evs.length)h+='<p class="empty">'+(ui.feedBusy?T('正在讀取時程……','Loading schedule…'):T('這天沒有排定的時程。','Nothing scheduled.'))+'</p>';
+ if(!evs.length)h+='<p class="empty">'+(busy?T('正在讀取時程……','Loading schedule…'):T('這天沒有排定的時程。','Nothing scheduled.'))+'</p>';
  for(i=0;i<evs.length;i++){var e=evs[i],cur=!ui.schedOff&&e.start&&e.end&&e.start<=hm&&hm<e.end;
-  h+='<div class="row sch'+(cur?' now':'')+'"><span class="tm">'+(e.start||T('全天','All day'))+(e.end?'<br>'+e.end:'')+'</span><i class="bar2" style="background:'+esc(e.color||'var(--accent)')+'"></i><div class="grow"><div class="ttl">'+esc(e.title)+'</div>'+(cur?'<div class="meta"><span class="chip gold">'+T('進行中','Now')+'</span></div>':'')+'</div></div>';}
+  h+='<div class="row sch'+(cur?' now':'')+'"><span class="tm">'+(e.start||T('全天','All day'))+(e.end?'<br>'+e.end:'')+'</span><i class="bar2" style="background:'+esc(e.color||'var(--accent)')+'"></i><div class="grow"><div class="ttl">'+esc(e.title)+'</div><div class="meta">'+(cur?'<span class="chip gold">'+T('進行中','Now')+'</span>':'')+(e.cal?'<span>'+esc(e.cal)+'</span>':'')+(e.loc?'<span>'+esc(e.loc)+'</span>':'')+'</div></div></div>';}
  h+='</div><div class="btns"><button class="btn ghost sm" data-act="schedDay">'+(ui.schedOff?T('看今天','Today'):T('看明天','Tomorrow'))+'</button>'+
- (S.feedUrl?'<button class="btn ghost sm" data-act="feedRefresh">'+T('重新整理','Refresh')+'</button>':'')+
- '<a class="btn ghost sm" href="'+PLANNER_URL+'" target="_blank" rel="noopener">'+T('開啟每日得勝','Open Daily Victory')+'</a></div></section>';
+ (S.cals.length?'<button class="btn ghost sm" data-act="calRefresh">'+T('重新整理','Refresh')+'</button>':'')+
+ '<button class="btn ghost sm" data-act="calSet">'+(ui.calSet?T('收起','Close'):T('管理連結的日曆','Linked calendars'))+'</button>'+
+ '<a class="btn ghost sm" href="'+PLANNER_URL+'" target="_blank" rel="noopener">'+T('開啟每日得勝','Open Daily Victory')+'</a></div>'+(ui.calSet?calSetup():'')+'</section>';
  return h;
 }
 function vToday(){
@@ -568,7 +608,6 @@ function vToday(){
  var v=VERSES[doy%VERSES.length],h='',i,cn=[T('一','one'),T('二','two'),T('三','three')];
  h+='<section class="kv"><img src="hero.jpg" alt="'+T('321管家主視覺','321 Steward key visual')+'" width="1080" height="608"><div class="cap"><b>'+greet+(S.name?T('，',', ')+esc(S.name):'')+'</b>'+T('今天也讓耶穌在你裡面作王','Let Jesus reign in you today')+'</div></section>';
  h+='<section class="versecard"><span class="vlabel">'+ic('book',18)+T('今日經文','Today\'s verse')+'</span><blockquote class="verse">'+esc(vt(v[0]))+'</blockquote><p class="ref">'+T(v[1],v[2])+'</p><div class="btns">'+spkBtn('vtoday',vt(v[0])+(L==='en'?' ':'。')+refSay(T(v[1],v[2])),T('今日經文','Today\'s verse'))+'<button class="btn ghost sm" data-act="vcard" data-id="'+v[0]+'">'+ic('image',16)+T('經文美圖','Verse card')+'</button><button class="btn ghost sm" data-act="vshare" data-id="'+v[0]+'">'+ic('share',16)+T('分享','Share')+'</button></div></section>';
- h+=fellowCard();
  if(hasEx())h+='<div class="banner"><span>'+T('畫面上標「範例」的是示範資料，幫你看見管家怎麼運作。','Items marked “Sample” show how the Steward works.')+'</span><button class="btn ghost sm" data-act="clearEx">'+T('清除範例','Clear samples')+'</button></div>';
  h+='<section class="card">'+st('star',T('四重關係','Four relationships'),T('今日操練完成度・按關係次序','Today\'s practices, in order of relationship'))+'<div class="medals">';
  for(i=0;i<AREAS.length;i++){var a=AREAS[i],p=areaPct(a.k,t);
@@ -597,6 +636,7 @@ function vToday(){
   (p0.pray?'<div class="meta" style="margin-top:4px">'+T('代禱：','Pray for: ')+esc(p0.pray)+'</div>':'')+'</div><button class="btn sm" data-act="contact" data-id="'+p0.id+'">'+T('已聯絡','Contacted')+'</button></div>';}
  h+='</section>';
  h+='<section class="card">'+st('moon',T('晚間省察','Evening reflection'),T('凡事謝恩，把榮耀歸給耶穌','Give thanks in everything'))+''+jText('thanks',T('今天感恩的事','What I thank God for today'),T('今天神在哪裡施恩給我？','Where did God show me grace today?'))+'</section>';
+ h+=fellowCard();
  return h;
 }
 
@@ -847,10 +887,7 @@ function vReview(){
  '<div class="setrow"><span>'+T('外觀','Appearance')+'</span><div class="seg">'+(function(){var o='',TH=[['',['跟隨系統','System']],['light',['淺色','Light']],['dark',['深色','Dark']]];for(var q=0;q<3;q++)o+='<button data-act="theme" data-id="'+TH[q][0]+'"'+(SET.theme===TH[q][0]?' class="on"':'')+'>'+tr(TH[q][1])+'</button>';return o;})()+'</div></div>'+
  '<div class="setrow"><span>'+T('版本 ','Version ')+'<b>'+esc(APPVER.indexOf('@@')<0?APPVER:'dev')+'</b></span><div class="btns"><button class="btn ghost sm" data-act="checkUpd">'+T('檢查更新','Check for updates')+'</button><button class="btn ghost sm" data-act="hardUpd">'+T('強制更新','Force update')+'</button></div></div>'+
  '<label class="f" for="nm_me">'+T('你的稱呼','Your name')+'<input id="nm_me" data-bind="name" value="'+esc(S.name)+'"></label>'+
- '<label class="f" for="fd_u2">'+T('每日得勝同步網址（可空白）','Daily Victory sync link (optional)')+'<input id="fd_u2" value="'+esc(S.feedUrl)+'" placeholder="https://ical-proxy.spch321.workers.dev/feed/….ics"></label>'+
- '<div class="meta">'+(plannerHere()?T('已在同一網站找到每日得勝，時程會直接讀取。','Daily Victory found on this site; the schedule is read directly.'):T('同一網站還沒有每日得勝資料。','No Daily Victory data on this site yet.'))+'</div>'+
- '<div class="btns"><button class="btn ghost sm" data-act="feedSave2">'+T('儲存同步網址','Save sync link')+'</button></div>'+
- '<div class="btns"><button class="btn ghost" data-act="backup">'+(ui.backup?T('收起備份','Hide backup'):T('產生備份','Create backup'))+'</button>'+(hasEx()?'<button class="btn ghost" data-act="clearEx">'+T('清除範例','Clear samples')+'</button>':'')+'</div>';
+  '<div class="btns"><button class="btn ghost" data-act="backup">'+(ui.backup?T('收起備份','Hide backup'):T('產生備份','Create backup'))+'</button>'+(hasEx()?'<button class="btn ghost" data-act="clearEx">'+T('清除範例','Clear samples')+'</button>':'')+'</div>';
  if(ui.backup)h+='<textarea id="bk" readonly style="min-height:120px;font-size:13px">'+esc(JSON.stringify(S))+'</textarea><div class="btns"><button class="btn sm" data-act="copyBk">'+T('複製備份文字','Copy backup text')+'</button></div><p class="empty">'+T('把這段文字貼到記事本或寄給自己保存。','Paste it into a note or email it to yourself.')+'</p>';
  h+='<label class="f" for="imp">'+T('還原備份','Restore backup')+'<textarea id="imp" placeholder="'+T('貼上先前複製的備份文字','Paste your backup text')+'"></textarea></label><div class="btns"><button class="btn ghost sm" data-act="importData">'+T('還原','Restore')+'</button></div>';
  h+=ui.reset?'<div class="banner"><span>'+T('確定要清空全部資料、回到初始狀態嗎？此動作無法復原。','Erase all data and start over? This cannot be undone.')+'</span><button class="btn danger sm" data-act="resetYes">'+T('確定清空','Erase all')+'</button><button class="btn ghost sm" data-act="resetNo">'+T('取消','Cancel')+'</button></div>'
@@ -928,10 +965,15 @@ document.addEventListener('click',function(e){
   if(pushToPlanner(day,x.title,st,en)){ui.schedTask=null;toast(T('已排入每日得勝 ','Added to Daily Victory ')+md(day));render();}else toast(T('寫入失敗，請稍後再試','Could not save, try again'));
   return;
  case 'schedDay':ui.schedOff=ui.schedOff?0:1;render();return;
- case 'feedSave':case 'feedSave2':x=val(act==='feedSave'?'fd_u':'fd_u2');
-  if(x&&!okUrl(x)){toast(T('請貼上 https 開頭的同步網址','Paste a link starting with https'));return;}
-  S.feedUrl=x;S.feed=null;save();render();if(x){toast(T('正在讀取時程……','Loading schedule…'));refreshFeed(true);}else toast(T('已取消同步網址','Sync link removed'));return;
- case 'feedRefresh':refreshFeed(true);render();return;
+ case 'calAdd':x=calUrlFrom(val('cal_u'));
+  if(!x){toast(T('請貼上 https 或 webcal 開頭的網址','Paste a link starting with https or webcal'));return;}
+  for(i=0;i<S.cals.length;i++){if(S.cals[i].url===x){toast(T('這個日曆已經連結了','Already linked'));return;}}
+  var cn=val('cal_n')||(isFeed(x)?T('每日得勝','Daily Victory'):T('Google 日曆','Google Calendar'));
+  var nc={id:uid(),name:cn,url:x,color:CAL_COLORS[S.cals.length%CAL_COLORS.length]};S.cals.push(nc);save();ui.calSet=true;render();
+  toast(T('正在讀取 ','Loading ')+cn+'…');calFetch(nc,true,function(err){toast(err?T('讀不到這個日曆，請確認網址','Could not read this calendar; check the link'):T('已連結 ','Linked ')+cn);});return;
+ case 'calDel':i=find(S.cals,id);if(i>=0){delete CALC[id];saveCalc();S.cals.splice(i,1);}toast(T('已移除','Removed'));break;
+ case 'calRefresh':refreshCals(true);toast(T('正在更新時程…','Updating…'));render();return;
+ case 'calSet':ui.calSet=!ui.calSet;render();return;
  case 'contact':i=find(S.people,id);if(i<0)return;S.people[i].last=t;toast(T('願主祝福 ','God bless ')+S.people[i].name);break;
  case 'delPerson':i=find(S.people,id);if(i>=0)S.people.splice(i,1);break;
  case 'addPerson':x=val('np_n');if(!x){$('np_n').focus();return;}S.people.push({id:uid(),name:x,ri:+val('np_r')||0,last:'',bday:val('np_b'),pray:val('np_p')});toast(T('已加入關懷名單','Added to care list'));break;
@@ -974,7 +1016,7 @@ document.addEventListener('input',function(e){
 window.addEventListener('storage',function(e){if(e.key&&e.key.indexOf('p4_sched')===0&&view==='today')render();});
 
 /* ================= 321 App 共用功能（ES5）：字級、主題、朗讀、經文美圖、空中團契、自動更新、小智強化 ================= */
-var APPVER='v2026.1111.0557';
+var APPVER='v2026.1111.0607';
 var SETK='steward321.set',SET={font:0,theme:''};
 try{var _st=JSON.parse(localStorage.getItem(SETK)||'{}');if(_st){SET.font=+_st.font||0;SET.theme=_st.theme||'';}}catch(e){}
 function saveSet(){try{localStorage.setItem(SETK,JSON.stringify(SET));}catch(e){}}
@@ -1311,6 +1353,155 @@ function updInit(){
  setInterval(updIdle,20000);
 }
 
+/* 以下日曆解析取自 321每日得勝（含重複事件、時區、例外日） */
+var _gcFmt={};
+function _gcPad(n) { return n < 10 ? '0' + n : '' + n; }
+function _gcUnesc(s) { return String(s || '').replace(/\\n/gi, ' ').replace(/\\([,;\\])/g, '$1'); }
+function _gcTzOff(tz, ms) {
+  try {
+    var f = _gcFmt[tz];
+    if (!f) f = _gcFmt[tz] = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    var m = /(\d+)\/(\d+)\/(\d+),?\s+(\d+):(\d+):(\d+)/.exec(f.format(new Date(ms)));
+    if (!m) return null;
+    var h = parseInt(m[4], 10) % 24;
+    return Date.UTC(+m[3], +m[1] - 1, +m[2], h, +m[5], +m[6]) - Math.floor(ms / 1000) * 1000;
+  } catch (e) { return null; }
+}
+function _gcWall(y, mo, d, h, mi, s, tz) {   /* mo: 1–12 */
+  if (tz === 'Z') return Date.UTC(y, mo - 1, d, h, mi, s);
+  if (tz) {
+    var g = Date.UTC(y, mo - 1, d, h, mi, s), o = _gcTzOff(tz, g);
+    if (o != null) { var u = g - o, o2 = _gcTzOff(tz, u); return (o2 != null && o2 !== o) ? g - o2 : u; }
+  }
+  return new Date(y, mo - 1, d, h, mi, s).getTime();   /* 浮動時間或不認得的時區：當作本機時間 */
+}
+function _gcParseDT(v, p) {
+  var m = /^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})?(Z)?)?/.exec(v || '');
+  if (!m) return null;
+  var r = { y: +m[1], m: +m[2], d: +m[3], h: +(m[4] || 0), mi: +(m[5] || 0), s: +(m[6] || 0), day: !m[4] };
+  r.tz = m[7] ? 'Z' : (p.TZID || '');
+  return r;
+}
+function _gcDur(v) {
+  var m = /^([+-])?P(?:(\d+)W)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?/.exec(v || '');
+  if (!m) return 0;
+  var ms = (((+(m[2] || 0) * 7 + +(m[3] || 0)) * 24 + +(m[4] || 0)) * 60 + +(m[5] || 0)) * 60000 + +(m[6] || 0) * 1000;
+  return m[1] === '-' ? -ms : ms;
+}
+function _gcRule(s) {
+  var r = {}, a = String(s || '').split(';');
+  for (var i = 0; i < a.length; i++) { var kv = a[i].split('='); if (kv.length === 2) r[kv[0].toUpperCase()] = kv[1]; }
+  return r;
+}
+function _gcDays(y, m) { return new Date(y, m, 0).getDate(); }
+function _gcPeriod(freq, rule, st, k, iv) {
+  var out = [], i, by = rule.BYDAY ? rule.BYDAY.split(',') : null, bmd = rule.BYMONTHDAY ? rule.BYMONTHDAY.split(',') : null;
+  if (freq === 'DAILY') { var dd = new Date(st.y, st.m - 1, st.d + k * iv); out.push([dd.getFullYear(), dd.getMonth() + 1, dd.getDate()]); }
+  else if (freq === 'WEEKLY') {
+    var wk = _GC_WD[(rule.WKST || 'MO')] || 0, s0 = new Date(st.y, st.m - 1, st.d), back = (s0.getDay() - wk + 7) % 7;
+    var ws = new Date(st.y, st.m - 1, st.d - back + k * iv * 7);
+    var list = by ? by : [['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'][s0.getDay()]];
+    for (i = 0; i < list.length; i++) {
+      var wd = _GC_WD[list[i].replace(/^[+-]?\d+/, '')]; if (wd == null) continue;
+      var dd2 = new Date(ws.getFullYear(), ws.getMonth(), ws.getDate() + ((wd - wk + 7) % 7));
+      out.push([dd2.getFullYear(), dd2.getMonth() + 1, dd2.getDate()]);
+    }
+  } else if (freq === 'MONTHLY' || freq === 'YEARLY') {
+    var months = [];
+    if (freq === 'MONTHLY') { var mm = new Date(st.y, st.m - 1 + k * iv, 1); months.push([mm.getFullYear(), mm.getMonth() + 1]); }
+    else { var yy = st.y + k * iv, bm = rule.BYMONTH ? rule.BYMONTH.split(',') : [String(st.m)]; for (i = 0; i < bm.length; i++) months.push([yy, +bm[i]]); }
+    for (var q = 0; q < months.length; q++) {
+      var Y = months[q][0], M = months[q][1], dim = _gcDays(Y, M);
+      if (bmd) { for (i = 0; i < bmd.length; i++) { var n = +bmd[i]; var D = n < 0 ? dim + n + 1 : n; if (D >= 1 && D <= dim) out.push([Y, M, D]); } }
+      else if (by && (freq === 'MONTHLY' || rule.BYMONTH)) {
+        for (i = 0; i < by.length; i++) {
+          var mt = /^([+-]?\d+)?([A-Z]{2})$/.exec(by[i]); if (!mt) continue;
+          var w = _GC_WD[mt[2]], ord = mt[1] ? +mt[1] : 0, hits = [];
+          for (var dday = 1; dday <= dim; dday++) if (new Date(Y, M - 1, dday).getDay() === w) hits.push(dday);
+          if (rule.BYSETPOS) ord = +rule.BYSETPOS;
+          if (!ord) { for (var z = 0; z < hits.length; z++) out.push([Y, M, hits[z]]); }
+          else { var pick = ord > 0 ? hits[ord - 1] : hits[hits.length + ord]; if (pick) out.push([Y, M, pick]); }
+        }
+      } else if (st.d <= dim) out.push([Y, M, st.d]);
+    }
+  }
+  out.sort(function (a, b) { return (a[0] - b[0]) || (a[1] - b[1]) || (a[2] - b[2]); });
+  return out;
+}
+function _gcExpand(ev, from, to, push) {
+  var st = ev.ds; if (!st) return;
+  var s0 = _gcMs(st), dur;
+  if (ev.de) dur = _gcMs(ev.de) - s0; else if (ev.du) dur = ev.du; else dur = st.day ? 86400000 : 0;
+  if (dur < 0) dur = 0;
+  var exk = {};
+  for (var i = 0; i < ev.ex.length; i++) { var x = ev.ex[i]; exk[x.y + '-' + x.m + '-' + x.d + (st.day ? '' : '@' + _gcMs(x))] = 1; exk[x.y + '-' + x.m + '-' + x.d] = 1; }
+  if (!ev.rr) { if (s0 + dur >= from && s0 <= to) push(s0, dur, st.day); return; }
+  var r = _gcRule(ev.rr), freq = r.FREQ, iv = Math.max(1, +(r.INTERVAL || 1)), cnt = r.COUNT ? +r.COUNT : 0, until = null, made = 0;
+  if (!freq || !/^(DAILY|WEEKLY|MONTHLY|YEARLY)$/.test(freq)) { if (s0 + dur >= from && s0 <= to) push(s0, dur, st.day); return; }
+  if (r.UNTIL) { var u = _gcParseDT(r.UNTIL, {}); if (u) { until = _gcMs(u); if (u.day || st.day) until += 86399999; } }
+  for (var k = 0; k < 5000; k++) {
+    var days = _gcPeriod(freq, r, st, k, iv);
+    if (!days.length && k > 400) break;
+    for (var j = 0; j < days.length; j++) {
+      var D = days[j], o = { y: D[0], m: D[1], d: D[2], h: st.h, mi: st.mi, s: st.s, day: st.day, tz: st.tz }, ms = _gcMs(o);
+      if (ms < s0) continue;
+      if (until != null && ms > until) return;
+      made++;
+      if (cnt && made > cnt) return;
+      if (ms > to) return;
+      var key = D[0] + '-' + D[1] + '-' + D[2];
+      if (exk[key + '@' + ms] || (st.day && exk[key]) || (ev._ov && ev._ov[ms])) continue;
+      if (ms + dur >= from) push(ms, dur, st.day);
+    }
+  }
+}
+function gcalParse(text) {
+  text = String(text || '').replace(/\r?\n[ \t]/g, '');
+  var lines = text.split(/\r?\n/), evs = [], cur = null, depth = 0;
+  for (var i = 0; i < lines.length; i++) {
+    var ln = lines[i]; if (!ln) continue;
+    if (ln === 'BEGIN:VEVENT') { cur = { ex: [] }; depth = 0; continue; }
+    if (!cur) continue;
+    if (/^BEGIN:/.test(ln)) { depth++; continue; }          /* VALARM 等巢狀區塊略過 */
+    if (/^END:/.test(ln)) { if (depth) { depth--; continue; } if (ln === 'END:VEVENT') { evs.push(cur); cur = null; } continue; }
+    if (depth) continue;
+    var ci = ln.indexOf(':'); if (ci < 0) continue;
+    var head = ln.slice(0, ci), val = ln.slice(ci + 1), parts = head.split(';'), name = parts[0].toUpperCase(), p = {};
+    for (var j = 1; j < parts.length; j++) { var eq = parts[j].indexOf('='); if (eq > 0) p[parts[j].slice(0, eq).toUpperCase()] = parts[j].slice(eq + 1).replace(/^"|"$/g, ''); }
+    if (name === 'SUMMARY') cur.t = _gcUnesc(val);
+    else if (name === 'LOCATION') cur.l = _gcUnesc(val);
+    else if (name === 'UID') cur.uid = val;
+    else if (name === 'STATUS') cur.st = val.toUpperCase();
+    else if (name === 'DTSTART') cur.ds = _gcParseDT(val, p);
+    else if (name === 'DTEND') cur.de = _gcParseDT(val, p);
+    else if (name === 'DURATION') cur.du = _gcDur(val);
+    else if (name === 'RRULE') cur.rr = val;
+    else if (name === 'RECURRENCE-ID') cur.rid = _gcParseDT(val, p);
+    else if (name === 'EXDATE') { var xs = val.split(','); for (var k = 0; k < xs.length; k++) { var x = _gcParseDT(xs[k], p); if (x) cur.ex.push(x); } }
+  }
+  return evs;
+}
+function gcalBuild(evs) {
+  var now = Date.now(), from = now - 200 * 86400000, to = now + 400 * 86400000, out = [], byUid = {}, i;
+  for (i = 0; i < evs.length; i++) if (evs[i].rid && evs[i].uid) { (byUid[evs[i].uid] = byUid[evs[i].uid] || []).push(evs[i]); }
+  for (i = 0; i < evs.length; i++) {
+    var ev = evs[i];
+    if (ev.rr && ev.uid && byUid[ev.uid]) { ev._ov = {}; for (var q = 0; q < byUid[ev.uid].length; q++) ev._ov[_gcMs(byUid[ev.uid][q].rid)] = 1; }
+  }
+  for (i = 0; i < evs.length; i++) {
+    (function (ev) {
+      if (ev.st === 'CANCELLED') return;
+      _gcExpand(ev, from, to, function (s, d, a) {
+        if (out.length < 4000) out.push({ s: s, e: s + d, a: a ? 1 : 0, t: ev.t || '', l: ev.l || '' });
+      });
+    })(evs[i]);
+  }
+  out.sort(function (a, b) { return a.s - b.s; });
+  return out;
+}
+function _gcMs(o) { return o.day ? new Date(o.y, o.m - 1, o.d).getTime() : _gcWall(o.y, o.m, o.d, o.h, o.mi, o.s, o.tz); }
+var _GC_WD = { SU: 0, MO: 1, TU: 2, WE: 3, TH: 4, FR: 5, SA: 6 };
+
 var SKEY='steward321.splash';
 function showSplash(){
  var now=new Date(),hr=now.getHours(),greet=hr<5?T('夜深了','Late night'):hr<11?T('早安','Good morning'):hr<18?T('午安','Good afternoon'):T('晚安','Good evening');
@@ -1321,7 +1512,7 @@ function showSplash(){
 function hideSplash(){$('splash').hidden=true;try{localStorage.setItem(SKEY,ds());}catch(e){}}
 applyChrome();
 render();
-refreshFeed(false);
+refreshCals(false);
 felLoad();
 updInit();
 (function(){var seen='';try{seen=localStorage.getItem(SKEY)||'';}catch(e){}if(seen!==ds())showSplash();})();

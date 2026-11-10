@@ -1,5 +1,5 @@
 /* 321管家 service worker：網頁與程式網路優先（拿得到新版就用新版），圖片快取優先，只清自己前綴的快取 */
-var VER='v2026.1111.0557',PFX='steward321-',CACHE=PFX+VER;
+var VER='v2026.1111.0607',PFX='steward321-',CACHE=PFX+VER;
 var CORE=['./','index.html','hero.jpg','manifest.json','icon-v2-192.png','icon-v2-512.png','apple-touch-icon-v2.png'];
 self.addEventListener('install',function(e){
  self.skipWaiting();

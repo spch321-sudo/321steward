@@ -36,50 +36,49 @@ function norm(o){
  o.v=3;return o;
 }
 
-/* ---------- 雲端加密備份（每日得勝同一個 Worker；內容在手機上先加密，只有備份碼能解開） ---------- */
-var CKEY='steward321.cloud',CLOUD=null,cloudTimer=null,cloudBusy=false;
-try{CLOUD=JSON.parse(localStorage.getItem(CKEY)||'null');}catch(e){CLOUD=null;}
-function saveCloud(){try{if(CLOUD)localStorage.setItem(CKEY,JSON.stringify(CLOUD));else localStorage.removeItem(CKEY);}catch(e){}}
-function rnd(n){var a='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789',s='',i,b=null;try{b=new Uint8Array(n);crypto.getRandomValues(b);}catch(e){}for(i=0;i<n;i++)s+=a.charAt((b?b[i]:Math.floor(Math.random()*256))%a.length);return s;}
-function cloudCode(c){return '321S-'+c.id+'-'+c.key+'-'+c.sec;}
-function parseCode(t){var m=/321S-([A-Za-z0-9]{20,40})-([A-Za-z0-9]{30,50})-([A-Za-z0-9]{20,50})/.exec(String(t||''));return m?{id:m[1],key:m[2],sec:m[3]}:null;}
-function u8(str){if(window.TextEncoder)return new TextEncoder().encode(str);var s=unescape(encodeURIComponent(str)),a=new Uint8Array(s.length);for(var i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return a;}
-function fromU8(a){if(window.TextDecoder)return new TextDecoder().decode(a);var s='';for(var i=0;i<a.length;i++)s+=String.fromCharCode(a[i]);return decodeURIComponent(escape(s));}
-function b64(a){var s='',i,ch=8192;for(i=0;i<a.length;i+=ch)s+=String.fromCharCode.apply(null,a.subarray(i,i+ch));return btoa(s);}
-function unb64(s){var b=atob(s),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a;}
-function aesKey(sec){return crypto.subtle.digest('SHA-256',u8('321steward|'+sec)).then(function(h){return crypto.subtle.importKey('raw',h,{name:'AES-GCM'},false,['encrypt','decrypt']);});}
-function cloudOk(){return !!(window.crypto&&crypto.subtle&&window.Promise);}
-function cloudPush(cb){
- if(!CLOUD||cloudBusy||!cloudOk()){if(cb)cb(!cloudOk()?'nocrypto':'busy');return;}
- cloudBusy=true;var iv=new Uint8Array(12);crypto.getRandomValues(iv);
- aesKey(CLOUD.sec).then(function(k){return crypto.subtle.encrypt({name:'AES-GCM',iv:iv},k,u8(JSON.stringify(S)));}).then(function(ct){
-  var all=new Uint8Array(12+ct.byteLength);all.set(iv,0);all.set(new Uint8Array(ct),12);
-  var s=b64(all),body='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//321 Steward//Backup//ZH\r\nX-WR-CALNAME:321 Steward backup\r\nX-STEWARD-V:1\r\nX-STEWARD-TS:'+Date.now()+'\r\n',i;
-  for(i=0;i<s.length;i+=72)body+='X-STEWARD-B:'+s.slice(i,i+72)+'\r\n';
-  body+='END:VCALENDAR\r\n';
-  var x=new XMLHttpRequest();x.open('PUT',CAL_PROXY+'feed/'+CLOUD.id);x.setRequestHeader('X-Feed-Key',CLOUD.key);x.setRequestHeader('Content-Type','text/calendar; charset=utf-8');x.timeout=30000;
-  x.onload=function(){cloudBusy=false;if(x.status>=200&&x.status<300){CLOUD.at=Date.now();CLOUD.err='';saveCloud();if(cb)cb('');}else{CLOUD.err='http '+x.status;saveCloud();if(cb)cb(CLOUD.err);}};
-  x.onerror=x.ontimeout=function(){cloudBusy=false;CLOUD.err='net';saveCloud();if(cb)cb('net');};
-  x.send(body);
- },function(){cloudBusy=false;if(cb)cb('crypto');});
+/* ---------- 321 共用帳號（k321acct.js）：管家的雲端位置 'steward'；每日得勝公開給管家的時程在 'planner-pub' ---------- */
+var ACC=window.K321ACCT||null,acctTimer=null,acctBusy=false,PUB={evs:null,at:0,busy:false};
+try{var _pb=JSON.parse(localStorage.getItem('steward321.pub')||'null');if(_pb&&_pb.evs)PUB=_pb;}catch(e){}
+(function(){var c=null;try{c=JSON.parse(localStorage.getItem('steward321.cloud')||'null');}catch(e){}
+ if(ACC&&c&&c.id&&c.key&&c.sec){ACC.adopt(c);try{localStorage.removeItem('steward321.cloud');}catch(e){}setTimeout(function(){acctPush(null);},4000);}})();
+function cloudOk(){return !!(ACC&&ACC.ok());}
+function acctOn(){return !!(ACC&&ACC.get());}
+function acctPush(cb){
+ if(!acctOn()||acctBusy){if(cb)cb(acctOn()?'busy':'noacct');return;}
+ acctBusy=true;ACC.put('steward',S,function(err){acctBusy=false;ui.acctErr=err||'';if(cb)cb(err);if(view==='review'&&ui.rtab==='set')render();});
 }
-function cloudSoon(){if(!CLOUD)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(function(){if(Date.now()-(CLOUD.at||0)>8*60000)cloudPush(null);else cloudSoon();},90000);}
-function cloudFetch(c,cb){
- if(!cloudOk()){cb('nocrypto');return;}
- var x=new XMLHttpRequest();x.open('GET',CAL_PROXY+'feed/'+c.id+'.ics?t='+Date.now());x.timeout=30000;
- x.onload=function(){
-  if(x.status<200||x.status>=300){cb(x.status===404?'gone':'http '+x.status);return;}
-  var m=x.responseText.match(/^X-STEWARD-B:(.*)$/gm);if(!m){cb('fmt');return;}
-  var s='';for(var i=0;i<m.length;i++)s+=m[i].replace(/^X-STEWARD-B:/,'').replace(/\s/g,'');
-  var all;try{all=unb64(s);}catch(e){cb('fmt');return;}
-  aesKey(c.sec).then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:all.subarray(0,12)},k,all.subarray(12));}).then(function(pt){
-   try{cb('',JSON.parse(fromU8(new Uint8Array(pt))));}catch(e){cb('fmt');}
-  },function(){cb('key');});
- };
- x.onerror=x.ontimeout=function(){cb('net');};x.send();
+function cloudSoon(){if(!acctOn())return;clearTimeout(acctTimer);acctTimer=setTimeout(function(){if(Date.now()-ACC.lastAt('steward')>5*60000)acctPush(null);else cloudSoon();},60000);}
+function loadPub(force){
+ if(!acctOn()||PUB.busy)return;if(!force&&PUB.chk&&Date.now()-PUB.chk<15*60000)return;
+ PUB.busy=true;PUB.chk=Date.now();
+ ACC.fetch('planner-pub',function(err,o,ts){PUB.busy=false;
+  if(!err&&o&&o.ev){PUB.evs=o.ev;PUB.at=o.at||ts||Date.now();try{localStorage.setItem('steward321.pub',JSON.stringify({evs:PUB.evs,at:PUB.at}));}catch(e){}if(view==='today')render();}
+ });
 }
-function cloudErr(e){return e==='gone'?T('雲端找不到這份備份','No backup found for this code'):e==='key'?T('備份碼不正確','The backup code is not correct'):e==='nocrypto'?T('這個瀏覽器不支援加密備份','This browser cannot encrypt backups'):e==='fmt'?T('備份內容讀不出來','The backup could not be read'):e==='net'?T('網路連不上，稍後再試','No connection, try again later'):T('雲端暫時無法使用（','Cloud unavailable (')+e+T('）',')');}
-function applyRestore(o){S=norm(o);S.onb=1;ui.wheel=null;ui.restore=null;save();render();toast(T('已還原備份','Backup restored'));}
+function pubFor(day){
+ var o=[],i,e;if(!PUB.evs||!acctOn())return o;
+ for(i=0;i<PUB.evs.length;i++){e=PUB.evs[i];if(e.d!==day)continue;
+  o.push({title:e.t||T('（無標題）','(untitled)'),start:e.s||'',end:e.e||'',color:e.c||'#2d3a8c',cal:e.n||T('每日得勝','Daily Victory'),loc:e.l||'',sort:e.s?pd(day).getTime()+(+e.s.slice(0,2))*36e5+(+e.s.slice(3,5))*6e4:-1});}
+ return o;
+}
+function acctChanged(kind){
+ if(kind==='create'){toast(T('正在建立第一次備份…','Creating the first backup…'));acctPush(function(err){toast(err?cloudErr(err):T('已建立帳號並完成備份，請存好帳號碼','Account created and backed up. Keep your code safe'));});ACC.syncProfile();}
+ else if(kind==='login'){
+  toast(T('正在讀取雲端資料…','Reading cloud data…'));
+  ACC.fetch('steward',function(err,o){
+   if(err==='gone'){var a=ACC.get();
+    if(a&&a.legacy){ACC.fetch('legacy',function(e2,o2){if(!e2){ui.restore=o2;render();}else acctPush(null);});return;}
+    acctPush(null);toast(T('已登入，這支手機的資料已備份到帳號','Signed in; this phone\'s data is now backed up'));return;}
+   if(err){toast(cloudErr(err));return;}
+   ui.restore=o;ui.rtab='set';view='review';render();
+  });
+  ACC.syncProfile(function(e,n){if(n)toast(T('已帶入共用設定（空中團契開通）','Shared settings applied'));});loadPub(true);
+ }
+ else if(kind==='logout'){PUB={evs:null,at:0,busy:false};try{localStorage.removeItem('steward321.pub');}catch(e){}}
+ render();
+}
+function cloudErr(e){return e==='gone'?T('雲端找不到資料','No cloud data found'):e==='key'?T('帳號碼不正確','The account code is not correct'):e==='nocrypto'?T('這個瀏覽器不支援加密','This browser cannot encrypt'):e==='fmt'?T('雲端資料讀不出來','Cloud data could not be read'):e==='net'?T('網路連不上，稍後再試','No connection, try again later'):T('雲端暫時無法使用（','Cloud unavailable (')+e+T('）',')');}
+function applyRestore(o){S=norm(o);S.onb=1;ui.wheel=null;ui.restore=null;try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}acctPush(null);render();toast(T('已還原資料','Data restored'));}
 
 /* 備份檔（分享或下載 JSON） */
 function fileBackup(){
@@ -548,7 +547,7 @@ function settingsPanel(){
  setRow(T('幣別','Currency'),segOf(function(){var o=[];for(var q=0;q<CURS.length;q++)o.push([CURS[q][0],[CURS[q][0],CURS[q][0]]]);return o;}(),S.cur,'cur'))+
  '<details class="fd"'+(ui.layout?' open':'')+'><summary>'+ic('list',17)+T('今日頁版面','Today page layout')+'<small>'+T('排順序、隱藏、收進「更多」','Order, hide, or move under “More”')+'</small></summary>'+layoutCard()+'</details></section>';
  h+='<section class="card">'+st('clock',T('每日提醒','Daily reminders'),T('晨讀、920、晚間省察','Morning reading, 920, evening reflection'))+remCard()+'</section>';
- h+='<section class="card">'+st('share',T('雲端備份','Cloud backup'),T('換手機或資料被清除時，用備份碼找回','Restore everything on a new phone with your code'))+cloudPanel()+'</section>';
+ h+='<section class="card">'+st('share',T('321 共用帳號','321 Account'),T('一組帳號碼，所有 321 App 共用','One code for every 321 app'))+cloudPanel()+'</section>';
  h+='<section class="card">'+st('pen',T('備份檔','Backup file'),T('另存一份在檔案、雲端硬碟或寄給自己','Keep a copy in Files, a drive or email'))+
  '<div class="btns"><button class="btn ghost" data-act="fileBk">'+ic('share',16)+T('匯出備份檔','Export backup file')+'</button><label class="btn ghost" for="fileIn">'+T('從備份檔還原','Restore from file')+'</label><input type="file" id="fileIn" accept=".json,application/json" hidden></div>'+restoreConfirm()+
  '<details class="fd"'+(ui.backup?' open':'')+'><summary>'+T('用文字備份／還原','Text backup / restore')+'</summary><div class="btns"><button class="btn ghost sm" data-act="backup">'+(ui.backup?T('收起','Hide'):T('顯示備份文字','Show backup text'))+'</button></div>'+
@@ -557,7 +556,7 @@ function settingsPanel(){
  h+='<section class="card">'+st('self',T('隱私','Privacy'),'')+
  setRow(T('小智回顧時','When Xiaozhi reviews'),segOf([['1',['可以讀我的筆記','May read my notes']],['0',['不要讀我的筆記','Don\'t read my notes']]],S.aiJ?'1':'0','aiJ'))+
  setRow(T('密碼鎖','Passcode lock'),lockOn()?'<div class="btns"><span class="chip gold">'+T('已開啟','On')+'</span><button class="btn ghost sm" data-act="lockNow">'+T('立即上鎖','Lock now')+'</button><button class="btn ghost sm" data-act="lockOff">'+T('關閉密碼鎖','Turn off')+'</button></div>':
-  (ui.lockSet?'<div class="form"><input id="pin1" type="password" inputmode="numeric" maxlength="4" placeholder="'+T('4 位數密碼','4-digit passcode')+'"><input id="pin2" type="password" inputmode="numeric" maxlength="4" placeholder="'+T('再輸入一次','Again')+'"><div class="btns full"><button class="btn sm" data-act="lockSave">'+T('開啟','Turn on')+'</button><button class="btn ghost sm" data-act="lockCancel">'+T('取消','Cancel')+'</button></div><p class="empty full">'+T('忘記密碼時只能清除資料，再用雲端備份碼還原，請先設定雲端備份。','If you forget it, you can only clear the data and restore from cloud backup, so set that up first.')+'</p></div>':'<div class="btns"><button class="btn ghost sm" data-act="lockSet">'+T('設定密碼鎖','Set a passcode')+'</button></div>'))+'</section>';
+  (ui.lockSet?'<div class="form"><input id="pin1" type="password" inputmode="numeric" maxlength="4" placeholder="'+T('4 位數密碼','4-digit passcode')+'"><input id="pin2" type="password" inputmode="numeric" maxlength="4" placeholder="'+T('再輸入一次','Again')+'"><div class="btns full"><button class="btn sm" data-act="lockSave">'+T('開啟','Turn on')+'</button><button class="btn ghost sm" data-act="lockCancel">'+T('取消','Cancel')+'</button></div><p class="empty full">'+T('忘記密碼時只能清除資料，再用 321 帳號碼還原，請先登入帳號。','If you forget it, you can only clear the data and restore with your 321 Account, so sign in first.')+'</p></div>':'<div class="btns"><button class="btn ghost sm" data-act="lockSet">'+T('設定密碼鎖','Set a passcode')+'</button></div>'))+'</section>';
  h+='<section class="card">'+st('gear2',T('關於','About'),'')+
  setRow(T('版本 ','Version ')+'<b>'+esc(APPVER.indexOf('@@')<0?APPVER:'dev')+'</b>','<div class="btns"><button class="btn ghost sm" data-act="checkUpd">'+T('檢查更新','Check for updates')+'</button><button class="btn ghost sm" data-act="hardUpd">'+T('強制更新','Force update')+'</button><button class="btn ghost sm" data-act="onbAgain">'+T('重看使用引導','Show the welcome guide')+'</button></div>')+
  '<div class="btns">'+(hasEx()?'<button class="btn ghost sm" data-act="clearEx">'+T('清除範例','Clear samples')+'</button>':'')+'</div>'+
@@ -565,15 +564,17 @@ function settingsPanel(){
  return h;
 }
 function cloudPanel(){
- var h='';
- if(!cloudOk())return '<p class="empty">'+T('這個瀏覽器不支援加密，請改用備份檔。','This browser cannot encrypt; please use a backup file.')+'</p>';
- if(CLOUD){
-  h+='<p class="empty">'+(CLOUD.at?T('上次備份：','Last backup: ')+new Date(CLOUD.at).toLocaleString():T('還沒有備份','Not backed up yet'))+(CLOUD.err?' · <span style="color:var(--warn)">'+esc(cloudErr(CLOUD.err))+'</span>':'')+'</p>'+
-  '<label class="f" for="ccode">'+T('你的備份碼（請另外存好，換手機時用它還原）','Your backup code (keep it safe; use it to restore on a new phone)')+'<textarea id="ccode" readonly rows="2" style="font-size:13px">'+esc(cloudCode(CLOUD))+'</textarea></label>'+
-  '<div class="btns"><button class="btn sm" data-act="cloudNow">'+T('立即備份','Back up now')+'</button><button class="btn ghost sm" data-act="copy" data-id="'+esc(cloudCode(CLOUD))+'">'+T('複製備份碼','Copy code')+'</button><button class="btn ghost sm" data-act="cloudOff">'+T('停止雲端備份','Stop cloud backup')+'</button></div>'+
-  '<p class="empty">'+T('🔒 資料在手機上先加密才上傳，只有備份碼能解開。之後每次修改都會自動備份。','🔒 Data is encrypted on this phone before upload; only your code can open it. Changes are backed up automatically.')+'</p>';
- }else h+='<div class="btns"><button class="btn" data-act="cloudOn">'+T('開啟雲端備份','Turn on cloud backup')+'</button></div>';
- h+='<details class="fd"><summary>'+T('用備份碼還原','Restore with a code')+'</summary><div class="form"><textarea id="rcode" class="full" rows="2" placeholder="321S-…"></textarea><button class="btn sm full" data-act="cloudGet">'+T('從雲端還原','Restore from cloud')+'</button></div></details>';
+ if(!ACC)return '<p class="empty">'+T('帳號模組沒有載入，請確認網路後重新開啟管家。','The account module did not load; check your connection and reopen.')+'</p>'+restoreConfirm();
+ if(!ACC.ok())return '<p class="empty">'+T('這個瀏覽器不支援加密，請改用備份檔。','This browser cannot encrypt; please use a backup file.')+'</p>'+restoreConfirm();
+ var h='',fa=false;try{fa=!!localStorage.getItem('k321_auth');}catch(e){}
+ if(acctOn()){var at=ACC.lastAt('steward');
+  h+='<p class="empty"><b style="color:var(--self)">✓ '+T('已登入','Signed in')+'</b> · '+(at?T('上次同步：','Last sync: ')+new Date(at).toLocaleString():T('尚未同步','Not synced yet'))+(ui.acctErr&&ui.acctErr!=='busy'?' · <span style="color:var(--warn)">'+esc(cloudErr(ui.acctErr))+'</span>':'')+'</p>';
+  h+='<div class="list">'+
+   '<div class="row"><i class="bar2" style="background:#2d3a8c"></i><div class="grow"><div class="ttl">'+T('321每日得勝','321 Daily Victory')+'</div><div class="meta">'+(PUB.evs?T('時程已互通・更新於 ','Schedule shared · updated ')+new Date(PUB.at).toLocaleString():T('在每日得勝用同一組帳號碼登入，時程就會自動出現在管家','Sign in to Daily Victory with the same code to share its schedule'))+'</div></div></div>'+
+   '<div class="row"><i class="bar2" style="background:var(--gold)"></i><div class="grow"><div class="ttl">'+T('國度321空中團契','Kingdom 321 Fellowship')+'</div><div class="meta">'+(fa?T('已開通，用同一組帳號的 App 都不必再輸入授權碼','Unlocked for every app using this account'):T('在管家裡開啟團契 App 輸入一次授權碼，其他 App 就通用','Enter the access code once inside the Steward; other apps will share it'))+'</div></div></div></div>';
+  h+='<div class="btns"><button class="btn sm" data-act="cloudNow">'+T('立即同步','Sync now')+'</button><button class="btn ghost sm" data-act="acctOpen">'+T('帳號碼與登出','Account code / sign out')+'</button></div>';
+ }else h+='<p class="empty">'+T('一組帳號碼，所有 321 App 共用：自動加密備份、換手機找回、App 之間資料互通。','One code for every 321 app: encrypted backup, restore on a new phone, and data shared between apps.')+'</p><div class="btns"><button class="btn" data-act="acctOpen">'+T('建立或登入 321 帳號','Create or sign in to a 321 Account')+'</button></div>';
+ h+='<p class="empty">'+T('🔒 資料在手機上先加密才上傳，只有帳號碼解得開。帳號碼就是鑰匙，請另外存好。','🔒 Data is encrypted on the phone before upload; only your code can open it. The code is the key, so keep it safe.')+'</p>';
  return h+restoreConfirm();
 }
 function restoreConfirm(){
@@ -624,7 +625,7 @@ function paintOnb(){
   for(i=0;i<TPL.length;i++){var a=area(TPL[i][0]);h+='<button class="obh'+(ui.obSel[i]?' on':'')+'" data-act="obHab" data-id="'+i+'" style="'+cvars(a.k)+'"><b>'+tr(a.g)+'</b>'+esc(tr(TPL[i][2]))+'</button>';}
   h+='</div>';}
  else{h+='<h2>'+T('最後一步','Last step')+'</h2><p>'+T('要先看看範例，還是從空白開始？','See sample data first, or start fresh?')+'</p>'+segOf([['keep',['先看範例','Show samples']],['blank',['從空白開始','Start fresh']]],ui.obEx,'obEx')+
-  '<p class="empty">'+T('之後可以在「回顧 → 設定」開啟雲端備份、每日提醒和密碼鎖；在「今日時程」連結每日得勝和 Google 日曆。','Later, turn on cloud backup, reminders and a passcode in Review → Settings, and link calendars from Today\'s schedule.')+'</p>';}
+  '<p class="empty">'+T('之後可以在「回顧 → 設定」登入 321 共用帳號、開啟每日提醒和密碼鎖；在「今日時程」連結每日得勝和 Google 日曆。','Later, sign in to your 321 Account and set reminders and a passcode in Review → Settings, and link calendars from Today\'s schedule.')+'</p>';}
  h+='<div class="btns obnav">'+(ui.onb>1?'<button class="btn ghost" data-act="obBack">'+T('上一步','Back')+'</button>':'')+'<button class="btn gold" data-act="obNext">'+(ui.onb<3?T('下一步','Next'):T('開始使用','Start'))+'</button></div></div>';
  w.innerHTML=h;
 }
@@ -678,12 +679,9 @@ function plusAct(act,id,el,e){
  case 'homeHide':S.home.hide[id]=!S.home.hide[id];ui.layout=true;break;
  case 'homeReset':S.home={order:['verse','top3','sched','habits','due','more','rings','care','evening','fel'],hide:{}};ui.layout=true;break;
  case 'remIcs':remIcs();return true;
- case 'cloudOn':CLOUD={id:rnd(28),key:rnd(40),sec:rnd(32),at:0,err:''};saveCloud();render();toast(T('正在建立雲端備份…','Creating cloud backup…'));cloudPush(function(err){render();toast(err?cloudErr(err):T('雲端備份完成，請存好備份碼','Backed up. Keep your code safe'));});return true;
- case 'cloudNow':toast(T('正在備份…','Backing up…'));cloudPush(function(err){render();toast(err?cloudErr(err):T('雲端備份完成','Backed up'));});return true;
- case 'cloudOff':if(CLOUD){var cx=new XMLHttpRequest();try{cx.open('DELETE',CAL_PROXY+'feed/'+CLOUD.id);cx.setRequestHeader('X-Feed-Key',CLOUD.key);cx.send();}catch(err){}}CLOUD=null;saveCloud();render();toast(T('已停止雲端備份並刪除雲端資料','Cloud backup stopped and deleted'));return true;
- case 'cloudGet':x=parseCode(val('rcode'));if(!x){toast(T('備份碼格式不對，請整段貼上','The code looks wrong; paste the whole code'));return true;}
-  toast(T('正在讀取雲端備份…','Reading cloud backup…'));cloudFetch(x,function(err,o){if(err){toast(cloudErr(err));return;}ui.restore=o;ui.restoreCloud=x;render();});return true;
- case 'restoreYes':var ro=ui.restore;if(ui.restoreCloud){CLOUD={id:ui.restoreCloud.id,key:ui.restoreCloud.key,sec:ui.restoreCloud.sec,at:Date.now(),err:''};saveCloud();ui.restoreCloud=null;}applyRestore(ro);return true;
+ case 'acctOpen':if(ACC)ACC.open({lang:L,onChange:acctChanged});return true;
+ case 'cloudNow':toast(T('正在同步…','Syncing…'));acctPush(function(err){toast(err?cloudErr(err):T('已同步到 321 帳號','Synced'));});ACC.syncProfile();loadPub(true);return true;
+ case 'restoreYes':applyRestore(ui.restore);return true;
  case 'restoreNo':ui.restore=null;ui.restoreCloud=null;render();return true;
  case 'fileBk':fileBackup();return true;
  case 'aiJ':S.aiJ=id==='1';break;

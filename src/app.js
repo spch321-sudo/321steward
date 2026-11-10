@@ -150,7 +150,7 @@ function calEventsFor(day){
  return out;
 }
 function schedFor(day){
- var a=plannerHere()?plannerDay(day):[],b=calEventsFor(day),seen={},out=[],i,k,all;
+ var a=plannerHere()?plannerDay(day):[],b=calEventsFor(day).concat(pubFor(day)),seen={},out=[],i,k,all;
  for(i=0;i<a.length;i++){a[i].cal=T('每日得勝','Daily Victory');a[i].sort=a[i].start?pd(day).getTime()+(+a[i].start.slice(0,2))*36e5+(+a[i].start.slice(3,5))*6e4:-1;}
  all=a.concat(b);
  for(i=0;i<all.length;i++){k=all[i].start+'|'+all[i].title;if(seen[k])continue;seen[k]=1;out.push(all[i]);}
@@ -238,7 +238,7 @@ function schedCard(){
  var day=addDays(ds(),ui.schedOff),here=plannerHere(),evs=schedFor(day),now=new Date(),hm=pad(now.getHours())+':'+pad(now.getMinutes()),i,h,busy=false,k;
  for(k in ui.calBusy)busy=true;
  h='<section class="card">'+st('clock',(ui.schedOff?T('明日時程','Tomorrow'):T('今日時程','Today\'s schedule')),T('每日得勝時程・連結的日曆活動','Daily Victory and linked calendars'));
- if(!here&&!S.cals.length){h+='<p class="empty">'+T('連結每日得勝的時程和你的日曆，今天要做的事就會全部出現在這裡。','Link your Daily Victory schedule and calendars to see everything for today here.')+'</p>'+calSetup()+'</section>';return h;}
+ if(!here&&!S.cals.length&&!PUB.evs){h+='<p class="empty">'+T('連結每日得勝的時程和你的日曆，今天要做的事就會全部出現在這裡。','Link your Daily Victory schedule and calendars to see everything for today here.')+'</p>'+calSetup()+'</section>';return h;}
  h+='<div class="list">';
  if(!evs.length)h+='<p class="empty">'+(busy?T('正在讀取時程……','Loading schedule…'):T('這天沒有排定的時程。','Nothing scheduled.'))+'</p>';
  for(i=0;i<evs.length;i++){var e=evs[i],cur=!ui.schedOff&&e.start&&e.end&&e.start<=hm&&hm<e.end;
@@ -426,7 +426,7 @@ document.addEventListener('click',function(e){
   var nc={id:uid(),name:cn,url:x,color:CAL_COLORS[S.cals.length%CAL_COLORS.length]};S.cals.push(nc);save();ui.calSet=true;render();
   toast(T('正在讀取 ','Loading ')+cn+'…');calFetch(nc,true,function(err){toast(err?T('讀不到這個日曆，請確認網址','Could not read this calendar; check the link'):T('已連結 ','Linked ')+cn);});return;
  case 'calDel':i=find(S.cals,id);if(i>=0){delete CALC[id];saveCalc();S.cals.splice(i,1);}toast(T('已移除','Removed'));break;
- case 'calRefresh':refreshCals(true);toast(T('正在更新時程…','Updating…'));render();return;
+ case 'calRefresh':refreshCals(true);loadPub(true);toast(T('正在更新時程…','Updating…'));render();return;
  case 'calSet':ui.calSet=!ui.calSet;render();return;
  case 'delPerson':i=find(S.people,id);if(i>=0)S.people.splice(i,1);break;
  case 'delMoney':i=find(S.money,id);if(i>=0)S.money.splice(i,1);break;
@@ -482,6 +482,7 @@ applyChrome();
 render();
 refreshCals(false);
 felLoad();
+if(acctOn()){ACC.syncProfile(function(e,n){if(n&&view==='today')render();});loadPub(false);}
 updInit();
 (function(){var seen='';try{seen=localStorage.getItem(SKEY)||'';}catch(e){}if(!S.onb)showOnb();else if(seen!==ds())showSplash();if(lockOn())showLock();})();
 })();

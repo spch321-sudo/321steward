@@ -51,13 +51,13 @@ head='''<!doctype html>
 <meta property="og:image" content="hero.jpg">
 '''
 base=':root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}\n'
-idx=head+fonts+'<style>\n'+base+css+'</style>\n</head>\n<body>\n'+body+'<script src="app.js?v='+VER+'"></script>\n</body>\n</html>\n'
+idx=head+fonts+'<style>\n'+base+css+'</style>\n</head>\n<body>\n'+body+'<script src="k321acct.js?v='+VER+'"></script>\n<script src="app.js?v='+VER+'"></script>\n</body>\n</html>\n'
 open(os.path.join(ROOT,'index.html'),'w',encoding='utf-8').write(idx)
 open(os.path.join(ROOT,'app.js'),'w',encoding='utf-8').write(js)
 open(os.path.join(ROOT,'sw.js'),'w',encoding='utf-8').write(rd('sw.tpl.js').replace('@@VER@@',VER))
 open(os.path.join(ROOT,'version.json'),'w').write(json.dumps({'v':VER})+'\n')
 if '--artifact' in sys.argv:
     out=sys.argv[sys.argv.index('--artifact')+1]
-    art='<title>321管家</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n'+fonts+'<style>\n'+css+'</style>\n'+body+'<script>\n'+js+'</script>\n'
+    art='<title>321管家</title>\n<meta name="claude:viewport-fit-sides" content="cover">\n'+fonts+'<style>\n'+css+'</style>\n'+body+'<script>\n'+open(os.path.join(ROOT,'k321acct.js'),encoding='utf-8').read()+'</script>\n<script>\n'+js+'</script>\n'
     open(out,'w',encoding='utf-8').write(art)
 print(VER,'index.html',len(idx.encode()),'bytes · app.js',len(js.encode()),'bytes')

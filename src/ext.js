@@ -244,7 +244,7 @@ function felOpen(){
  try{history.pushState({fel:1},'',location.pathname+location.search+'#fellowship');}catch(e){}
 }
 function felClose(fromPop){
- var w=$('felview');if(!w)return;w.parentNode.removeChild(w);document.body.classList.remove('felon');ui.fel=false;
+ var w=$('felview');if(!w)return;w.parentNode.removeChild(w);document.body.classList.remove('felon');ui.fel=false;if(acctOn())ACC.syncProfile();
  if(!fromPop){try{if(history.state&&history.state.fel)history.back();}catch(e){}}
 }
 window.addEventListener('popstate',function(){if($('felview'))felClose(true);});

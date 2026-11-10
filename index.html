@@ -221,18 +221,79 @@ label.f{display:flex;flex-direction:column;gap:5px;font-size:14px;font-weight:50
  @keyframes fadein{from{opacity:0}to{opacity:1}}
  @keyframes rise{from{transform:translateY(16px) scale(.97)}to{transform:none}}
 }
+
+/* 字級：只放大內容區，頂欄與分頁不受影響 */
+html.fs-lg #main{zoom:1.12}html.fs-xl #main{zoom:1.25}html.fs-xxl #main{zoom:1.4}
+.fsbtn{font-family:var(--f-display);font-weight:700;font-size:14px;background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:99px;padding:2px 10px;cursor:pointer;line-height:1.6}
+.toprow{display:flex;gap:6px;align-items:center}
+.btn.on{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.btn.onband{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn.onband.on{background:#fff;color:var(--cd)}
+.btn.big{font-size:18px;padding:13px 22px;border-radius:14px;width:100%;box-sizing:border-box}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font-size:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:5px 13px;cursor:pointer;word-break:keep-all}
+.seg button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+.setrow{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;color:var(--muted)}
+.setrow b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* 團契卡 */
+.fel .felhd{display:flex;align-items:center;gap:12px}
+.felmark{flex:none;width:46px;height:46px;border-radius:14px;background:linear-gradient(160deg,var(--hdr1),var(--hdr2));color:var(--logo);font-family:var(--f-display);font-weight:900;font-style:italic;font-size:17px;display:grid;place-items:center}
+.fel h2{font-family:var(--f-display);font-size:20px}
+.fel .felhd p{margin:0;font-size:13px;color:var(--muted)}
+.nextm{display:flex;flex-direction:column;gap:6px;background:var(--accent-soft);border-radius:14px;padding:14px}
+.nextm.live{background:var(--gold-soft)}
+.nextm .nk{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.nextm.live .nk{color:var(--gold)}
+.nextm h3{font-family:var(--f-display);font-size:22px}
+.nextm .nt{font-variant-numeric:tabular-nums;font-weight:500}
+.nextm .cd{font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+.zid{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:13px;color:var(--muted)}
+.zid b{color:var(--ink);font-variant-numeric:tabular-nums}
+details.fd{border-top:1px solid var(--line);padding-top:8px}
+details.fd summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;padding:4px 0}
+details.fd summary::-webkit-details-marker{display:none}
+details.fd summary::after{content:"▾";margin-left:auto;color:var(--muted)}
+details.fd[open] summary::after{content:"▴"}
+details.fd summary small{font-weight:400;font-size:12px;color:var(--muted)}
+.acct{font-variant-numeric:tabular-nums;font-weight:700;display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:2px;overflow-wrap:anywhere}
+.qr{display:block;width:150px;max-width:100%;height:auto;margin-top:8px;border-radius:10px;background:#fff;padding:6px}
+
+/* 小智 */
+.msg-body blockquote{margin:6px 0;border-left:3px solid var(--gold);background:var(--gold-soft);padding:6px 12px;border-radius:0 10px 10px 0;font-family:var(--f-display);font-weight:600}
+.msg.ai.fold .msg-body{max-height:9.6em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.msg-more{display:block;margin:6px 0 0;padding:4px 12px;border:1px solid var(--line);border-radius:99px;background:var(--surface);color:var(--accent);font-size:.82em;font-weight:700;cursor:pointer}
+.msg-act{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.msg-act .btn{font-size:.82em;padding:4px 10px}
+.fu{display:flex;flex-wrap:wrap;gap:6px}
+.chip-btn{font-size:.9em;border:1px solid var(--line);background:var(--surface);color:var(--accent);border-radius:99px;padding:5px 12px;cursor:pointer}
+.crisis{background:var(--people-soft);border-radius:14px;padding:12px 14px;font-size:15px}
+.crisis p{margin:4px 0}.crisis ul{margin:4px 0;padding-left:1.2em}
+
+/* 美圖面板 */
+.sheet-mask{position:fixed;inset:0;z-index:40;background:rgba(5,10,25,.5);display:flex;align-items:flex-end;justify-content:center}
+.sheet-card{background:var(--surface);color:var(--ink);width:100%;max-width:640px;max-height:90vh;max-height:90dvh;overflow-y:auto;border-radius:22px 22px 0 0;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:12px;box-sizing:border-box}
+.sh-hd{display:flex;align-items:center;justify-content:space-between}
+.sh-hd b{display:flex;align-items:center;gap:8px;font-family:var(--f-display);font-size:19px}
+.cardwrap{display:flex;justify-content:center;background:var(--sunk);border-radius:14px;padding:10px}
+.cardwrap canvas{max-width:100%;max-height:46vh;width:auto;height:auto;border-radius:8px;box-shadow:var(--shadow)}
+#cardimg img{display:block;width:100%;max-width:420px;height:auto;margin:8px auto 0;border-radius:10px}
+
+.updbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:35;background:var(--accent);color:var(--accent-ink);border:0;padding:10px 18px;border-radius:99px;box-shadow:var(--shadow);font-weight:700;white-space:nowrap;cursor:pointer}
 </style>
 </head>
 <body>
-<header class="top"><div class="wrap topin"><button class="brand" data-act="splash" aria-label="321"><span class="n">321</span><span class="w" id="brandName">管家</span></button><div class="topr"><div class="langs" id="langs" role="group" aria-label="Language"></div><div class="date" id="hdate"></div></div></div></header>
+<header class="top"><div class="wrap topin"><button class="brand" data-act="splash" aria-label="321"><span class="n">321</span><span class="w" id="brandName">管家</span></button><div class="topr"><div class="toprow"><button class="fsbtn" data-act="fs" aria-label="Text size">Aa</button><div class="langs" id="langs" role="group" aria-label="Language"></div></div><div class="date" id="hdate"></div></div></div></header>
 <main class="wrap" id="main"></main>
 <nav class="tabs" aria-label="Menu"><div class="tabsin" id="tabs"></div></nav>
 <div class="toast" id="toast" hidden></div>
 <div class="splash" id="splash" hidden></div>
+<div id="sheet" hidden></div>
+<button class="updbar" id="updbar" data-act="updNow" hidden>已有新版本，點這裡立即更新</button>
 <script>
 (function(){
 var KEY='steward321.v1',LKEY='steward321.lang';
-var ZS={"並":"并","來":"来","係":"系","個":"个","們":"们","備":"备","傳":"传","傷":"伤","價":"价","優":"优","儲":"储","兒":"儿","兩":"两","冊":"册","別":"别","刪":"删","則":"则","動":"动","務":"务","勝":"胜","勵":"励","問":"问","啟":"启","單":"单","嗎":"吗","國":"国","圓":"圆","媽":"妈","學":"学","寢":"寝","實":"实","寫":"写","將":"将","專":"专","導":"导","屬":"属","帳":"账","幫":"帮","後":"后","從":"从","復":"复","悅":"悦","惡":"恶","愛":"爱","態":"态","慮":"虑","應":"应","懷":"怀","戰":"战","捨":"舍","掛":"挂","換":"换","擋":"挡","據":"据","敗":"败","數":"数","於":"于","時":"时","暫":"暂","曆":"历","書":"书","會":"会","東":"东","條":"条","業":"业","榮":"荣","樂":"乐","標":"标","樣":"样","樹":"树","機":"机","檢":"检","權":"权","歸":"归","氣":"气","沒":"没","況":"况","準":"准","溫":"温","滿":"满","潔":"洁","瀏":"浏","為":"为","無":"无","狀":"状","獎":"奖","獻":"献","現":"现","環":"环","產":"产","畫":"画","當":"当","疇":"畴","療":"疗","發":"发","確":"确","礎":"础","禱":"祷","稱":"称","穌":"稣","筆":"笔","節":"节","範":"范","簡":"简","糧":"粮","紀":"纪","約":"约","純":"纯","結":"结","絡":"络","給":"给","經":"经","網":"网","緊":"紧","緒":"绪","線":"线","編":"编","練":"练","繳":"缴","續":"续","羅":"罗","義":"义","習":"习","聖":"圣","聯":"联","聰":"聪","與":"与","舊":"旧","華":"华","處":"处","虛":"虚","號":"号","裡":"里","製":"制","複":"复","見":"见","視":"视","親":"亲","覺":"觉","覽":"览","觀":"观","訊":"讯","討":"讨","託":"托","記":"记","設":"设","訴":"诉","註":"注","評":"评","試":"试","詩":"诗","誇":"夸","認":"认","語":"语","誠":"诚","說":"说","誰":"谁","課":"课","請":"请","論":"论","謀":"谋","謙":"谦","謝":"谢","謹":"谨","識":"识","議":"议","讀":"读","變":"变","讓":"让","豈":"岂","財":"财","買":"买","費":"费","貼":"贴","資":"资","賜":"赐","賴":"赖","踐":"践","輪":"轮","轉":"转","這":"这","連":"连","週":"周","進":"进","運":"运","過":"过","選":"选","還":"还","醫":"医","釘":"钉","錄":"录","鐘":"钟","長":"长","開":"开","間":"间","關":"关","陰":"阴","陳":"陈","離":"离","電":"电","靈":"灵","靜":"静","頁":"页","項":"项","預":"预","領":"领","頭":"头","題":"题","額":"额","願":"愿","類":"类","顧":"顾","顯":"显","飯":"饭","飲":"饮","餘":"余","馬":"马","驕":"骄","驗":"验","驟":"骤","體":"体","麼":"么","點":"点","著":"着","藉":"藉","「":"“","」":"”"};
+var ZS={"並":"并","亞":"亚","來":"来","係":"系","個":"个","們":"们","備":"备","傳":"传","傷":"伤","價":"价","優":"优","儲":"储","兒":"儿","內":"内","兩":"两","冊":"册","別":"别","刪":"删","則":"则","剛":"刚","動":"动","務":"务","勝":"胜","勵":"励","區":"区","協":"协","唸":"念","問":"问","啟":"启","單":"单","嗎":"吗","國":"国","圓":"圆","圖":"图","團":"团","塊":"块","媽":"妈","學":"学","寢":"寝","實":"实","寫":"写","將":"将","專":"专","導":"导","屬":"属","帳":"账","帶":"带","幫":"帮","強":"强","後":"后","從":"从","復":"复","悅":"悦","惡":"恶","愛":"爱","態":"态","慮":"虑","憑":"凭","應":"应","懷":"怀","戰":"战","捨":"舍","掛":"挂","換":"换","撥":"拨","擋":"挡","據":"据","敗":"败","數":"数","斷":"断","於":"于","時":"时","暫":"暂","曆":"历","書":"书","會":"会","東":"东","條":"条","業":"业","榮":"荣","樂":"乐","樓":"楼","標":"标","樣":"样","樹":"树","機":"机","檢":"检","權":"权","歸":"归","殺":"杀","氣":"气","沒":"没","況":"况","淺":"浅","準":"准","溫":"温","滿":"满","潔":"洁","瀏":"浏","灣":"湾","為":"为","無":"无","熱":"热","狀":"状","獎":"奖","獻":"献","現":"现","環":"环","產":"产","畫":"画","當":"当","疇":"畴","療":"疗","發":"发","確":"确","碼":"码","礎":"础","禱":"祷","稱":"称","穌":"稣","筆":"笔","節":"节","範":"范","簡":"简","糧":"粮","紀":"纪","約":"约","紐":"纽","純":"纯","紙":"纸","級":"级","結":"结","絡":"络","給":"给","統":"统","經":"经","網":"网","緊":"紧","緒":"绪","線":"线","編":"编","練":"练","繳":"缴","續":"续","羅":"罗","義":"义","習":"习","聖":"圣","聯":"联","聰":"聪","與":"与","舊":"旧","華":"华","藍":"蓝","蘭":"兰","處":"处","虛":"虚","號":"号","蟲":"虫","裝":"装","裡":"里","製":"制","複":"复","見":"见","視":"视","親":"亲","覺":"觉","覽":"览","觀":"观","訊":"讯","討":"讨","託":"托","記":"记","設":"设","許":"许","訴":"诉","註":"注","評":"评","試":"试","詩":"诗","話":"话","誇":"夸","認":"认","語":"语","誠":"诚","說":"说","誰":"谁","課":"课","調":"调","請":"请","論":"论","謀":"谋","謙":"谦","謝":"谢","謹":"谨","識":"识","議":"议","讀":"读","變":"变","讓":"让","豈":"岂","財":"财","買":"买","費":"费","貼":"贴","資":"资","賜":"赐","賴":"赖","踐":"践","輕":"轻","輪":"轮","轉":"转","這":"这","連":"连","週":"周","進":"进","運":"运","過":"过","適":"适","選":"选","還":"还","邊":"边","醫":"医","釘":"钉","銀":"银","錄":"录","鍵":"键","鐘":"钟","長":"长","閉":"闭","開":"开","間":"间","關":"关","陰":"阴","陳":"陈","隨":"随","險":"险","離":"离","電":"电","靈":"灵","靜":"静","頁":"页","項":"项","預":"预","領":"领","頭":"头","題":"题","額":"额","願":"愿","類":"类","顧":"顾","顯":"显","飯":"饭","飲":"饮","飾":"饰","餘":"余","馬":"马","驕":"骄","驗":"验","驟":"骤","體":"体","麼":"么","點":"点","著":"着","藉":"藉","「":"“","」":"”"};
 var L='zh';
 try{L=localStorage.getItem(LKEY)||'';}catch(e){}
 if(L!=='zh'&&L!=='zs'&&L!=='en'){var nl=(navigator.language||'').toLowerCase();L=nl.indexOf('zh')===0?((nl.indexOf('cn')>0||nl.indexOf('hans')>0||nl.indexOf('sg')>0)?'zs':'zh'):(nl?'en':'zh');}
@@ -245,34 +306,20 @@ var AI_URL='https://xiaozhi-proxy.spch321.workers.dev';
 var AREAS=[
  {k:'god',g:['神','G'],s:['與神','God'],n:['與神的關係','With God'],subs:[['讀經靈修','Word & devotion'],['禱告敬拜','Prayer & worship'],['事奉','Service']],
   motto:['先建立與神的關係——讓耶穌作王，讓耶穌得著一切的榮耀','First, my relationship with God: let Jesus reign, and let Him have all the glory'],
-  v:['你們要先求他的國和他的義，這些東西都要加給你們了。','But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.'],r:['馬太福音 6:33','Matthew 6:33']},
+  v:'Matthew.6.33',r:['馬太福音 6:33','Matthew 6:33']},
  {k:'self',g:['己','S'],s:['與己','Self'],n:['與自己的關係','With myself'],subs:[['身體健康','Health'],['心靈情緒','Heart & emotions'],['學習成長','Learning']],
-  motto:['不再是我，乃是基督——無己才能讓耶穌在裡面活','Not I, but Christ: only a self-emptied life lets Jesus live within'],
-  v:['豈不知你們的身子就是聖靈的殿嗎？這聖靈是從神而來，住在你們裡頭的；並且你們不是自己的人；因為你們是重價買來的。所以，要在你們的身子上榮耀神。','What? know ye not that your body is the temple of the Holy Ghost which is in you, which ye have of God, and ye are not your own? For ye are bought with a price: therefore glorify God in your body, and in your spirit, which are God\'s.'],r:['哥林多前書 6:19-20','1 Corinthians 6:19-20']},
+  motto:['不再是我，乃是基督——無己才能讓耶穌在裡面活','Not I, but Christ: only selflessness lets Jesus live in me'],
+  v:'1Corinthians.6.19-20',r:['哥林多前書 6:19-20','1 Corinthians 6:19-20']},
  {k:'people',g:['人','O'],s:['與人','Others'],n:['與人的關係','With others'],subs:[['婚姻家庭','Marriage & family'],['屬靈同伴','Spiritual companions'],['關懷傳福音','Care & gospel']],
   motto:['人比事重要，關係比東西重要——操練920，活出無己的愛','People matter more than tasks, relationships more than things: practise 920'],
-  v:['我賜給你們一條新命令，乃是叫你們彼此相愛；我怎樣愛你們，你們也要怎樣相愛。','A new commandment I give unto you, That ye love one another; as I have loved you, that ye also love one another.'],r:['約翰福音 13:34','John 13:34']},
+  v:'John.13.34',r:['約翰福音 13:34','John 13:34']},
  {k:'work',g:['事','W'],s:['與事','Work'],n:['與事的關係','With my work'],subs:[['工作事業','Work & career'],['財務管理','Finances'],['家務生活','Home & daily life']],
   motto:['先生命、再關係、後事工——凡事為榮耀神而行','Life first, then relationships, then ministry: do all to the glory of God'],
-  v:['無論做甚麼，都要從心裡做，像是給主做的，不是給人做的。','And whatsoever ye do, do it heartily, as to the Lord, and not unto men;'],r:['歌羅西書 3:23','Colossians 3:23']}
+  v:'Colossians.3.23',r:['歌羅西書 3:23','Colossians 3:23']}
 ];
-var VERSES=[
- ['主說：「誰是那忠心有見識的管家，主人派他管理家裡的人，按時分糧給他們呢？」','路加福音 12:42','And the Lord said, Who then is that faithful and wise steward, whom his lord shall make ruler over his household, to give them their portion of meat in due season?','Luke 12:42'],
- ['所求於管家的，是要他有忠心。','哥林多前書 4:2','Moreover it is required in stewards, that a man be found faithful.','1 Corinthians 4:2'],
- ['各人要照所得的恩賜彼此服事，作神百般恩賜的好管家。','彼得前書 4:10','As every man hath received the gift, even so minister the same one to another, as good stewards of the manifold grace of God.','1 Peter 4:10'],
- ['你要保守你心，勝過保守一切，因為一生的果效是由心發出。','箴言 4:23','Keep thy heart with all diligence; for out of it are the issues of life.','Proverbs 4:23'],
- ['我已經與基督同釘十字架，現在活著的不再是我，乃是基督在我裡面活著；並且我如今在肉身活著，是因信神的兒子而活；他是愛我，為我捨己。','加拉太書 2:20','I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me: and the life which I now live in the flesh I live by the faith of the Son of God, who loved me, and gave himself for me.','Galatians 2:20'],
- ['求你指教我們怎樣數算自己的日子，好叫我們得著智慧的心。','詩篇 90:12','So teach us to number our days, that we may apply our hearts unto wisdom.','Psalm 90:12'],
- ['你們要謹慎行事，不要像愚昧人，當像智慧人。要愛惜光陰，因為現今的世代邪惡。','以弗所書 5:15-16','See then that ye walk circumspectly, not as fools, but as wise, redeeming the time, because the days are evil.','Ephesians 5:15-16'],
- ['但他賜更多的恩典，所以經上說：神阻擋驕傲的人，賜恩給謙卑的人。','雅各書 4:6','But he giveth more grace. Wherefore he saith, God resisteth the proud, but giveth grace unto the humble.','James 4:6'],
- ['你所做的，要交託耶和華，你所謀的，就必成立。','箴言 16:3','Commit thy works unto the LORD, and thy thoughts shall be established.','Proverbs 16:3'],
- ['我是葡萄樹，你們是枝子。常在我裡面的，我也常在他裡面，這人就多結果子；因為離了我，你們就不能做甚麼。','約翰福音 15:5','I am the vine, ye are the branches: He that abideth in me, and I in him, the same bringeth forth much fruit: for without me ye can do nothing.','John 15:5'],
- ['所以，你們或吃或喝，無論做甚麼，都要為榮耀神而行。','哥林多前書 10:31','Whether therefore ye eat, or drink, or whatsoever ye do, do all to the glory of God.','1 Corinthians 10:31'],
- ['不要效法這個世界，只要心意更新而變化，叫你們察驗何為神的善良、純全、可喜悅的旨意。','羅馬書 12:2','And be not conformed to this world: but be ye transformed by the renewing of your mind, that ye may prove what is that good, and acceptable, and perfect, will of God.','Romans 12:2'],
- ['應當一無掛慮，只要凡事藉著禱告、祈求，和感謝，將你們所要的告訴神。','腓立比書 4:6','Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.','Philippians 4:6'],
- ['聖靈所結的果子，就是仁愛、喜樂、和平、忍耐、恩慈、良善、信實、溫柔、節制。','加拉太書 5:22-23','But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, meekness, temperance: against such there is no law.','Galatians 5:22-23'],
- ['你要專心仰賴耶和華，不可倚靠自己的聰明，在你一切所行的事上都要認定他，他必指引你的路。','箴言 3:5-6','Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.','Proverbs 3:5-6']
-];
+var VV={"1Corinthians.10.31":["所以，你們或吃或喝，無論做什麼，都要為榮耀神而行。","所以，你们或吃或喝，无论做什么，都要为荣耀神而行。","Whether therefore you eat or drink, or whatever you do, do all to the glory of God."],"1Corinthians.4.2":["所求於管家的，是要他有忠心。","所求于管家的，是要他有忠心。","Here, moreover, it is required of stewards that they be found faithful."],"1Corinthians.6.19-20":["豈不知你們的身子就是聖靈的殿嗎？這聖靈是從神而來，住在你們裡頭的；並且你們不是自己的人，因為你們是重價買來的。所以，要在你們的身子上榮耀神。","岂不知你们的身子就是圣灵的殿吗？这圣灵是从神而来，住在你们里头的；并且你们不是自己的人，因为你们是重价买来的。所以，要在你们的身子上荣耀神。","Or don’t you know that your body is a temple of the Holy Spirit who is in you, whom you have from God? You are not your own, for you were bought with a price. Therefore glorify God in your body and in your spirit, which are God’s."],"1Peter.4.10":["各人要照所得的恩賜彼此服事，作神百般恩賜的好管家。","各人要照所得的恩赐彼此服事，作神百般恩赐的好管家。","As each has received a gift, employ it in serving one another, as good managers of the grace of God in its various forms."],"Colossians.3.23":["無論做什麼，都要從心裡做，像是給主做的，不是給人做的。","无论做什么，都要从心里做，像是给主做的，不是给人做的。","And whatever you do, work heartily, as for the Lord and not for men."],"Ephesians.5.15-16":["你們要謹慎行事，不要像愚昧人，當像智慧人。要愛惜光陰，因為現今的世代邪惡。","你们要谨慎行事，不要像愚昧人，当像智慧人。要爱惜光阴，因为现今的世代邪恶。","Therefore watch carefully how you walk, not as unwise, but as wise, redeeming the time, because the days are evil."],"Galatians.2.20":["我已經與基督同釘十字架，現在活著的不再是我，乃是基督在我裡面活著；並且我如今在肉身活著，是因信神的兒子而活；他是愛我，為我捨己。","我已经与基督同钉十字架，现在活着的不再是我，乃是基督在我里面活着；并且我如今在肉身活着，是因信神的儿子而活；他是爱我，为我舍己。","I have been crucified with Christ, and it is no longer I who live, but Christ lives in me. That life which I now live in the flesh, I live by faith in the Son of God, who loved me and gave himself up for me."],"Galatians.5.22-23":["聖靈所結的果子，就是仁愛、喜樂、和平、忍耐、恩慈、良善、信實、溫柔、節制。這樣的事沒有律法禁止。","圣灵所结的果子，就是仁爱、喜乐、和平、忍耐、恩慈、良善、信实、温柔、节制。这样的事没有律法禁止。","But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faith, gentleness, and self-control. Against such things there is no law."],"James.4.6":["但他賜更多的恩典，所以經上說：神阻擋驕傲的人，賜恩給謙卑的人。","但他赐更多的恩典，所以经上说：神阻挡骄傲的人，赐恩给谦卑的人。","But he gives more grace. Therefore it says, “God resists the proud, but gives grace to the humble.”"],"John.13.34":["我賜給你們一條新命令，乃是叫你們彼此相愛；我怎樣愛你們，你們也要怎樣相愛。","我赐给你们一条新命令，乃是叫你们彼此相爱；我怎样爱你们，你们也要怎样相爱。","A new commandment I give to you, that you love one another. Just as I have loved you, you also love one another."],"John.15.5":["我是葡萄樹，你們是枝子。常在我裡面的，我也常在他裡面，這人就多結果子；因為離了我，你們就不能做什麼。","我是葡萄树，你们是枝子。常在我里面的，我也常在他里面，这人就多结果子；因为离了我，你们就不能做什么。","I am the vine. You are the branches. He who remains in me and I in him bears much fruit, for apart from me you can do nothing."],"Luke.12.42":["主說：「誰是那忠心有見識的管家，主人派他管理家裡的人，按時分糧給他們呢？」","主说：“谁是那忠心有见识的管家，主人派他管理家里的人，按时分粮给他们呢？”","The Lord said, “Who then is the faithful and wise steward, whom his lord will set over his household, to give them their portion of food at the right times?”"],"Matthew.6.33":["你們要先求他的國和他的義，這些東西都要加給你們了。","你们要先求他的国和他的义，这些东西都要加给你们了。","But seek first God’s Kingdom and his righteousness; and all these things will be given to you as well."],"Philippians.4.6":["應當一無掛慮，只要凡事藉著禱告、祈求，和感謝，將你們所要的告訴神。","应当一无挂虑，只要凡事借着祷告、祈求，和感谢，将你们所要的告诉神。","In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God."],"Proverbs.16.3":["你所做的，要交託耶和華，你所謀的，就必成立。","你所做的，要交托耶和华，你所谋的，就必成立。","Commit your deeds to the LORD, and your plans shall succeed."],"Proverbs.3.5-6":["你要專心仰賴耶和華，不可倚靠自己的聰明，在你一切所行的事上都要認定他，他必指引你的路。","你要专心仰赖耶和华，不可倚靠自己的聪明，在你一切所行的事上都要认定他，他必指引你的路。","Trust in the LORD with all your heart, and don’t lean on your own understanding. In all your ways acknowledge him, and he will make your paths straight."],"Proverbs.4.23":["你要保守你心，勝過保守一切，因為一生的果效是由心發出。","你要保守你心，胜过保守一切，因为一生的果效是由心发出。","Keep your heart with all diligence, for out of it is the wellspring of life."],"Psalms.90.12":["求你指教我們怎樣數算自己的日子，好叫我們得著智慧的心。","求你指教我们怎样数算自己的日子，好叫我们得着智慧的心。","So teach us to count our days, that we may gain a heart of wisdom."],"Romans.12.2":["不要效法這個世界，只要心意更新而變化，叫你們察驗何為神的善良、純全、可喜悅的旨意。","不要效法这个世界，只要心意更新而变化，叫你们察验何为神的善良、纯全、可喜悦的旨意。","Don’t be conformed to this world, but be transformed by the renewing of your mind, so that you may prove what is the good, well-pleasing, and perfect will of God."]};
+function vt(k){var v=VV[k]||["","",""];return v[L==="zh"?0:(L==="zs"?1:2)];}
+var VERSES=[["Luke.12.42", "路加福音 12:42", "Luke 12:42"], ["1Corinthians.4.2", "哥林多前書 4:2", "1 Corinthians 4:2"], ["1Peter.4.10", "彼得前書 4:10", "1 Peter 4:10"], ["Proverbs.4.23", "箴言 4:23", "Proverbs 4:23"], ["Galatians.2.20", "加拉太書 2:20", "Galatians 2:20"], ["Psalms.90.12", "詩篇 90:12", "Psalm 90:12"], ["Ephesians.5.15-16", "以弗所書 5:15-16", "Ephesians 5:15-16"], ["James.4.6", "雅各書 4:6", "James 4:6"], ["Proverbs.16.3", "箴言 16:3", "Proverbs 16:3"], ["John.15.5", "約翰福音 15:5", "John 15:5"], ["1Corinthians.10.31", "哥林多前書 10:31", "1 Corinthians 10:31"], ["Romans.12.2", "羅馬書 12:2", "Romans 12:2"], ["Philippians.4.6", "腓立比書 4:6", "Philippians 4:6"], ["Galatians.5.22-23", "加拉太書 5:22-23", "Galatians 5:22-23"], ["Proverbs.3.5-6", "箴言 3:5-6", "Proverbs 3:5-6"]];
 var REL=[['配偶','Spouse'],['家人','Family'],['屬靈同伴（2）','Companion (2)'],['屬靈父母兒女（3）','Spiritual parent/child (3)'],['屬靈戰友（5）','Co-worker (5)'],['朋友','Friend'],['同事','Colleague'],['慕道友','Seeker']];
 var CATS={give:['奉獻','Giving'],food:['飲食','Food'],home:['居住','Housing'],trans:['交通','Transport'],family:['家庭','Family'],edu:['教育','Education'],med:['醫療','Medical'],other:['其他支出','Other expense'],salary:['薪資','Salary'],bonus:['獎金','Bonus'],inc:['其他收入','Other income']};
 var CAT_OUT=['give','food','home','trans','family','edu','med','other'],CAT_IN=['salary','bonus','inc'];
@@ -291,6 +338,10 @@ var IC={
  moon:'<path d="M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z"/>',
  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
  coin:'<circle cx="12" cy="12" r="8.8"/><path d="M14.8 9.2c-.6-.9-1.6-1.4-2.8-1.4-1.6 0-2.8.9-2.8 2.1 0 2.9 5.8 1.4 5.8 4.3 0 1.2-1.2 2.1-2.9 2.1-1.3 0-2.4-.6-3-1.5M12 6v1.8M12 16.3v1.8"/>',
+ sound:'<path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>',
+ image:'<rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.8"/><path d="M21 16l-5-5-8.5 8.5"/>',
+ share:'<path d="M12 15V3.5M7.5 8 12 3.5 16.5 8"/><path d="M5 12v7a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19v-7"/>',
+ video:'<rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="M15.5 10.5 21.5 7v10l-6-3.5z"/>',
  pen:'<path d="M4 20l1-4.2L15.6 5.2a2.1 2.1 0 0 1 3 3L8 18.8z"/><path d="M13.8 7l3 3"/>',
  gear2:'<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4.9a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.5a7 7 0 0 0-2 1.2L5.1 5.8l-2 3.4 2 1.6a7 7 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-.9a7 7 0 0 0 2 1.2L10 21h4l.5-2.5a7 7 0 0 0 2-1.2l2.4.9 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/>'
 };
@@ -504,7 +555,8 @@ function vToday(){
  var start=new Date(now.getFullYear(),0,0),doy=Math.floor((now-start)/864e5);
  var v=VERSES[doy%VERSES.length],h='',i,cn=[T('一','one'),T('二','two'),T('三','three')];
  h+='<section class="kv"><img src="hero.jpg" alt="'+T('321管家主視覺','321 Steward key visual')+'" width="1080" height="608"><div class="cap"><b>'+greet+(S.name?T('，',', ')+esc(S.name):'')+'</b>'+T('今天也讓耶穌在你裡面作王','Let Jesus reign in you today')+'</div></section>';
- h+='<section class="versecard"><span class="vlabel">'+ic('book',18)+T('今日經文','Today\'s verse')+'</span><blockquote class="verse">'+T(v[0],v[2])+'</blockquote><p class="ref">'+T(v[1],v[3])+'</p></section>';
+ h+='<section class="versecard"><span class="vlabel">'+ic('book',18)+T('今日經文','Today\'s verse')+'</span><blockquote class="verse">'+esc(vt(v[0]))+'</blockquote><p class="ref">'+T(v[1],v[2])+'</p><div class="btns">'+spkBtn('vtoday',vt(v[0])+(L==='en'?' ':'。')+refSay(T(v[1],v[2])),T('今日經文','Today\'s verse'))+'<button class="btn ghost sm" data-act="vcard" data-id="'+v[0]+'">'+ic('image',16)+T('經文美圖','Verse card')+'</button><button class="btn ghost sm" data-act="vshare" data-id="'+v[0]+'">'+ic('share',16)+T('分享','Share')+'</button></div></section>';
+ h+=fellowCard();
  if(hasEx())h+='<div class="banner"><span>'+T('畫面上標「範例」的是示範資料，幫你看見管家怎麼運作。','Items marked “Sample” show how the Steward works.')+'</span><button class="btn ghost sm" data-act="clearEx">'+T('清除範例','Clear samples')+'</button></div>';
  h+='<section class="card">'+st('star',T('四重關係','Four relationships'),T('今日操練完成度・按關係次序','Today\'s practices, in order of relationship'))+'<div class="medals">';
  for(i=0;i<AREAS.length;i++){var a=AREAS[i],p=areaPct(a.k,t);
@@ -539,7 +591,7 @@ function vToday(){
 /* ---------- 範疇頁 ---------- */
 function vArea(k){
  var a=area(k),t=ds(),h='',i,j,n=0;
- h+='<section class="band" style="'+cvars(k)+'"><div class="bmed" aria-hidden="true">'+ic(AICON[k],20)+'<b>'+tr(a.g)+'</b></div><div><h1>'+tr(a.n)+'</h1><p class="tag">'+tr(ATAG[k])+'</p></div><p class="motto">'+tr(a.motto)+'</p><div class="bv"><blockquote class="verse">'+tr(a.v)+'</blockquote><p class="ref">'+tr(a.r)+'</p></div></section>';
+ h+='<section class="band" style="'+cvars(k)+'"><div class="bmed" aria-hidden="true">'+ic(AICON[k],20)+'<b>'+tr(a.g)+'</b></div><div><h1>'+tr(a.n)+'</h1><p class="tag">'+tr(ATAG[k])+'</p></div><p class="motto">'+tr(a.motto)+'</p><div class="bv"><blockquote class="verse">'+esc(vt(a.v))+'</blockquote><p class="ref">'+tr(a.r)+'</p><div class="btns">'+spkBtn('va'+k,vt(a.v)+(L==='en'?' ':'。')+refSay(tr(a.r)),tr(a.n)).replace('btn ghost sm','btn onband sm')+'<button class="btn onband sm" data-act="vcardA" data-id="'+k+'">'+ic('image',16)+T('經文美圖','Verse card')+'</button></div></div></section>';
  h+='<section class="card" style="'+cvars(k)+'">'+st('cross',T('每日操練','Daily practices'),T('圓點是最近七天','Dots show the last 7 days'))+'<div class="list">';
  for(i=0;i<S.habits.length;i++){if(S.habits[i].area===k){h+=habitRow(S.habits[i],true);n++;}}
  if(!n)h+='<p class="empty">'+T('還沒有操練項目，從下面加一項開始。','No practices yet. Add one below.')+'</p>';
@@ -596,12 +648,14 @@ function moneyExtra(){
 /* ---------- 小智週檢討 ---------- */
 function weekRange(){var t=ds(),wk=weekKey(t);return {wk:wk,from:wk,to:addDays(wk,6),today:t};}
 function aiSystem(){
- return T('你是「小智」，321管家裡陪伴使用者做每週檢討的屬靈同伴，是一位敬虔愛神的福音派牧者。你熟悉321理念：三個基礎（耶穌是我的榜樣、聖經是我的準則、聖靈是我的引導）、兩個核心（讓耶穌作王、讓耶穌得著一切的榮耀）、一個目的（建立屬神的體系）；改變觀念的八大步驟（資訊、啟示、信服、實踐、檢討、修正、反覆、繁殖）；舊人有己、新人無己；先生命、再關係、後事工；關係的次序是神、己、人、事。\n'+
+ return T('你是「小智」，國度321空中團契的屬靈同伴，在321管家裡陪伴使用者做每週檢討。你是一位敬虔愛神的福音派牧者，熟悉321理念：三個基礎（耶穌是我的榜樣、聖經是我的準則、聖靈是我的引導）、兩個核心（讓耶穌作王、讓耶穌得著一切的榮耀）、一個目的（建立屬神的體系）；改變觀念的八大步驟（資訊、啟示、信服、實踐、檢討、修正、反覆、繁殖）；舊人有己、新人無己；先生命、再關係、後事工；關係的次序是神、己、人、事。\n'+
  '請根據使用者這週的資料回應：一、具體指出神這週在他身上的恩典，只根據資料，不誇大、不奉承；二、誠實點出一個最需要修正的地方，連到舊人有己的根源；三、依八大步驟給下週一到三個具體、做得到的操練；四、引用一處和合本經文並註明出處，只引用你確定的經文；五、最後問一個幫助他反省的問題。\n'+
- '語氣溫暖、簡潔，全文不超過四百字，可用小標題與條列。資料裡沒有的事不要編造。若使用者流露想傷害自己或他人的念頭，請溫柔地停下檢討，鼓勵他立刻聯絡信任的人或當地的緊急求助專線。請用'+(L==='zs'?'简体中文':'繁體中文')+'回答。',
- 'You are “Xiaozhi”, a spiritual companion inside the 321 Steward app who walks with the user through a weekly review. You are a godly evangelical pastor who knows the 321 framework: three foundations (Jesus is my example, the Bible is my standard, the Holy Spirit is my guide), two cores (let Jesus reign, give Jesus all the glory), one purpose (build God\'s kingdom system); the eight steps of changing one\'s thinking (information, revelation, conviction, practice, review, correction, repetition, multiplication); the old self centred on self versus the new self emptied of self; life first, then relationships, then ministry; the order of relationships: God, self, others, work.\n'+
- 'Based on the user\'s data for this week: 1) name specific evidence of God\'s grace this week, only from the data, without exaggeration or flattery; 2) honestly point out the one area most needing correction and connect it to the self-centred root; 3) give one to three concrete, doable practices for next week, following the eight steps; 4) quote one Bible verse with its reference (KJV), only a verse you are sure of; 5) end with one question for reflection.\n'+
- 'Be warm and concise, under 250 words, using short headings and bullet points. Do not invent anything that is not in the data. If the user expresses thoughts of harming themselves or others, gently pause the review and encourage them to contact someone they trust or a local emergency line right away. Answer in English.');
+ '回答格式：語氣溫暖、簡潔，全文不超過四百字；小標題要短，可用條列；把最重要的那一句用「> 」標成引言。不要用程式碼區塊或唸不出來的裝飾符號。資料裡沒有的事不要編造。若使用者流露想傷害自己或他人的念頭，請溫柔地停下檢討，鼓勵他立刻聯絡信任的人或當地的緊急求助專線。請用'+(L==='zs'?'简体中文':'繁體中文')+'回答。\n'+
+ '【禱告的寫法（一定要照做）】回答裡凡要寫禱告，那一段的小標題一律寫「憑信心禱告」，不要寫「為你禱告」「我為你禱告」或「一起禱告」。禱告前先用一句話邀請讀者自己開口，例如「請你憑信心，親口向主這樣禱告：」。禱告本身要用讀者的第一人稱（用「我」），寫成讀者自己向神說的話；不要寫成小智替讀者禱告。禱告要簡短、真誠、帶著信心交託與感恩，結尾一律用「奉主耶穌的名禱告，阿們。」',
+ 'You are “Xiaozhi”, a spiritual companion from Kingdom 321 Fellowship, walking with the user through a weekly review inside the 321 Steward app. You are a godly evangelical pastor who knows the 321 framework: the Three Foundations (Jesus is my role model, the Bible is my standard, the Holy Spirit is my guide), the Two Core Values (let Jesus reign, let Jesus have all the glory), and the Goal (establish God\'s system); the eight steps of changing one\'s mindset (information, revelation, conviction, practice, review, correction, repetition, multiplication); the old self that lives for self versus the new self of selflessness; life first, then relationships, then ministry; the order of relationships: God, self, others, work.\n'+
+ 'Based on the user\'s data for this week: 1) name specific evidence of God\'s grace this week, only from the data, without exaggeration or flattery; 2) honestly point out the one area most needing correction and connect it to its self-centred root; 3) give one to three concrete, doable practices for next week, following the eight steps; 4) quote one Bible verse from the World English Bible with its reference, only a verse you are sure of; 5) end with one question for reflection.\n'+
+ 'Format: warm and concise, under 250 words, short headings and bullet points; mark the single most important sentence as a “> ” quote. No code blocks or decorative symbols. Do not invent anything not in the data. If the user expresses thoughts of harming themselves or others, gently pause the review and encourage them to contact someone they trust or a local emergency line right away. Answer in English.\n'+
+ '[How to write prayers — always follow] Whenever you include a prayer, title that section “Pray in Faith”, never “I pray for you” or “Let us pray”. Introduce it with one line inviting the reader to pray it themselves, e.g. “In faith, pray this to the Lord in your own words:”. Write the prayer in the reader\'s first person (“I”), as their own words to God, not as Xiaozhi praying for them. Keep it short, sincere, trusting and thankful, and end with “In the name of the Lord Jesus we pray, Amen.”');
 }
 function weekContext(){
  var r=weekRange(),i,j,lines=[],a,d;
@@ -635,20 +689,44 @@ function weekContext(){
   lines.push(T('【生命之輪】最近評估 ','[Life wheel] latest ')+w.date+T('，最低三項：','; lowest three: ')+pairs[0].n+' '+pairs[0].v+'、'+pairs[1].n+' '+pairs[1].v+'、'+pairs[2].n+' '+pairs[2].v);}
  return lines.join('\n');
 }
-function aiCall(msgs,cb){
+function aiOne(msgs,cb){
  var tries=0;
  function go(){
   var x=new XMLHttpRequest();
-  x.open('POST',AI_URL);x.setRequestHeader('Content-Type','application/json');x.timeout=60000;
+  x.open('POST',AI_URL);x.setRequestHeader('Content-Type','application/json');x.timeout=70000;
   x.onload=function(){
-   var out='';
-   if(x.status>=200&&x.status<300){try{var d=JSON.parse(x.responseText);if(d&&d.content&&d.content.length){for(var i=0;i<d.content.length;i++)out+=d.content[i].text||'';}else if(d)out=d.reply||d.text||d.message||'';}catch(e){}}
-   if(out)cb(null,out.replace(/^\s+|\s+$/g,''));else retry('http '+x.status);};
+   var out='',stop='';
+   if(x.status>=200&&x.status<300){try{var d=JSON.parse(x.responseText);stop=d.stop_reason||(d.choices&&d.choices[0]&&d.choices[0].finish_reason)||'';if(d&&d.content&&d.content.length){for(var i=0;i<d.content.length;i++)out+=d.content[i].text||'';}else if(d)out=d.reply||d.text||d.message||'';}catch(e){}}
+   if(out)cb(null,out,stop);else retry('http '+x.status);};
   x.onerror=function(){retry('network');};x.ontimeout=function(){retry('timeout');};
-  try{x.send(JSON.stringify({system:aiSystem(),messages:msgs}));}catch(e){retry('send');}
+  try{x.send(JSON.stringify({system:aiSystem(),messages:msgs,max_tokens:1400}));}catch(e){retry('send');}
  }
- function retry(why){tries++;if(tries<2)setTimeout(go,1200);else cb(why);}
+ function retry(why){tries++;if(tries<3)setTimeout(go,tries*900);else cb(why);}
  go();
+}
+function aiTrunc(text,stop){
+ if(stop==='max_tokens'||stop==='length')return 'sure';
+ if(!stop&&text.length>600&&!/[。！？.!?」”）)\]*]\s*$/.test(text))return 'guess';
+ return '';
+}
+function aiJoin(a,b){
+ b=b.replace(/^\s*(好的|好|OK|Sure)[，,。.!！]?\s*/i,'');
+ for(var n=Math.min(40,a.length,b.length);n>3;n--){if(a.slice(-n)===b.slice(0,n)){b=b.slice(n);break;}}
+ if(/^\s*(#{1,6}\s|>\s)/.test(b))return a.replace(/\s+$/,'')+'\n\n'+b.replace(/^\s+/,'');
+ if(/^\s*([-*•]\s|\d+[.、)]\s|\|)/.test(b))return a.replace(/\s+$/,'')+'\n'+b.replace(/^\s+/,'');
+ return a+b;
+}
+function aiCall(msgs,cb){
+ var acc='',rounds=0;
+ function step(m){aiOne(m,function(err,out,stop){
+  if(err){if(acc)cb(null,acc);else cb(err);return;}
+  acc=acc?aiJoin(acc,out):out.replace(/^\s+|\s+$/g,'');
+  var tr2=aiTrunc(acc,stop);rounds++;
+  if(tr2&&rounds<(tr2==='sure'?5:2)){ui.aiCont=true;render();
+   step(msgs.concat([{role:'assistant',content:acc},{role:'user',content:T('請從中斷的地方直接接著寫完，不要重複已經寫過的內容。','Please continue exactly where you stopped, without repeating anything.')}]));}
+  else{ui.aiCont=false;cb(null,acc.replace(/\s+$/,''));}
+ });}
+ step(msgs);
 }
 function mdHtml(s){
  var lines=esc(s).split(/\n/),h='',inL=false,i,l;
@@ -657,38 +735,59 @@ function mdHtml(s){
   var m=/^\s*(?:[-*•]|\d+[.、)])\s+(.*)$/.exec(l);
   if(m){if(!inL){h+='<ul>';inL=true;}h+='<li>'+inline(m[1])+'</li>';continue;}
   if(inL){h+='</ul>';inL=false;}
-  if(/^\s*#{1,4}\s+/.test(l)){h+='<h4>'+inline(l.replace(/^\s*#{1,4}\s+/,''))+'</h4>';continue;}
-  if(/^\s*$/.test(l))continue;
+  if(/^\s*#{1,6}\s+/.test(l)){h+='<h4>'+inline(l.replace(/^\s*#{1,6}\s+/,''))+'</h4>';continue;}
+  if(/^\s*&gt;\s?/.test(l)){h+='<blockquote>'+inline(l.replace(/^\s*&gt;\s?/,''))+'</blockquote>';continue;}
+  if(/^\s*(-{3,}|\*{3,})\s*$/.test(l)||/^\s*$/.test(l))continue;
   h+='<p>'+inline(l)+'</p>';}
  if(inL)h+='</ul>';
  return h;
 }
+function mdStrip(s){return String(s).replace(/^\s*#{1,6}\s*/gm,'').replace(/\*\*|__|`/g,'').replace(/^\s*>\s?/gm,'').replace(/^\s*[-*•]\s+/gm,'・').replace(/\n{3,}/g,'\n\n').replace(/^\s+|\s+$/g,'');}
+function aiQuote(s){var m=/^\s*>\s?(.+)$/m.exec(s);if(m)return mdStrip(m[1]);var t=mdStrip(s).replace(/\n+/g,' ');var max=L==='en'?300:140;return t.length>max?t.slice(0,max)+'…':t;}
+function msgLong(s){return mdStrip(s).length>(L==='en'?420:200);}
+function foldOld(chat){var lastA=-1,i;for(i=0;i<chat.length;i++)if(chat[i].role==='assistant')lastA=i;for(i=0;i<chat.length;i++){if(chat[i].role==='assistant')chat[i].fold=(i!==lastA&&msgLong(chat[i].content));}}
+var FU={
+ zh:[['下週第一步','請幫我把下週的操練排成每天做得到的小步驟。'],['憑信心禱告','請照你剛才的回答，寫一段我可以憑信心自己禱告的禱告。'],['舊人的根源','請再幫我看清楚，這週的問題背後，舊人有己的根源是什麼？'],['經文默想','請再給我一處合適的和合本經文，並帶我默想。'],['920 祝福','這週我可以怎樣具體祝福身邊的一個人？'],['時間次序','照神、己、人、事的次序，我下週的時間要怎麼調整？']],
+ en:[['First step','Please break next week\'s practices into small steps I can do each day.'],['Pray in faith','Based on your answer, write a short prayer I can pray in faith myself.'],['The root','Help me see more clearly the self-centred root behind this week\'s struggle.'],['A verse','Give me one more fitting verse and walk me through a short meditation.'],['920 blessing','How can I bless one person around me in a concrete way this week?'],['Order of time','Following God, self, others, work, how should I adjust my time next week?']]
+};
 function aiStart(){
  var wk=weekRange().wk;if(!S.reviews[wk])S.reviews[wk]={};
  var msgs=[{role:'user',content:T('以下是我這週在321管家的紀錄，請陪我做週檢討。\n\n','Here is my record in the 321 Steward this week. Please walk me through a weekly review.\n\n')+weekContext()}];
- S.reviews[wk].chat=msgs;ui.aiBusy=true;ui.aiErr='';save();render();
- aiCall(msgs,function(err,out){ui.aiBusy=false;if(err){ui.aiErr=err;}else{S.reviews[wk].chat.push({role:'assistant',content:out});save();}render();});
+ S.reviews[wk].chat=msgs;ui.aiBusy=true;ui.aiErr='';ui.crisis=false;stopSpeak();save();render();
+ aiCall(msgs,function(err,out){ui.aiBusy=false;if(err){ui.aiErr=err;}else{S.reviews[wk].chat.push({role:'assistant',content:out,ok:1});foldOld(S.reviews[wk].chat);save();}render();});
 }
-function aiAsk(){
- var q=val('ai_q'),wk=weekRange().wk,rv=S.reviews[wk];if(!q||!rv||!rv.chat)return;
+function aiAsk(q){
+ q=q||val('ai_q');var wk=weekRange().wk,rv=S.reviews[wk];if(!q||!rv||!rv.chat)return;
+ if(CRISIS_RE.test(q))ui.crisis=true;
  rv.chat.push({role:'user',content:q});ui.aiBusy=true;ui.aiErr='';save();render();
- var msgs=rv.chat.slice(-12);if(msgs[0].role!=='user')msgs=msgs.slice(1);
- aiCall(msgs,function(err,out){ui.aiBusy=false;if(err){ui.aiErr=err;rv.chat.pop();}else{rv.chat.push({role:'assistant',content:out});}save();render();});
+ var msgs=[],i;for(i=0;i<rv.chat.length;i++)msgs.push({role:rv.chat[i].role,content:rv.chat[i].content});
+ if(msgs.length>12)msgs=[msgs[0]].concat(msgs.slice(-11));if(msgs[1]&&msgs[1].role==='user')msgs.splice(1,1);
+ aiCall(msgs,function(err,out){ui.aiBusy=false;if(err){ui.aiErr=err;rv.chat.pop();}else{rv.chat.push({role:'assistant',content:out,ok:1});foldOld(rv.chat);}save();render();});
 }
 function aiCard(){
- var wk=weekRange().wk,rv=S.reviews[wk]||{},chat=rv.chat||[],h,i;
- h='<section class="card">'+st('spark',T('小智陪你週檢討','Weekly review with Xiaozhi'),T('依八大步驟，看見恩典也看見要修正的','See grace, and what needs correcting'))+'';
+ var wk=weekRange().wk,rv=S.reviews[wk]||{},chat=rv.chat||[],h,i,last=-1;
+ for(i=0;i<chat.length;i++)if(chat[i].role==='assistant')last=i;
+ h='<section class="card">'+st('spark',T('小智陪你週檢討','Weekly review with Xiaozhi'),T('依八大步驟，看見恩典也看見要修正的','See grace, and what needs correcting'));
  if(!chat.length){
   h+='<p class="empty">'+T('小智會讀這週的操練、事項、筆記與你寫的檢討，給你肯定、提醒和下週的操練建議。關懷名單只送出人數，不送名字和聯絡資料。','Xiaozhi reads this week\'s practices, to-dos, notes and your own review, then offers encouragement, honest correction and practices for next week. Only counts from your care list are sent, never names or contact details.')+'</p>'+
-  '<div class="btns"><button class="btn" data-act="aiStart"'+(ui.aiBusy?' disabled':'')+'>'+T('請小智陪我檢討','Start review with Xiaozhi')+'</button></div>';
+  '<div class="btns"><button class="btn" data-act="aiStart"'+(ui.aiBusy?' disabled':'')+'>'+ic('spark',16)+T('請小智陪我檢討','Start review with Xiaozhi')+'</button></div>';
  }else{
   h+='<div class="chat">';
   for(i=0;i<chat.length;i++){var m=chat[i];
    if(i===0){h+='<div class="msg me"><small>'+T('已送出本週摘要','Sent this week\'s summary')+'</small></div>';continue;}
-   h+=m.role==='assistant'?'<div class="msg ai"><div class="who">'+ic('spark',15)+T('小智','Xiaozhi')+'</div>'+mdHtml(m.content)+'</div>':'<div class="msg me">'+esc(m.content)+'</div>';}
-  if(ui.aiBusy)h+='<div class="msg ai"><p class="empty">'+T('小智正在禱告思想……','Xiaozhi is thinking…')+'</p></div>';
+   if(m.role!=='assistant'){h+='<div class="msg me">'+esc(m.content)+'</div>';continue;}
+   var lg=msgLong(m.content),key='ai'+wk+'_'+i;
+   h+='<div class="msg ai'+(m.fold&&lg?' fold':'')+'" id="msg'+i+'"><div class="who">'+ic('spark',15)+T('小智','Xiaozhi')+'</div><div class="msg-body">'+mdHtml(m.content)+'</div>'+
+    (lg?'<button class="msg-more" data-act="aiFold" data-id="'+i+'">'+(m.fold?T('展開全文 ▾','Show all ▾'):T('收合 ▴','Collapse ▴'))+'</button>':'')+
+    '<div class="msg-act">'+spkBtn(key,mdStrip(m.content),T('小智週檢討','Weekly review'))+
+    '<button class="btn ghost sm" data-act="aiShare" data-id="'+i+'">'+ic('share',16)+T('分享','Share')+'</button>'+
+    '<button class="btn ghost sm" data-act="aiImg" data-id="'+i+'">'+ic('image',16)+T('做成美圖','Card')+'</button></div></div>';
+   if(i===last&&m.ok&&!ui.aiBusy){var fu=FU[L==='en'?'en':'zh'];h+='<div class="fu">';for(var j=0;j<fu.length;j++)h+='<button class="chip-btn" data-act="aiFu" data-id="'+j+'">'+esc(T(fu[j][0],fu[j][0]))+'</button>';h+='</div>';}
+  }
+  if(ui.aiBusy)h+='<div class="msg ai"><p class="empty">'+(ui.aiCont?T('小智還在接著寫…','Xiaozhi is still writing…'):T('小智正在禱告思想……','Xiaozhi is thinking…'))+'</p></div>';
   h+='</div>';
-  if(chat.length>1||!ui.aiBusy)h+='<div class="inl"><input id="ai_q" class="grow" placeholder="'+T('追問小智，例如：下週怎麼開始？','Ask a follow-up, e.g. how do I start next week?')+'" aria-label="'+T('追問','Follow-up')+'"><button class="btn sm" data-act="aiAsk"'+(ui.aiBusy?' disabled':'')+'>'+T('送出','Send')+'</button></div>'+
+  if(ui.crisis)h+=crisisCard();
+  h+='<div class="inl"><input id="ai_q" class="grow" placeholder="'+T('追問小智，例如：下週怎麼開始？','Ask a follow-up, e.g. how do I start next week?')+'" aria-label="'+T('追問','Follow-up')+'"><button class="btn sm" data-act="aiAsk"'+(ui.aiBusy?' disabled':'')+'>'+T('送出','Send')+'</button></div>'+
    '<div class="btns"><button class="btn ghost sm" data-act="aiStart"'+(ui.aiBusy?' disabled':'')+'>'+T('依最新資料重新檢討','Review again with latest data')+'</button></div>';
  }
  if(ui.aiErr)h+='<p class="empty" style="color:var(--warn)">'+T('小智暫時連不上（','Xiaozhi could not be reached (')+esc(ui.aiErr)+T('）。請確認網路後再試；在 claude.ai 預覽畫面中無法連線，放上 GitHub Pages 後即可使用。','). Check your connection and try again. It cannot connect inside the claude.ai preview; it works once installed on GitHub Pages.')+'</p>';
@@ -715,7 +814,7 @@ function vReview(){
  var r=weekRange(),wk=r.wk,h='',i,cur=wheelVals(),subs=allSubs(),last=S.wheels[S.wheels.length-1];
  var steps=[['資訊','Information'],['啟示','Revelation'],['信服','Conviction'],['實踐','Practice'],['檢討','Review'],['修正','Correction'],['反覆','Repetition'],['繁殖','Multiplication']],sh='';
  for(i=0;i<steps.length;i++)sh+='<span>'+tr(steps[i])+'</span>';
- h+='<section class="versecard"><span class="vlabel">'+ic('pen',18)+''+T('改變觀念的八大步驟','Eight steps to a changed mind')+'</span><div class="steps">'+sh+'</div><blockquote class="verse sm">'+T(VERSES[5][0],VERSES[5][2])+'</blockquote><p class="ref">'+T(VERSES[5][1],VERSES[5][3])+'</p></section>';
+ h+='<section class="versecard"><span class="vlabel">'+ic('pen',18)+''+T('改變觀念的八大步驟','Eight steps to a changed mind')+'</span><div class="steps">'+sh+'</div><blockquote class="verse sm">'+esc(vt(VERSES[5][0]))+'</blockquote><p class="ref">'+T(VERSES[5][1],VERSES[5][2])+'</p></section>';
  h+='<section class="card">'+st('chart',T('本週操練','This week'),T('最近七天完成度','Last 7 days'))+'<div class="bars">';
  for(i=0;i<AREAS.length;i++){var a=AREAS[i],p=weekPct(a.k);
   h+='<div class="bar" style="'+cvars(a.k)+'"><b>'+tr(a.g)+'</b><i><em style="width:'+(p<0?0:Math.round(p*100))+'%"></em></i><span>'+(p<0?'—':Math.round(p*100)+'%')+'</span></div>';}
@@ -732,6 +831,9 @@ function vReview(){
  for(i=0;i<subs.length;i++){h+='<label class="sl" for="w_'+i+'" style="'+cvars(subs[i].k)+'"><span>'+tr(area(subs[i].k).g)+'・'+esc(subs[i].n)+'</span><b id="wv_'+i+'">'+cur[i]+'</b><input id="w_'+i+'" type="range" min="1" max="10" step="1" value="'+cur[i]+'" data-bind="w" data-id="'+i+'"></label>';}
  h+='</div><div class="btns"><button class="btn" data-act="saveWheel">'+T('儲存今天的評估','Save today\'s assessment')+'</button></div></section>';
  h+='<section class="card">'+st('gear2',T('設定與備份','Settings & backup'),T('資料只存在這支手機的瀏覽器裡','Data stays in this phone\'s browser'))+''+
+ '<div class="setrow"><span>'+T('字級','Text size')+'</span><div class="seg">'+(function(){var o='';for(var q=0;q<4;q++)o+='<button data-act="fsSet" data-id="'+q+'"'+(SET.font===q?' class="on"':'')+'>'+tr(FS_NAMES[q])+'</button>';return o;})()+'</div></div>'+
+ '<div class="setrow"><span>'+T('外觀','Appearance')+'</span><div class="seg">'+(function(){var o='',TH=[['',['跟隨系統','System']],['light',['淺色','Light']],['dark',['深色','Dark']]];for(var q=0;q<3;q++)o+='<button data-act="theme" data-id="'+TH[q][0]+'"'+(SET.theme===TH[q][0]?' class="on"':'')+'>'+tr(TH[q][1])+'</button>';return o;})()+'</div></div>'+
+ '<div class="setrow"><span>'+T('版本 ','Version ')+'<b>'+esc(APPVER.indexOf('@@')<0?APPVER:'dev')+'</b></span><div class="btns"><button class="btn ghost sm" data-act="checkUpd">'+T('檢查更新','Check for updates')+'</button><button class="btn ghost sm" data-act="hardUpd">'+T('強制更新','Force update')+'</button></div></div>'+
  '<label class="f" for="nm_me">'+T('你的稱呼','Your name')+'<input id="nm_me" data-bind="name" value="'+esc(S.name)+'"></label>'+
  '<label class="f" for="fd_u2">'+T('每日得勝同步網址（可空白）','Daily Victory sync link (optional)')+'<input id="fd_u2" value="'+esc(S.feedUrl)+'" placeholder="https://ical-proxy.spch321.workers.dev/feed/….ics"></label>'+
  '<div class="meta">'+(plannerHere()?T('已在同一網站找到每日得勝，時程會直接讀取。','Daily Victory found on this site; the schedule is read directly.'):T('同一網站還沒有每日得勝資料。','No Daily Victory data on this site yet.'))+'</div>'+
@@ -759,7 +861,10 @@ function render(){
  for(var i=0;i<TABS.length;i++){var b=TABS[i],isA=b.v!=='today'&&b.v!=='review';
   th+='<button class="tab'+(view===b.v?' on':'')+'" data-act="go" data-id="'+b.v+'"'+(isA?' style="'+cvars(b.v)+'"':'')+(view===b.v?' aria-current="page"':'')+'>'+ic(b.i,24)+'<span>'+tr(b.s)+'</span></button>';}
  $('tabs').innerHTML=th;
+ applyChrome();
+ var ub=$('updbar');if(ub)ub.textContent=T('已有新版本，點這裡立即更新','New version available — tap to update');
  $('main').innerHTML=view==='today'?vToday():view==='review'?vReview():vArea(view);
+ spkSync();updIdle();
 }
 function find(arr,id){for(var i=0;i<arr.length;i++){if(arr[i].id===id)return i;}return -1;}
 function okUrl(u){return /^https:\/\/[^\s]+$/.test(u);}
@@ -771,9 +876,29 @@ document.addEventListener('click',function(e){
  var act=el.getAttribute('data-act'),id=el.getAttribute('data-id'),t=ds(),i,x;
  switch(act){
  case 'splash':showSplash();return;
+ case 'speak':speak(id,SPK[id+':t']);return;
+ case 'vcard':openCard(vt(id),(function(){for(var q=0;q<VERSES.length;q++)if(VERSES[q][0]===id)return T(VERSES[q][1],VERSES[q][2]);return '';})(),'');return;
+ case 'vcardA':x=area(id);openCard(vt(x.v),tr(x.r),tr(x.motto));return;
+ case 'vshare':for(i=0;i<VERSES.length;i++){if(VERSES[i][0]===id){shareText((L==='en'?'“':'「')+vt(id)+(L==='en'?'”':'」')+'\n—— '+T(VERSES[i][1],VERSES[i][2]));break;}}return;
+ case 'cardTpl':CARD.tpl=id;renderCard();return;
+ case 'cardSize':CARD.size=id;renderCard();return;
+ case 'cardShare':shareCard();return;
+ case 'cardClose':closeCard();return;
+ case 'cardMask':if(e.target===el)closeCard();return;
+ case 'copy':(function(txt){try{navigator.clipboard.writeText(txt).then(function(){toast(T('已複製 ','Copied ')+txt);},function(){toast(txt);});}catch(err){toast(txt);}})(id);return;
+ case 'fs':SET.font=(SET.font+1)%4;saveSet();applyChrome();toast(T('字級：','Text size: ')+tr(FS_NAMES[SET.font]));if(view==='review')render();return;
+ case 'fsSet':SET.font=+id;saveSet();applyChrome();render();return;
+ case 'theme':SET.theme=id;saveSet();applyChrome();render();return;
+ case 'checkUpd':checkUpdate(true);return;
+ case 'hardUpd':UPD.pending=UPD.pending||'hard';applyUpdate(true);return;
+ case 'updNow':applyUpdate(false);return;
+ case 'aiFold':(function(){var rv=S.reviews[weekRange().wk];if(!rv||!rv.chat[+id])return;var m=rv.chat[+id];m.fold=!m.fold;save();var box=$('msg'+id);if(box){box.classList.toggle('fold',m.fold);el.textContent=m.fold?T('展開全文 ▾','Show all ▾'):T('收合 ▴','Collapse ▴');if(m.fold&&box.scrollIntoView)box.scrollIntoView({block:'nearest'});}})();return;
+ case 'aiShare':(function(){var rv=S.reviews[weekRange().wk];if(rv&&rv.chat[+id])shareText(T('【小智週檢討】','[Weekly review]')+'\n'+mdStrip(rv.chat[+id].content));})();return;
+ case 'aiImg':(function(){var rv=S.reviews[weekRange().wk];if(rv&&rv.chat[+id])openCard(aiQuote(rv.chat[+id].content),'',T('小智週檢討','Weekly review with Xiaozhi'));})();return;
+ case 'aiFu':if(!ui.aiBusy){var fu=FU[L==='en'?'en':'zh'][+id];aiAsk(T(fu[1],fu[1]));}return;
  case 'enter':hideSplash();return;
- case 'go':view=id;ui.reset=false;ui.schedTask=null;render();window.scrollTo(0,0);return;
- case 'lang':L=id;try{localStorage.setItem(LKEY,L);}catch(err){}ui.wheel=null;render();return;
+ case 'go':stopSpeak();view=id;ui.reset=false;ui.schedTask=null;render();window.scrollTo(0,0);return;
+ case 'lang':stopSpeak();CARD.fontTried=0;L=id;try{localStorage.setItem(LKEY,L);}catch(err){}ui.wheel=null;render();return;
  case 't3':if(!S.top3[t])S.top3[t]=[{t:'',d:0},{t:'',d:0},{t:'',d:0}];x=S.top3[t][+id];x.d=x.d?0:1;break;
  case 'hab':i=find(S.habits,id);if(i<0)return;x=S.habits[i];if(x.log[t])delete x.log[t];else x.log[t]=1;break;
  case 'delHab':i=find(S.habits,id);if(i>=0)S.habits.splice(i,1);toast(T('已刪除操練','Practice deleted'));break;
@@ -828,10 +953,335 @@ document.addEventListener('input',function(e){
  else if(b==='j'){if(!S.journal[t])S.journal[t]={};S.journal[t][f]=el.value;}
  else if(b==='rv'){var wk=weekKey(t);if(!S.reviews[wk])S.reviews[wk]={};S.reviews[wk][f]=el.value;}
  else if(b==='name'){S.name=el.value;}
+ else if(b==='cardn'){CARD.n=el.value;paintCard();return;}
  else if(b==='w'){var w=wheelVals();w[+id]=+el.value;$('wv_'+id).textContent=el.value;var last=S.wheels[S.wheels.length-1];$('radar').innerHTML=radar(w,last?last.v:null);return;}
  save();
 });
 window.addEventListener('storage',function(e){if(e.key&&e.key.indexOf('p4_sched')===0&&view==='today')render();});
+
+/* ================= 321 App 共用功能（ES5）：字級、主題、朗讀、經文美圖、空中團契、自動更新、小智強化 ================= */
+var APPVER='v2026.1111.0537';
+var SETK='steward321.set',SET={font:0,theme:''};
+try{var _st=JSON.parse(localStorage.getItem(SETK)||'{}');if(_st){SET.font=+_st.font||0;SET.theme=_st.theme||'';}}catch(e){}
+function saveSet(){try{localStorage.setItem(SETK,JSON.stringify(SET));}catch(e){}}
+var FS_NAMES=[['標準','Standard'],['大','Large'],['特大','Extra large'],['超大','Huge']];
+function applyChrome(){
+ var h=document.documentElement,c=['fs-lg','fs-xl','fs-xxl'];
+ for(var i=0;i<c.length;i++)h.classList.remove(c[i]);
+ if(SET.font>0)h.classList.add(c[SET.font-1]);
+ if(SET.theme)h.setAttribute('data-theme',SET.theme);else h.removeAttribute('data-theme');
+}
+
+/* ---------- 朗讀（單一 audio、背景接續、失敗改用裝置語音） ---------- */
+var TTS_URL='https://azure-tts.spch321.workers.dev';
+var VOICE={zh:'zh-TW-YunJheNeural',zs:'zh-CN-Yunfan:DragonHDLatestNeural',en:'en-US-AndrewNeural'};
+var SILENT_WAV='data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAgD4AAAB9AAACABAAZGF0YQAAAAA=';
+var TTS={el:null,unlocked:false,key:'',segs:[],urls:{},want:-1,gen:0,lock:null};
+var SPK={};
+function ttsEl(){if(!TTS.el){TTS.el=document.createElement('audio');TTS.el.setAttribute('playsinline','');document.body.appendChild(TTS.el);}return TTS.el;}
+function ttsUnlock(){var a=ttsEl();if(TTS.unlocked)return;TTS.unlocked=true;try{a.src=SILENT_WAV;var p=a.play();if(p&&p.catch)p.catch(function(){});}catch(e){}}
+var EMOJI_RE=/[\uD83C-\uD83E][\uDC00-\uDFFF]|[←-⇿⌀-⏿■-➿⬀-⯿☀-⛿️‍⃣]/g;
+var BKSAY={'詩篇':1};
+function refSay(r){
+ if(L==='en')return r.replace(/^(.*?)\s+(\d+):(\d+)(?:-(\d+))?$/,function(m,b,c,v,v2){return b+' chapter '+c+' verse '+v+(v2?' to '+v2:'');});
+ return r.replace(/^(.*?)\s*(\d+):(\d+)(?:-(\d+))?$/,function(m,b,c,v,v2){return b+c+(b==='詩篇'||b==='诗篇'?'篇':'章')+v+(v2?'到'+v2:'')+T('節','节');});
+}
+function ttsPrep(t){
+ t=String(t||'').replace(EMOJI_RE,'').replace(/〔[^〕]*〕/g,'').replace(/\[[^\]]*\]/g,'');
+ t=t.replace(/^\s*#{1,6}\s*/gm,'').replace(/\*\*|__|`/g,'').replace(/^\s*>\s?/gm,'').replace(/^\s*[-*•]\s+/gm,'').replace(/\|/g,'，');
+ if(L==='en')return t.replace(/\s+/g,' ').replace(/\s+([,.;:!?])/g,'$1').replace(/\b321\b/g,'3 2 1');
+ t=t.replace(/[「」『』《》〈〉“”]/g,'').replace(/[（(]([^）)]*)[）)]/g,'，$1，').replace(/——|—/g,'，');
+ t=t.replace(/321/g,'三二一').replace(/920/g,'九二零').replace(/235/g,'二三五');
+ t=t.replace(/與主同行|與神同行/g,function(m){return m.charAt(0)+m.charAt(1)+'同形';}).replace(/得著/g,'得着').replace(/數算/g,'鼠算').replace(/重生/g,'蟲生').replace(/教會/g,'叫會').replace(/應許/g,'英許');
+ return t.replace(/\n+/g,'。').replace(/[，。]{2,}/g,'。');
+}
+function ttsSplit(t){
+ var max=L==='en'?320:130,parts=L==='en'?t.match(/[^.!?]+[.!?]*\s*/g)||[t]:t.match(/[^。！？；]+[。！？；]*/g)||[t],out=[],cur='';
+ for(var i=0;i<parts.length;i++){var p=parts[i];if(!p.replace(/\s/g,''))continue;if(cur&&(cur+p).length>max){out.push(cur);cur='';}cur+=p;}
+ if(cur)out.push(cur);return out;
+}
+function spkSync(){
+ var bs=document.querySelectorAll('[data-act="speak"]');
+ for(var i=0;i<bs.length;i++){var on=TTS.key&&bs[i].getAttribute('data-id')===TTS.key;bs[i].classList.toggle('on',!!on);var lb=bs[i].querySelector('.lb');if(lb)lb.textContent=on?T('停止','Stop'):T('朗讀','Listen');}
+}
+function stopSpeak(){
+ TTS.gen++;var a=TTS.el;if(a){a.onended=null;a.onerror=null;try{a.pause();}catch(e){}}
+ for(var k in TTS.urls){try{URL.revokeObjectURL(TTS.urls[k]);}catch(e){}}
+ TTS.urls={};TTS.segs=[];TTS.want=-1;TTS.key='';
+ try{if(window.speechSynthesis)speechSynthesis.cancel();}catch(e){}
+ if(TTS.lock){try{TTS.lock.release();}catch(e){}TTS.lock=null;}
+ try{if(navigator.mediaSession)navigator.mediaSession.playbackState='none';}catch(e){}
+ spkSync();
+}
+function ttsFetch(i,gen,tries){
+ if(TTS.urls[i]||i>=TTS.segs.length)return;
+ TTS.urls[i]='…';
+ var x=new XMLHttpRequest();x.open('POST',TTS_URL);x.setRequestHeader('Content-Type','application/json');x.responseType='arraybuffer';x.timeout=25000;
+ function fail(){if(gen!==TTS.gen)return;delete TTS.urls[i];if((tries||0)<2){setTimeout(function(){ttsFetch(i,gen,(tries||0)+1);},800*((tries||0)+1));}else{TTS.urls[i]='x';if(TTS.want===i)ttsFallback(i,gen);}}
+ x.onload=function(){if(gen!==TTS.gen)return;if(x.status>=200&&x.status<300&&x.response&&x.response.byteLength>128){TTS.urls[i]=URL.createObjectURL(new Blob([x.response],{type:'audio/mpeg'}));if(TTS.want===i)ttsPlay(i,gen);}else fail();};
+ x.onerror=x.ontimeout=fail;
+ try{x.send(JSON.stringify({voice:VOICE[L]||VOICE.zh,rate:'+0%',sil:140,silc:140,sile:260,text:TTS.segs[i]}));}catch(e){fail();}
+}
+function ttsPlay(i,gen){
+ if(gen!==TTS.gen)return;
+ if(i>=TTS.segs.length){stopSpeak();return;}
+ TTS.want=i;ttsFetch(i+1,gen);ttsFetch(i+2,gen);
+ var u=TTS.urls[i];
+ if(!u||u==='…'){ttsFetch(i,gen);return;}
+ if(u==='x'){ttsFallback(i,gen);return;}
+ var a=ttsEl();a.onended=function(){ttsPlay(i+1,gen);};a.onerror=function(){TTS.urls[i]='x';ttsFallback(i,gen);};
+ a.src=u;var p=a.play();if(p&&p.catch)p.catch(function(){ttsFallback(i,gen);});
+}
+function ttsFallback(i,gen){
+ if(gen!==TTS.gen)return;
+ if(!window.speechSynthesis){toast(T('無法朗讀，請檢查網路','Cannot read aloud; check your connection'));stopSpeak();return;}
+ if(!TTS.fbTold){TTS.fbTold=1;toast(T('改用裝置內建語音朗讀','Using the device voice'));}
+ var u=new SpeechSynthesisUtterance(TTS.segs.slice(i).join(' '));u.lang=L==='en'?'en-US':(L==='zs'?'zh-CN':'zh-TW');u.rate=.95;
+ u.onend=function(){if(gen===TTS.gen)stopSpeak();};
+ TTS.want=-2;speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+function speak(key,title){
+ var text=SPK[key];
+ if(TTS.key===key){stopSpeak();return;}
+ stopSpeak();ttsUnlock();if(!text)return;
+ TTS.key=key;TTS.segs=ttsSplit(ttsPrep(text));TTS.fbTold=0;var gen=TTS.gen;
+ try{if(navigator.mediaSession&&window.MediaMetadata){navigator.mediaSession.metadata=new MediaMetadata({title:title||T('321管家','321 Steward'),artist:T('國度321空中團契','Kingdom 321 Fellowship'),artwork:[{src:'icon-512.png',sizes:'512x512',type:'image/png'}]});
+  navigator.mediaSession.setActionHandler('pause',stopSpeak);navigator.mediaSession.setActionHandler('stop',stopSpeak);navigator.mediaSession.playbackState='playing';}}catch(e){}
+ try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(function(l){TTS.lock=l;},function(){});}catch(e){}
+ spkSync();ttsPlay(0,gen);
+}
+function spkBtn(key,text,title){SPK[key]=text;SPK[key+':t']=title||'';return '<button class="btn ghost sm'+(TTS.key===key?' on':'')+'" data-act="speak" data-id="'+key+'">'+ic('sound',16)+'<span class="lb">'+(TTS.key===key?T('停止','Stop'):T('朗讀','Listen'))+'</span></button>';}
+
+/* ---------- 經文美圖 ---------- */
+var CARD={t:'',ref:'',n:'',tpl:'navy',size:'s'};
+var CARD_TPL={
+ navy:{bg:['#1D3A6E','#14294F','#0B1833'],ink:'#F5EEDC',gold:'#E2B65C',sub:'#C9D3E6'},
+ dawn:{bg:['#FBE9D2','#F3D3B0','#E6B48C'],ink:'#3B2A1A',gold:'#A0651C',sub:'#6E5440'},
+ paper:{bg:['#FBF8F1','#F4EFE3','#EDE6D6'],ink:'#2A2620',gold:'#A9781D',sub:'#6B6355'},
+ photo:{bg:['#0E1A33','#0E1A33','#0E1A33'],ink:'#FFFFFF',gold:'#F0C977',sub:'#E5E9F2',photo:1}
+};
+var CARD_SIZE={s:[1080,1080],t:[1080,1350],p:[1080,1920]};
+var HERO_IMG=null;
+function cardFont(serif,px,b){var f=L==='en'?(serif?'Georgia,"Times New Roman",serif':'Helvetica,Arial,sans-serif'):(L==='zs'?(serif?'"Noto Serif SC","Songti SC","STSong","SimSun",serif':'"Noto Sans SC","PingFang SC",sans-serif'):(serif?'"Noto Serif TC","Songti TC","PMingLiU",serif':'"Noto Sans TC","PingFang TC",sans-serif'));return (b?'700 ':'400 ')+px+'px '+f;}
+var NO_START='，。、；：？！）」』】》〉·…—％”’',NO_END='（「『【《〈“‘';
+function wrapLines(ctx,text,maxW){
+ var lines=[],cur='',i,ch;
+ if(L==='en'){var ws=text.split(/\s+/);for(i=0;i<ws.length;i++){var t2=cur?cur+' '+ws[i]:ws[i];if(ctx.measureText(t2).width>maxW&&cur){lines.push(cur);cur=ws[i];}else cur=t2;}if(cur)lines.push(cur);return lines;}
+ for(i=0;i<text.length;i++){ch=text.charAt(i);
+  if(ctx.measureText(cur+ch).width>maxW&&cur&&NO_START.indexOf(ch)<0){
+   if(NO_END.indexOf(cur.charAt(cur.length-1))>=0){var last=cur.charAt(cur.length-1);lines.push(cur.slice(0,-1));cur=last+ch;}else{lines.push(cur);cur=ch;}
+  }else cur+=ch;}
+ if(cur)lines.push(cur);return lines;
+}
+function drawCard(cv){
+ var sz=CARD_SIZE[CARD.size],W=sz[0],H=sz[1],tp=CARD_TPL[CARD.tpl],x=cv.getContext('2d'),i;
+ cv.width=W;cv.height=H;
+ var g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,tp.bg[0]);g.addColorStop(.55,tp.bg[1]);g.addColorStop(1,tp.bg[2]);x.fillStyle=g;x.fillRect(0,0,W,H);
+ if(tp.photo&&HERO_IMG&&HERO_IMG.complete){var iw=HERO_IMG.naturalWidth,ih=HERO_IMG.naturalHeight,sc=Math.max(W/iw,H/ih);x.drawImage(HERO_IMG,(W-iw*sc)/2,(H-ih*sc)/2,iw*sc,ih*sc);
+  var ov=x.createLinearGradient(0,0,0,H);ov.addColorStop(0,'rgba(9,18,40,.80)');ov.addColorStop(.5,'rgba(9,18,40,.86)');ov.addColorStop(1,'rgba(9,18,40,.80)');x.fillStyle=ov;x.fillRect(0,0,W,H);}
+ var m=Math.round(W*.06);x.strokeStyle=tp.gold;x.globalAlpha=.55;x.lineWidth=3;x.strokeRect(m,m,W-2*m,H-2*m);x.globalAlpha=.3;x.lineWidth=1.5;x.strokeRect(m+14,m+14,W-2*m-28,H-2*m-28);x.globalAlpha=1;
+ x.textAlign='center';x.textBaseline='middle';
+ var top=m+90,grp=T('國度321空中團契','Kingdom 321 Fellowship');
+ x.font=cardFont(false,34,true);x.fillStyle=tp.gold;x.fillText(grp,W/2,top);
+ var gw=x.measureText(grp).width;x.fillRect(W/2-gw/2-90,top-1,60,2);x.fillRect(W/2+gw/2+30,top-1,60,2);
+ var inner=W-2*m-140,body=!CARD.t?'':(/[「“『]/.test(CARD.t)?CARD.t:(L==='en'?'“'+CARD.t+'”':'「'+CARD.t+'」'));
+ var fs=L==='en'?60:66,lines,lh,noteLines=[],nfs=36;
+ var avail=H-2*m-320-(CARD.n?220:0);
+ for(;fs>=34;fs-=2){x.font=cardFont(true,fs,true);lines=wrapLines(x,body,inner);lh=fs*1.55;if(lines.length*lh<=avail)break;}
+ if(CARD.n){x.font=cardFont(false,nfs,false);noteLines=wrapLines(x,CARD.n,inner);if(noteLines.length>4){noteLines=noteLines.slice(0,4);noteLines[3]=noteLines[3].slice(0,-1)+'…';}}
+ var blockH=lines.length*lh+90+(noteLines.length?60+noteLines.length*nfs*1.6:0),y=Math.max(top+90,(H-blockH)/2+20);
+ x.fillStyle=tp.ink;x.font=cardFont(true,fs,true);
+ for(i=0;i<lines.length;i++)x.fillText(lines[i],W/2,y+i*lh+lh/2);
+ y+=lines.length*lh+40;
+ if(CARD.ref){x.font=cardFont(false,34,false);x.fillStyle=tp.gold;x.fillText('— '+CARD.ref+' —',W/2,y);}
+ if(noteLines.length){y+=60;x.fillStyle=tp.gold;for(i=-2;i<=2;i++){x.beginPath();x.arc(W/2+i*22,y,3.5,0,Math.PI*2);x.fill();}
+  y+=46;x.font=cardFont(false,nfs,false);x.fillStyle=tp.sub;for(i=0;i<noteLines.length;i++)x.fillText(noteLines[i],W/2,y+i*nfs*1.6);}
+ x.font=cardFont(false,28,false);x.fillStyle=tp.sub;x.globalAlpha=.85;x.fillText(T('321管家','321 Steward')+'  ·  spch321-sudo.github.io/321steward',W/2,H-m-56);x.globalAlpha=1;
+}
+function openCard(t,ref,n){
+ stopSpeak();CARD.t=t||'';CARD.ref=ref||'';CARD.n=n||'';
+ if(!HERO_IMG){HERO_IMG=new Image();HERO_IMG.onload=function(){if(CARD.tpl==='photo')paintCard();};HERO_IMG.src='hero.jpg';}
+ ui.card=true;renderCard();
+}
+function renderCard(){
+ var el=$('sheet'),h='',k;
+ h+='<div class="sheet-card" role="dialog" aria-label="'+T('經文美圖','Verse card')+'"><div class="sh-hd"><b>'+ic('image',18)+T('經文美圖','Verse card')+'</b><button class="x" data-act="cardClose" aria-label="'+T('關閉','Close')+'">×</button></div>';
+ h+='<div class="cardwrap"><canvas id="cardcv" aria-label="'+T('卡片預覽','Card preview')+'"></canvas></div>';
+ h+='<div class="seg">';var TN={navy:['深藍','Navy'],dawn:['晨光','Dawn'],paper:['素紙','Paper'],photo:['主視覺','Photo']};
+ for(k in CARD_TPL)h+='<button data-act="cardTpl" data-id="'+k+'"'+(CARD.tpl===k?' class="on"':'')+'>'+tr(TN[k])+'</button>';
+ h+='</div><div class="seg">';var SN={s:['方形 1:1','Square'],t:['直式 4:5','Portrait 4:5'],p:['限動 9:16','Story 9:16']};
+ for(k in CARD_SIZE)h+='<button data-act="cardSize" data-id="'+k+'"'+(CARD.size===k?' class="on"':'')+'>'+tr(SN[k])+'</button>';
+ h+='</div><label class="f" for="card_n">'+T('卡片下方的話（可空白）','Words under the verse (optional)')+'<textarea id="card_n" data-bind="cardn" placeholder="'+T('寫一句你的領受或祝福','A line of insight or blessing')+'">'+esc(CARD.n)+'</textarea></label>';
+ h+='<div class="btns"><button class="btn" data-act="cardShare">'+ic('share',16)+T('分享／存圖','Share / save')+'</button><button class="btn ghost" data-act="cardClose">'+T('完成','Done')+'</button></div><div id="cardimg"></div></div>';
+ el.innerHTML='<div class="sheet-mask" data-act="cardMask">'+h+'</div>';el.hidden=false;
+ paintCard();
+}
+function paintCard(){var cv=$('cardcv');if(!cv)return;drawCard(cv);
+ if(document.fonts&&document.fonts.load&&!CARD.fontTried){CARD.fontTried=1;var fam=L==='zs'?'Noto Serif SC':'Noto Serif TC';Promise.all([document.fonts.load('700 40px "'+fam+'"'),document.fonts.load('400 30px "Noto Sans TC"')]).then(function(){var c2=$('cardcv');if(c2)drawCard(c2);},function(){});}}
+function closeCard(){ui.card=false;$('sheet').hidden=true;$('sheet').innerHTML='';}
+function shareCard(){
+ var cv=$('cardcv');if(!cv)return;
+ function showImg(){var u;try{u=cv.toDataURL('image/png');}catch(e){toast(T('無法產生圖片','Could not create the image'));return;}$('cardimg').innerHTML='<p class="empty">'+T('長按圖片即可儲存或分享','Long-press the image to save or share')+'</p><img src="'+u+'" alt="'+T('經文美圖','Verse card')+'">';}
+ if(!cv.toBlob){showImg();return;}
+ cv.toBlob(function(b){
+  if(!b){showImg();return;}
+  var f=null;try{f=new File([b],'321steward-card.png',{type:'image/png'});}catch(e){}
+  if(f&&navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:T('321管家','321 Steward')}).then(function(){},function(){showImg();});}
+  else showImg();
+ },'image/png');
+}
+function shareText(txt){
+ var full=txt+'\n\n—— '+T('國度321空中團契','Kingdom 321 Fellowship')+'\nhttps://spch321-sudo.github.io/321steward/';
+ if(navigator.share){navigator.share({text:full}).then(function(){},function(){});return;}
+ try{navigator.clipboard.writeText(full).then(function(){toast(T('已複製，可以貼上分享','Copied, ready to paste'));},function(){toast(T('請長按選取文字分享','Long-press to copy'));});}catch(e){toast(T('請長按選取文字分享','Long-press to copy'));}
+}
+
+/* ---------- 國度321空中團契 ---------- */
+var FEL_URL='https://spch321-sudo.github.io/321fellowship/';
+var FEL_DEF={meetings:[{days:[1,2,3,4,5,6],start:'06:00',end:'07:00',title:'晨讀'},{days:[1,2,3,4,5],start:'12:10',end:'13:00',title:'午修靈糧'},{days:[1,2,3,4,5],start:'21:00',end:'22:00',title:'晚禱'}],
+ zoom:{url:'https://zoom.us/j/8193972372?pwd=o3tuX9k87Lyhb3UEV7hgRtSUYVyI1Q.1',id:'819 397 2372',pw:'321'},youtube:'https://www.youtube.com/@kingdom321air',
+ offering:[{country:'台灣',holder:'社團法人中華活力全人關懷協會',bank:'新光商業銀行 新埔分行',account:'(103) 0338101013000'},{country:'馬來西亞',holder:'馬來西亞安提阿教會',bank:'Public Bank',account:'3178557627'},{country:'紐西蘭',holder:'Bin Lu',bank:'ASB Bank Auckland Branch',account:'12-3231-0055109-00'},{country:'新加坡',holder:'LEE CHEW YONG',bank:'DBS My Account',account:'275-153637-9'},{country:'中國',holder:'微信支付',holderEn:'WeChat Pay',bank:'',account:''}]};
+var MT_EN={'晨讀':'Morning Reading 321','晨讀321':'Morning Reading 321','午修靈糧':'Midday Devotion','晚禱':'Evening Prayer'};
+var CTRY_EN={'台灣':'Taiwan','馬來西亞':'Malaysia','紐西蘭':'New Zealand','新加坡':'Singapore','中國':'China'};
+var FEL=FEL_DEF;
+try{var _fc=JSON.parse(localStorage.getItem('steward321.fel')||'null');if(_fc&&_fc.meetings)FEL=_fc;}catch(e){}
+var CN_WD={'日':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6};
+function parseDays(s){
+ s=String(s||'');var m=/週?([一二三四五六日])\s*[至到~～-]\s*週?([一二三四五六日])/.exec(s),out=[],a,b,i;
+ if(/每天|每日|daily/i.test(s))return [0,1,2,3,4,5,6];
+ if(m){a=CN_WD[m[1]];b=CN_WD[m[2]];if(b===0)b=7;for(i=a;i<=b;i++)out.push(i%7);return out;}
+ var r=/[一二三四五六日]/g,x;while((x=r.exec(s))!==null)out.push(CN_WD[x[0]]);
+ return out.length?out:[0,1,2,3,4,5,6];
+}
+function felLoad(){
+ var x=new XMLHttpRequest();
+ try{x.open('GET',FEL_URL+'data.json?t='+Date.now());}catch(e){return;}
+ x.timeout=15000;
+ x.onload=function(){
+  if(x.status<200||x.status>=300)return;
+  try{var d=JSON.parse(x.responseText),ms=[],i;
+   for(i=0;i<(d.meetings||[]).length;i++){var mt=d.meetings[i],tm=String(mt.time||'').split(/[–\-~～]/);if(tm.length<2)continue;ms.push({days:parseDays(mt.day),start:tm[0].replace(/\s/g,''),end:tm[1].replace(/\s/g,''),title:mt.title||'',link:mt.link||''});}
+   var L2=d.links||{},z=L2.zoom||{};
+   FEL={meetings:ms.length?ms:FEL_DEF.meetings,zoom:{url:z.url||FEL_DEF.zoom.url,id:z.meetingId||FEL_DEF.zoom.id,pw:z.passcode||FEL_DEF.zoom.pw},youtube:(L2.youtube&&L2.youtube.url)||FEL_DEF.youtube,offering:L2.offering&&L2.offering.length?L2.offering:FEL_DEF.offering};
+   try{localStorage.setItem('steward321.fel',JSON.stringify(FEL));}catch(e){}
+   if(view==='today')render();
+  }catch(e){}
+ };
+ try{x.send();}catch(e){}
+}
+var TPE=8*36e5;
+function nextMeet(now){
+ now=now||Date.now();var best=null,list=FEL.meetings||[],i,k;
+ var tp=new Date(now+TPE),base=Date.UTC(tp.getUTCFullYear(),tp.getUTCMonth(),tp.getUTCDate());
+ for(i=0;i<list.length;i++){var mt=list[i],sp=mt.start.split(':'),ep=mt.end.split(':');
+  for(k=0;k<8;k++){var day=new Date(base+k*864e5);if(mt.days.indexOf(day.getUTCDay())<0)continue;
+   var st=base+k*864e5+(+sp[0])*36e5+(+sp[1])*6e4-TPE,en=base+k*864e5+(+ep[0])*36e5+(+ep[1])*6e4-TPE;if(en<=st)en+=864e5;
+   if(now<en){var o={mt:mt,start:st,end:en,live:now>=st};if(o.live)return o;if(!best||st<best.start)best=o;break;}}}
+ return best;
+}
+function mtTitle(mt){return L==='en'?(MT_EN[mt.title]||mt.title):T(mt.title,mt.title);}
+function wdT(d){return L==='en'?['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][d]:T('週'+'日一二三四五六'.charAt(d),'');}
+function hm(d){return pad(d.getHours())+':'+pad(d.getMinutes());}
+function cdText(o){
+ var now=Date.now(),ms=o.live?o.end-now:o.start-now,mins=Math.max(0,Math.round(ms/6e4)),h=Math.floor(mins/60),mm=mins%60;
+ var span=L==='en'?((h?h+' h ':'')+mm+' min'):((h?h+' 小時 ':'')+mm+' 分');
+ return o.live?T('進行中・再 ','Live now · ')+span+T(' 結束',' left'):T('還有 ','Starts in ')+span;
+}
+function daysText(ds){
+ if(ds.length===7)return T('每天','Daily');
+ var s=ds.slice().sort(function(a,b){return ((a+6)%7)-((b+6)%7);});
+ var first=s[0],last=s[s.length-1],cont=true;for(var i=1;i<s.length;i++){if((s[i-1]+1)%7!==s[i])cont=false;}
+ if(cont&&s.length>2)return L==='en'?wdT(first)+'–'+wdT(last):T('週'+'日一二三四五六'.charAt(first)+'至週'+'日一二三四五六'.charAt(last),'');
+ var o=[];for(i=0;i<s.length;i++)o.push(wdT(s[i]));return o.join(L==='en'?', ':'、');
+}
+function sameTz(){return new Date().getTimezoneOffset()===-480;}
+function fellowCard(){
+ var o=nextMeet(),h,i,z=FEL.zoom||{};
+ h='<section class="card fel"><div class="felhd"><span class="felmark">321</span><div><h2>'+T('國度321空中團契','Kingdom 321 Fellowship')+'</h2><p>'+T('每天線上一起讀經、禱告，活出基督的生命','Read and pray together online every day')+'</p></div></div>';
+ if(o){var s=new Date(o.start),e=new Date(o.end),url=o.mt.link||z.url;
+  h+='<div class="nextm'+(o.live?' live':'')+'"><span class="nk">'+(o.live?T('聚會進行中','Meeting now'):T('下一堂聚會','Next meeting'))+'</span><h3>'+esc(mtTitle(o.mt))+'</h3>'+
+  '<div class="nt">'+wdT(s.getDay())+' '+hm(s)+'–'+hm(e)+(sameTz()?'':' <small>'+T('（你的時間）','(your time)')+'</small>')+'</div>'+
+  '<div class="cd" id="felcd">'+cdText(o)+'</div>'+
+  (url?'<a class="btn gold big" href="'+esc(url)+'" target="_blank" rel="noopener">'+ic('video',18)+(o.live?T('立即加入聚會','Join now'):T('一鍵加入聚會','Join the meeting'))+'</a>':'')+
+  '<div class="zid">'+T('會議 ID ','Meeting ID ')+'<b>'+esc(z.id||'')+'</b>'+T('・密碼 ',' · Passcode ')+'<b>'+esc(z.pw||'')+'</b> <button class="btn ghost sm" data-act="copy" data-id="'+esc(String(z.id||'').replace(/\s/g,''))+'">'+T('複製 ID','Copy ID')+'</button></div></div>';}
+ h+='<details class="fd"><summary>'+ic('clock',17)+T('聚會時間','Meeting times')+'<small>'+(sameTz()?T('台北時間','Taipei time'):T('台北時間，括號內為你的時間','Taipei time; yours in brackets'))+'</small></summary><div class="list">';
+ for(i=0;i<FEL.meetings.length;i++){var mt=FEL.meetings[i],oc=null,lt='';
+  if(!sameTz()){var nm=FEL.meetings[i];var save=FEL.meetings;FEL.meetings=[nm];oc=nextMeet();FEL.meetings=save;if(oc)lt=' <small>（'+wdT(new Date(oc.start).getDay())+' '+hm(new Date(oc.start))+'）</small>';}
+  h+='<div class="row"><div class="grow"><div class="ttl">'+esc(mtTitle(mt))+'</div><div class="meta">'+daysText(mt.days)+' '+esc(mt.start)+'–'+esc(mt.end)+lt+'</div></div></div>';}
+ h+='</div></details>';
+ h+='<details class="fd"><summary>'+ic('heart',17)+T('奉獻支持','Give')+'<small>'+T('支持團契的事工','Support the fellowship')+'</small></summary><div class="list">';
+ var of=FEL.offering||[];
+ for(i=0;i<of.length;i++){var g=of[i],acct=g.account||'';
+  h+='<div class="row of"><div class="grow"><div class="ttl">'+esc(L==='en'?(CTRY_EN[g.country]||g.country):T(g.country,g.country))+'</div><div class="meta">'+esc(L==='en'&&g.holderEn?g.holderEn:g.holder||'')+(g.bank?'・'+esc(g.bank):'')+'</div>'+
+  (acct?'<div class="acct">'+esc(acct)+' <button class="btn ghost sm" data-act="copy" data-id="'+esc(acct.replace(/^\(\d+\)\s*/,''))+'">'+T('複製帳號','Copy')+'</button></div>':'')+
+  (g.qr?'<img class="qr" src="'+esc(g.qr)+'" alt="QR">'+(g.qrCap?'<div class="meta">'+esc(L==='en'?(g.qrCapEn||g.qrCap):g.qrCap)+'</div>':''):'')+'</div></div>';}
+ h+='</div></details>';
+ h+='<div class="btns"><a class="btn ghost sm" href="'+FEL_URL+'" target="_blank" rel="noopener">'+ic('people',16)+T('開啟321空中團契 App','Open the Fellowship app')+'</a><a class="btn ghost sm" href="'+esc(FEL.youtube||FEL_DEF.youtube)+'" target="_blank" rel="noopener">'+ic('video',16)+'YouTube</a></div></section>';
+ return h;
+}
+setInterval(function(){var el=$('felcd');if(!el)return;var o=nextMeet();if(o)el.textContent=cdText(o);},30000);
+
+/* ---------- 小智：危機求助 ---------- */
+var CRISIS_RE=/想死|不想活|自殺|自杀|輕生|轻生|結束生命|结束生命|活不下去|傷害自己|伤害自己|割腕|跳樓|跳楼|suicid|kill myself|end my life|want to die|hurt myself|self-harm/i;
+function crisisCard(){
+ return '<div class="crisis"><b>'+T('你很重要，不需要一個人扛。','You matter. You don\'t have to carry this alone.')+'</b><p>'+T('如果你正想傷害自己，請現在就聯絡身邊信任的人，或撥打求助專線：','If you are thinking of harming yourself, please reach out now to someone you trust or a helpline:')+'</p>'+
+ '<ul><li>'+T('台灣：安心專線 1925、生命線 1995','Taiwan: 1925 or 1995')+'</li><li>'+T('馬來西亞：Befrienders 03-7627 2929','Malaysia: Befrienders 03-7627 2929')+'</li><li>'+T('新加坡：SOS 1767','Singapore: SOS 1767')+'</li><li>'+T('紐西蘭：1737','New Zealand: 1737')+'</li><li>'+T('中國：希望24熱線 400-161-9995','China: 400-161-9995')+'</li></ul><p>'+T('有立即危險時，請撥打當地緊急電話。','If you are in immediate danger, call your local emergency number.')+'</p></div>';
+}
+
+/* ---------- 自動更新（version.json＋SW，只動自己的快取） ---------- */
+var UPD={reg:null,pending:'',checking:false},CPFX='steward321-';
+function updBusy(){
+ if(TTS.key||ui.aiBusy||ui.card)return true;
+ var a=document.activeElement;if(a&&(a.tagName==='TEXTAREA'||(a.tagName==='INPUT'&&a.type!=='range'))&&a.value)return true;
+ return false;
+}
+function updBar(show){var b=$('updbar');if(!b)return;b.hidden=!show;}
+function onNewVersion(v){
+ UPD.pending=v;
+ if(updBusy()){updBar(true);return;}
+ applyUpdate(false);
+}
+function updIdle(){if(UPD.pending&&!updBusy())applyUpdate(false);}
+function applyUpdate(hard){
+ var v=UPD.pending||'',ss=window.sessionStorage;
+ try{if(!hard&&ss){if(ss.getItem('updHard')===v){updBar(true);UPD.pending='';return;}if(ss.getItem('updTry')===v)hard=true;ss.setItem(hard?'updHard':'updTry',v);}}catch(e){}
+ toast(T('正在更新到新版本…','Updating…'));
+ function go(){location.replace(location.pathname+'?u='+Date.now()+location.hash);}
+ if(hard){
+  var p=[];try{if(window.caches)p.push(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf(CPFX)===0;}).map(function(k){return caches.delete(k);}));}));}catch(e){}
+  try{if(UPD.reg)p.push(UPD.reg.unregister());}catch(e){}
+  if(p.length&&window.Promise)Promise.all(p).then(go,go);else go();return;
+ }
+ try{if(UPD.reg){if(UPD.reg.waiting)UPD.reg.waiting.postMessage('skip');UPD.reg.update();}}catch(e){}
+ setTimeout(go,900);
+}
+function checkUpdate(manual){
+ if(UPD.checking)return;UPD.checking=true;
+ var x=new XMLHttpRequest();
+ try{x.open('GET','version.json?t='+Date.now());x.setRequestHeader('Cache-Control','no-cache');}catch(e){UPD.checking=false;return;}
+ x.timeout=12000;
+ x.onload=function(){UPD.checking=false;var v='';try{v=JSON.parse(x.responseText).v;}catch(e){}
+  if(v&&v!==APPVER&&APPVER.indexOf('@@')<0)onNewVersion(v);else if(manual)toast(v?T('已經是最新版本','You have the latest version'):T('無法取得版本資訊','Could not read version info'));};
+ x.onerror=x.ontimeout=function(){UPD.checking=false;if(manual)toast(T('網路連不上，稍後再試','No connection, try again later'));};
+ try{x.send();}catch(e){UPD.checking=false;}
+ try{if(UPD.reg)UPD.reg.update();}catch(e){}
+}
+function updInit(){
+ try{if(/[?&]u=\d+/.test(location.search)&&history.replaceState)history.replaceState(null,'',location.pathname+location.hash);}catch(e){}
+ var https=location.protocol==='https:'&&/github\.io$/.test(location.hostname);
+ if(https&&navigator.serviceWorker){
+  navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(function(r){UPD.reg=r;
+   r.addEventListener('updatefound',function(){var w=r.installing;if(w)w.addEventListener('statechange',function(){if(w.state==='installed'&&navigator.serviceWorker.controller)checkUpdate(false);});});},function(){});
+  navigator.serviceWorker.addEventListener('message',function(e){if(e.data&&e.data.t==='sw-updated'&&e.data.v&&e.data.v!==APPVER)onNewVersion(e.data.v);});
+ }
+ if(!https)return;
+ setTimeout(function(){checkUpdate(false);},2500);
+ setInterval(function(){checkUpdate(false);},30*60000);
+ document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')checkUpdate(false);});
+ window.addEventListener('pageshow',function(e){if(e.persisted)checkUpdate(false);});
+ window.addEventListener('online',function(){checkUpdate(false);});
+ setInterval(updIdle,20000);
+}
 
 var SKEY='steward321.splash';
 function showSplash(){
@@ -841,11 +1291,13 @@ function showSplash(){
  el.hidden=false;
 }
 function hideSplash(){$('splash').hidden=true;try{localStorage.setItem(SKEY,ds());}catch(e){}}
+applyChrome();
 render();
 refreshFeed(false);
+felLoad();
+updInit();
 (function(){var seen='';try{seen=localStorage.getItem(SKEY)||'';}catch(e){}if(seen!==ds())showSplash();})();
 })();
 </script>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
 </body>
 </html>

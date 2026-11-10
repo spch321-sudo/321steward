@@ -1,14 +1,28 @@
-/* 321管家 service worker：頁面先走網路（隨時拿到新版），失敗才用快取；圖檔快取優先 */
-var C='steward321-v3';
+/* 321管家 service worker：網頁與程式網路優先（拿得到新版就用新版），圖片快取優先，只清自己前綴的快取 */
+var VER='v2026.1111.0537',PFX='steward321-',CACHE=PFX+VER;
 var CORE=['./','index.html','hero.jpg','manifest.json','icon-192.png','icon-512.png','apple-touch-icon.png'];
-self.addEventListener('install',function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(CORE);}).then(function(){return self.skipWaiting();}));});
-self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k!==C;}).map(function(k){return caches.delete(k);}));}).then(function(){return self.clients.claim();}));});
+self.addEventListener('install',function(e){
+ self.skipWaiting();
+ e.waitUntil(caches.open(CACHE).then(function(c){return Promise.all(CORE.map(function(u){return fetch(new Request(u,{cache:'reload'})).then(function(r){if(r.ok)return c.put(u,r);}).catch(function(){});}));}));
+});
+self.addEventListener('activate',function(e){
+ e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf(PFX)===0&&k!==CACHE;}).map(function(k){return caches.delete(k);}));})
+  .then(function(){return self.clients.claim();})
+  .then(function(){return self.clients.matchAll({type:'window'});})
+  .then(function(cs){cs.forEach(function(c){try{c.postMessage({t:'sw-updated',v:VER});}catch(x){}if(c.visibilityState==='hidden'&&c.navigate){try{c.navigate(c.url);}catch(x){}}});}));
+});
+self.addEventListener('message',function(e){if(e.data==='skip')self.skipWaiting();});
 self.addEventListener('fetch',function(e){
- var u=new URL(e.request.url);
- if(e.request.method!=='GET'||u.origin!==location.origin)return;
- if(e.request.mode==='navigate'||/\.html$/.test(u.pathname)){
-  e.respondWith(fetch(e.request).then(function(r){var cp=r.clone();caches.open(C).then(function(c){c.put('index.html',cp);});return r;}).catch(function(){return caches.match('index.html');}));
+ var r=e.request,u=new URL(r.url);
+ if(r.method!=='GET'||u.origin!==location.origin)return;
+ if(!/\/321steward\//.test(u.pathname))return;
+ if(r.headers.get('range')||/\.(mp3|m4a|aac|wav|mp4|webm|mov|ogg)$/i.test(u.pathname))return;
+ if(/version\.json$/.test(u.pathname)){e.respondWith(fetch(r,{cache:'no-store'}).catch(function(){return new Response('{}',{headers:{'Content-Type':'application/json'}});}));return;}
+ var nav=r.mode==='navigate',dyn=nav||/\.(html|js|json|css)$/.test(u.pathname);
+ if(dyn){
+  e.respondWith(fetch(r,{cache:'no-cache'}).then(function(res){if(res.ok){var cp=res.clone();caches.open(CACHE).then(function(c){c.put(nav?'index.html':r,cp);});}return res;})
+   .catch(function(){return caches.match(nav?'index.html':r).then(function(m){return m||caches.match('index.html');});}));
   return;
  }
- e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request).then(function(res){var cp=res.clone();caches.open(C).then(function(c){c.put(e.request,cp);});return res;});}));
+ e.respondWith(caches.match(r).then(function(m){return m||fetch(r).then(function(res){if(res.ok){var cp=res.clone();caches.open(CACHE).then(function(c){c.put(r,cp);});}return res;});}));
 });

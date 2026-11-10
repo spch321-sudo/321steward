@@ -11,8 +11,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="321管家">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=1">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=1">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-v2-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon-v2.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-v2.png">
+<link rel="apple-touch-icon" sizes="167x167" href="icon-v2-167.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icon-v2-152.png">
 <meta property="og:image" content="hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -960,7 +963,7 @@ document.addEventListener('input',function(e){
 window.addEventListener('storage',function(e){if(e.key&&e.key.indexOf('p4_sched')===0&&view==='today')render();});
 
 /* ================= 321 App 共用功能（ES5）：字級、主題、朗讀、經文美圖、空中團契、自動更新、小智強化 ================= */
-var APPVER='v2026.1111.0537';
+var APPVER='v2026.1111.0551';
 var SETK='steward321.set',SET={font:0,theme:''};
 try{var _st=JSON.parse(localStorage.getItem(SETK)||'{}');if(_st){SET.font=+_st.font||0;SET.theme=_st.theme||'';}}catch(e){}
 function saveSet(){try{localStorage.setItem(SETK,JSON.stringify(SET));}catch(e){}}
@@ -1045,7 +1048,7 @@ function speak(key,title){
  if(TTS.key===key){stopSpeak();return;}
  stopSpeak();ttsUnlock();if(!text)return;
  TTS.key=key;TTS.segs=ttsSplit(ttsPrep(text));TTS.fbTold=0;var gen=TTS.gen;
- try{if(navigator.mediaSession&&window.MediaMetadata){navigator.mediaSession.metadata=new MediaMetadata({title:title||T('321管家','321 Steward'),artist:T('國度321空中團契','Kingdom 321 Fellowship'),artwork:[{src:'icon-512.png',sizes:'512x512',type:'image/png'}]});
+ try{if(navigator.mediaSession&&window.MediaMetadata){navigator.mediaSession.metadata=new MediaMetadata({title:title||T('321管家','321 Steward'),artist:T('國度321空中團契','Kingdom 321 Fellowship'),artwork:[{src:'icon-v2-512.png',sizes:'512x512',type:'image/png'}]});
   navigator.mediaSession.setActionHandler('pause',stopSpeak);navigator.mediaSession.setActionHandler('stop',stopSpeak);navigator.mediaSession.playbackState='playing';}}catch(e){}
  try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(function(l){TTS.lock=l;},function(){});}catch(e){}
  spkSync();ttsPlay(0,gen);

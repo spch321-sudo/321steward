@@ -1,6 +1,6 @@
 /* 321管家 service worker：網頁與程式網路優先（拿得到新版就用新版），圖片快取優先，只清自己前綴的快取 */
-var VER='v2026.1111.0537',PFX='steward321-',CACHE=PFX+VER;
-var CORE=['./','index.html','hero.jpg','manifest.json','icon-192.png','icon-512.png','apple-touch-icon.png'];
+var VER='v2026.1111.0551',PFX='steward321-',CACHE=PFX+VER;
+var CORE=['./','index.html','hero.jpg','manifest.json','icon-v2-192.png','icon-v2-512.png','apple-touch-icon-v2.png'];
 self.addEventListener('install',function(e){
  self.skipWaiting();
  e.waitUntil(caches.open(CACHE).then(function(c){return Promise.all(CORE.map(function(u){return fetch(new Request(u,{cache:'reload'})).then(function(r){if(r.ok)return c.put(u,r);}).catch(function(){});}));}));

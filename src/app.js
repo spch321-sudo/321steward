@@ -3,6 +3,11 @@ var KEY='steward321.v1',LKEY='steward321.lang';
 var ZS=/*ZSMAP*/{};
 var L='zh';
 try{L=localStorage.getItem(LKEY)||'';}catch(e){}
+/* ?lang321=：空中團契／小智問答帶入語言（zh 繁、zs 简、en；其他語言用英文） */
+try{(function(){var q=location.search||'',m=/[?&]lang321=([A-Za-z]+)/.exec(q);if(!m)return;var v={zh:'zh',zs:'zs',en:'en',ko:'en',ja:'en',id:'en',ceb:'en'}[m[1].toLowerCase()];
+if(v){L=v;try{localStorage.setItem(LKEY,v);}catch(e){}}
+q=q.replace(/([?&])lang321=[^&]*(&|$)/,function(a,b,d){return d?b:'';}).replace(/[?&]$/,'');
+try{history.replaceState(history.state,'',location.pathname+q+location.hash);}catch(e){}})();}catch(e){}
 if(L!=='zh'&&L!=='zs'&&L!=='en'){var nl=(navigator.language||'').toLowerCase();L=nl.indexOf('zh')===0?((nl.indexOf('cn')>0||nl.indexOf('hans')>0||nl.indexOf('sg')>0)?'zs':'zh'):(nl?'en':'zh');}
 function zs(s){var o='',c;s=String(s);for(var i=0;i<s.length;i++){c=s.charAt(i);o+=ZS[c]||c;}return o;}
 function T(zh,en){return L==='en'?en:(L==='zs'?zs(zh):zh);}

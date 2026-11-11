@@ -4,6 +4,9 @@
 
 網址：https://spch321-sudo.github.io/321steward/
 
+## v2026.1111.2206（連結帶入語言）
+- 支援 ?lang321= 由空中團契／小智問答帶入語言：`zh` 繁、`zs` 简、`en` 英文；`ko`／`ja`／`id`／`ceb` 本 App 沒有，改用英文。啟動時寫入 `steward321.lang`（之後照這個語言開），並從網址拿掉 `lang321`（程式在 `src/app.js` 開頭）。
+
 ## 修改與發佈
 1. 只改 `src/` 裡的檔案：`app.js`（主程式）、`ext.js`（朗讀、美圖、團契、自動更新）、`plus.js`（目標、禱告、備份、九果等）、`gcal_lib.js`（日曆解析，取自每日得勝）、`style.css`、`sw.tpl.js`、`verses.json`（和合本／和合本简体／WEB 經文）。
 2. 執行 `pip install opencc-python-reimplemented` 一次，之後每次 `python3 src/build.py`。

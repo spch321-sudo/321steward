@@ -72,9 +72,9 @@ function acctChanged(kind){
    if(err){toast(cloudErr(err));return;}
    ui.restore=o;ui.rtab='set';view='review';render();
   });
-  ACC.syncProfile(function(e,n){if(n)toast(T('已帶入共用設定（空中團契開通）','Shared settings applied'));});loadPub(true);
+  ACC.syncProfile(function(e,n){if(n)toast(T('已帶入共用設定（空中團契開通）','Shared settings applied'));});loadPub(true);loadLife(true);
  }
- else if(kind==='logout'){PUB={evs:null,at:0,busy:false};try{localStorage.removeItem('steward321.pub');}catch(e){}}
+ else if(kind==='logout'){PUB={evs:null,at:0,busy:false};LIFE.pub=null;try{localStorage.removeItem('steward321.pub');localStorage.removeItem('steward321.life');}catch(e){}}
  render();
 }
 function cloudErr(e){return e==='gone'?T('雲端找不到資料','No cloud data found'):e==='key'?T('帳號碼不正確','The account code is not correct'):e==='nocrypto'?T('這個瀏覽器不支援加密','This browser cannot encrypt'):e==='fmt'?T('雲端資料讀不出來','Cloud data could not be read'):e==='net'?T('網路連不上，稍後再試','No connection, try again later'):T('雲端暫時無法使用（','Cloud unavailable (')+e+T('）',')');}
@@ -319,7 +319,7 @@ function vArea(k){
  if(k==='god'){h+=prayerCard();h+='<section class="card" style="'+cvars('god')+'">'+st('book',T('靈修筆記','Devotional notes'),T('資訊 → 啟示 → 信服 → 實踐','Information → revelation → conviction → practice'))+
   jText('dv_ref',T('今日經文','Today\'s passage'),T('例如：約翰福音 15:5','e.g. John 15:5'))+jText('dv_rev',T('神給我的啟示','What God showed me'),T('聖靈讓我看見什麼？','What did the Spirit open my eyes to?'))+jText('dv_act',T('我要實踐','What I will do'),T('今天具體怎麼行出來？','How will I live it out today?'))+jText('dv_pray',T('禱告','Prayer'),T('把領受化成禱告','Turn it into prayer'))+pastJ('dv_rev',T('近日的啟示','Recent insights'))+'</section>';}
  if(k==='self')h+='<section class="card" style="'+cvars('self')+'">'+st('self',T('舊人與新人','Old self and new self'),T('看見自己，也看見恩典','See yourself, and see grace'))+
-  jText('old',T('今天顯出的舊人（有己）','Where my old self showed today'),T('哪裡驕傲、離開本位、想抓住權力？','Where was I proud, out of place, grasping control?'))+jText('neu',T('新人無己的回應','How the new self responded'),T('怎樣謙卑、回到本位，讓神作神？','How did I humble myself and let God be God?'))+pastJ('neu',T('近日的得勝','Recent victories'))+'</section>';
+  jText('old',T('今天顯出的舊人（有己）','Where my old self showed today'),T('哪裡驕傲、離開本位、想抓住權力？','Where was I proud, out of place, grasping control?'))+jText('neu',T('新人無己的回應','How the new self responded'),T('怎樣謙卑、回到本位，讓神作神？','How did I humble myself and let God be God?'))+pastJ('neu',T('近日的得勝','Recent victories'))+'</section>'+lifeCard();
  if(k==='people')h+=peopleExtra();
  if(k==='work')h+=moneyExtra();
  h+='<section class="card" style="'+cvars(k)+'">'+st('list',T('事項清單','To-dos'),T('點名稱可編輯、設定重複與子步驟','Tap a title to edit, repeat or add steps'));
@@ -483,6 +483,7 @@ function ctxFor(mode){
   lines.push(T('【我自己寫的檢討】','[My own reviews]'));
   for(wk=weekKey(r.from);wk<=end;wk=addDays(wk,7)){rv=S.reviews[wk];if(!rv)continue;for(f in RF){if(rv[f])lines.push('- '+md(wk)+' '+RF[f]+'：'+String(rv[f]).slice(0,mode==='w'?300:120));}}}
  else lines.push(T('（使用者選擇不分享筆記內容）','(The user chose not to share journal notes)'));
+ var lc=lifeCtx();if(lc)lines.push(lc);
  var ws=S.wheels,wl=ws[ws.length-1];
  if(wl){var subs=allSubs(),pairs=[];for(i=0;i<subs.length;i++)pairs.push({n:subs[i].n,v:wl.v[i]});pairs.sort(function(x,y){return x.v-y.v;});
   lines.push(T('【生命之輪】最近 ','[Life wheel] latest ')+wl.date+T('，最低三項：','; lowest: ')+pairs[0].n+' '+pairs[0].v+'、'+pairs[1].n+' '+pairs[1].v+'、'+pairs[2].n+' '+pairs[2].v);}
@@ -571,6 +572,7 @@ function cloudPanel(){
   h+='<p class="empty"><b style="color:var(--self)">✓ '+T('已登入','Signed in')+'</b> · '+(at?T('上次同步：','Last sync: ')+new Date(at).toLocaleString():T('尚未同步','Not synced yet'))+(ui.acctErr&&ui.acctErr!=='busy'?' · <span style="color:var(--warn)">'+esc(cloudErr(ui.acctErr))+'</span>':'')+'</p>';
   h+='<div class="list">'+
    '<div class="row"><i class="bar2" style="background:#2d3a8c"></i><div class="grow"><div class="ttl">'+T('321每日得勝','321 Daily Victory')+'</div><div class="meta">'+(PUB.evs?T('時程已互通・更新於 ','Schedule shared · updated ')+new Date(PUB.at).toLocaleString():T('在每日得勝用同一組帳號碼登入，時程就會自動出現在管家','Sign in to Daily Victory with the same code to share its schedule'))+'</div></div></div>'+
+   '<div class="row"><i class="bar2" style="background:var(--self)"></i><div class="grow"><div class="ttl">'+T('321生命操練','321 Life Practice')+'</div><div class="meta">'+(LIFE.pub?T('操練紀錄已互通・更新於 ','Practice shared · updated ')+new Date(LIFE.pub.at).toLocaleString():T('在生命操練用同一組帳號碼登入，進展就會出現在「與己」頁','Sign in to Life Practice with the same code to show your progress on the Self page'))+'</div></div></div>'+
    '<div class="row"><i class="bar2" style="background:var(--gold)"></i><div class="grow"><div class="ttl">'+T('國度321空中團契','Kingdom 321 Fellowship')+'</div><div class="meta">'+(fa?T('已開通，用同一組帳號的 App 都不必再輸入授權碼','Unlocked for every app using this account'):T('在管家裡開啟團契 App 輸入一次授權碼，其他 App 就通用','Enter the access code once inside the Steward; other apps will share it'))+'</div></div></div></div>';
   h+='<div class="btns"><button class="btn sm" data-act="cloudNow">'+T('立即同步','Sync now')+'</button><button class="btn ghost sm" data-act="acctOpen">'+T('帳號碼與登出','Account code / sign out')+'</button></div>';
  }else h+='<p class="empty">'+T('一組帳號碼，所有 321 App 共用：自動加密備份、換手機找回、App 之間資料互通。','One code for every 321 app: encrypted backup, restore on a new phone, and data shared between apps.')+'</p><div class="btns"><button class="btn" data-act="acctOpen">'+T('建立或登入 321 帳號','Create or sign in to a 321 Account')+'</button></div>';
@@ -679,8 +681,10 @@ function plusAct(act,id,el,e){
  case 'homeHide':S.home.hide[id]=!S.home.hide[id];ui.layout=true;break;
  case 'homeReset':S.home={order:['verse','top3','sched','habits','due','more','rings','care','evening','fel'],hide:{}};ui.layout=true;break;
  case 'remIcs':remIcs();return true;
+ case 'lifeOpen':openApp(LIFE_URL,T('321生命操練','321 Life Practice'));return true;
+ case 'lifeRefresh':loadLife(true);toast(T('正在更新…','Updating…'));return true;
  case 'acctOpen':if(ACC)ACC.open({lang:L,onChange:acctChanged});return true;
- case 'cloudNow':toast(T('正在同步…','Syncing…'));acctPush(function(err){toast(err?cloudErr(err):T('已同步到 321 帳號','Synced'));});ACC.syncProfile();loadPub(true);return true;
+ case 'cloudNow':toast(T('正在同步…','Syncing…'));acctPush(function(err){toast(err?cloudErr(err):T('已同步到 321 帳號','Synced'));});ACC.syncProfile();loadPub(true);loadLife(true);return true;
  case 'restoreYes':applyRestore(ui.restore);return true;
  case 'restoreNo':ui.restore=null;ui.restoreCloud=null;render();return true;
  case 'fileBk':fileBackup();return true;
@@ -712,3 +716,48 @@ function plusBind(b,el,f,id){
 document.addEventListener('change',function(e){if(e.target&&e.target.id==='fileIn')fileRestore(e.target);});
 document.addEventListener('toggle',function(e){if(e.target&&e.target.id==='homeMore'){SET.moreOpen=e.target.open;saveSet();}},true);
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}cloudSoon();}
+
+/* ---------- 321生命操練（位置 'life-pub'） ---------- */
+var LIFE_URL='https://spch321-sudo.github.io/321life/',LIFE={pub:null,busy:false,chk:0};
+try{var _lf=JSON.parse(localStorage.getItem('steward321.life')||'null');if(_lf&&_lf.groups)LIFE.pub=_lf;}catch(e){}
+function loadLife(force){
+ if(!acctOn()||LIFE.busy)return;if(!force&&LIFE.chk&&Date.now()-LIFE.chk<15*60000)return;
+ LIFE.busy=true;LIFE.chk=Date.now();
+ ACC.fetch('life-pub',function(err,o){LIFE.busy=false;
+  if(!err&&o&&o.groups){LIFE.pub=o;try{localStorage.setItem('steward321.life',JSON.stringify(o));}catch(e){}if(view==='self'||view==='review')render();}
+ });
+}
+function openApp(url,title){
+ if(!felEmbed()){window.open(url,'_blank');return;}
+ stopSpeak();if($('felview'))return;
+ var w=document.createElement('div');w.id='felview';w.className='felview';
+ w.innerHTML='<div class="fvbar"><button class="fvback" data-act="felClose">‹ '+T('回到321管家','Back to 321 Steward')+'</button><span>'+esc(title)+'</span><a class="fvout" href="'+url+'" target="_blank" rel="noopener" aria-label="'+T('用瀏覽器開啟','Open in browser')+'">'+ic('share',18)+'</a></div><iframe src="'+url+'" title="'+esc(title)+'"></iframe>';
+ document.body.appendChild(w);document.body.classList.add('felon');ui.fel=true;
+ try{history.pushState({fel:1},'',location.pathname+location.search+'#app');}catch(e){}
+}
+function lifeDays(n){var p=LIFE.pub,c=0,from=addDays(ds(),-(n-1));if(!p||!p.days)return 0;for(var i=0;i<p.days.length;i++)if(p.days[i]>=from)c++;return c;}
+function lifeArrow(cur,pre,good){if(cur==null||pre==null||cur===pre)return '';var up=cur>pre;return '<em class="'+((up===good)?'up':'dn')+'">'+(up?'↑':'↓')+'</em>';}
+function lifeCard(){
+ var p=LIFE.pub,h='<section class="card" style="'+cvars('self')+'">'+st('self',T('321生命操練','321 Life Practice'),T('舊人有己檢視・新人無己操練','Old-self check · new-self practice')),i;
+ if(!p){
+  h+='<p class="empty">'+(acctOn()?T('在生命操練用同一組 321 帳號登入，你的檢視與操練進展就會出現在這裡，小智回顧時也會一起參考。','Sign in to Life Practice with the same 321 Account; your progress will appear here and in Xiaozhi\'s reviews.'):T('先在「回顧 → 設定」登入 321 共用帳號，再到生命操練用同一組帳號登入，兩邊就會連起來。','Sign in to your 321 Account in Review → Settings, then use the same code in Life Practice to link them.'))+'</p>';
+ }else{
+  var last=p.days&&p.days.length?p.days[p.days.length-1]:'';
+  h+='<div class="figs"><div class="fig"><span>'+T('近 30 天操練','Days, last 30')+'</span><b>'+lifeDays(30)+T(' 天',' d')+'</b></div><div class="fig"><span>'+T('生命健檢','Life checks')+'</span><b>'+(p.checks||0)+'</b></div><div class="fig"><span>'+T('最近一次','Last')+'</span><b style="font-size:16px">'+(last?md(last):'—')+'</b></div></div>';
+  h+='<div class="lchart"><div class="lleg"><span><i class="o"></i>'+T('舊人有己（越低越好）','Old self (lower is better)')+'</span><span><i class="n"></i>'+T('新人無己（越高越好）','New self (higher is better)')+'</span></div>';
+  for(i=0;i<p.groups.length;i++){var g=p.groups[i],o=p.latest.exam[g.id],n=p.latest.train[g.id],po=p.prev.exam[g.id],pn=p.prev.train[g.id];
+   if(o==null&&n==null)continue;
+   h+='<div class="lrow2"><b>'+esc(T(g.zh,g.en))+'</b><div class="lbars"><i class="o"><u style="width:'+((o||0)/15*100)+'%"></u></i><i class="n"><u style="width:'+((n||0)/15*100)+'%"></u></i></div><span>'+(o==null?'–':o)+lifeArrow(o,po,false)+'<br>'+(n==null?'–':n)+lifeArrow(n,pn,true)+'</span></div>';}
+  h+='</div><p class="empty">'+T('更新於 ','Updated ')+new Date(p.at).toLocaleString()+'</p>';
+ }
+ return h+'<div class="btns"><button class="btn ghost sm" data-act="lifeOpen">'+T('開啟生命操練','Open Life Practice')+'</button>'+(p?'<button class="btn ghost sm" data-act="lifeRefresh">'+T('重新整理','Refresh')+'</button>':'')+'</div></section>';
+}
+function lifeCtx(){
+ var p=LIFE.pub;if(!p)return '';
+ var ws=[],bs=[],i,g;
+ for(i=0;i<p.groups.length;i++){g=p.groups[i];var o=p.latest.exam[g.id],n=p.latest.train[g.id];if(o!=null)ws.push({n:T(g.zh,g.en),v:o});if(n!=null)bs.push({n:T(g.zh,g.en),v:n});}
+ ws.sort(function(a,b){return b.v-a.v;});bs.sort(function(a,b){return b.v-a.v;});
+ return T('【321生命操練】近 30 天操練 ','[321 Life Practice] practice days in last 30: ')+lifeDays(30)+T(' 天；生命健檢 ','; life checks ')+(p.checks||0)+T(' 次',' total')+
+  (ws.length?T('；舊人有己最重的：','; strongest old-self areas: ')+ws.slice(0,3).map(function(x){return x.n+' '+x.v+'/15';}).join('、'):'')+
+  (bs.length?T('；新人無己最好的：','; best new-self areas: ')+bs.slice(0,3).map(function(x){return x.n+' '+x.v+'/15';}).join('、'):'');
+}

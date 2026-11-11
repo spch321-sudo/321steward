@@ -72,9 +72,9 @@ function acctChanged(kind){
    if(err){toast(cloudErr(err));return;}
    ui.restore=o;ui.rtab='set';view='review';render();
   });
-  ACC.syncProfile(function(e,n){if(n)toast(T('已帶入共用設定（空中團契開通）','Shared settings applied'));});loadPub(true);loadLife(true);
+  ACC.syncProfile(function(e,n){if(n)toast(T('已帶入共用設定（空中團契開通）','Shared settings applied'));});loadPub(true);loadLife(true);loadRead(true);
  }
- else if(kind==='logout'){PUB={evs:null,at:0,busy:false};LIFE.pub=null;try{localStorage.removeItem('steward321.pub');localStorage.removeItem('steward321.life');}catch(e){}}
+ else if(kind==='logout'){PUB={evs:null,at:0,busy:false};LIFE.pub=null;RP.chendu=null;RP.bible=null;try{localStorage.removeItem('steward321.chendu');localStorage.removeItem('steward321.bible');localStorage.removeItem('steward321.pub');localStorage.removeItem('steward321.life');}catch(e){}}
  render();
 }
 function cloudErr(e){return e==='gone'?T('雲端找不到資料','No cloud data found'):e==='key'?T('帳號碼不正確','The account code is not correct'):e==='nocrypto'?T('這個瀏覽器不支援加密','This browser cannot encrypt'):e==='fmt'?T('雲端資料讀不出來','Cloud data could not be read'):e==='net'?T('網路連不上，稍後再試','No connection, try again later'):T('雲端暫時無法使用（','Cloud unavailable (')+e+T('）',')');}
@@ -316,7 +316,7 @@ function vArea(k){
  for(i=0;i<S.habits.length;i++){if(S.habits[i].area===k){h+=habitRow(S.habits[i],true);n++;}}
  if(!n)h+='<p class="empty">'+T('還沒有操練項目，從下面加一項開始。','No practices yet. Add one below.')+'</p>';
  h+='</div><div class="form"><input id="nh_t" class="full" placeholder="'+T('新的操練，例如：背一節經文','New practice, e.g. memorise a verse')+'" aria-label="'+T('操練名稱','Practice')+'"><select id="nh_s" aria-label="'+T('範疇','Area')+'">'+opts(a.subs,0)+'</select><select id="nh_per" aria-label="'+T('頻率','Frequency')+'">'+optsVal(PER_OPTS,7)+'</select><button class="btn full" data-act="addHab" data-id="'+k+'">'+T('加入操練','Add practice')+'</button></div></section>';
- if(k==='god'){h+=prayerCard();h+='<section class="card" style="'+cvars('god')+'">'+st('book',T('靈修筆記','Devotional notes'),T('資訊 → 啟示 → 信服 → 實踐','Information → revelation → conviction → practice'))+
+ if(k==='god'){h+=readCard();h+=prayerCard();h+='<section class="card" style="'+cvars('god')+'">'+st('book',T('靈修筆記','Devotional notes'),T('資訊 → 啟示 → 信服 → 實踐','Information → revelation → conviction → practice'))+
   jText('dv_ref',T('今日經文','Today\'s passage'),T('例如：約翰福音 15:5','e.g. John 15:5'))+jText('dv_rev',T('神給我的啟示','What God showed me'),T('聖靈讓我看見什麼？','What did the Spirit open my eyes to?'))+jText('dv_act',T('我要實踐','What I will do'),T('今天具體怎麼行出來？','How will I live it out today?'))+jText('dv_pray',T('禱告','Prayer'),T('把領受化成禱告','Turn it into prayer'))+pastJ('dv_rev',T('近日的啟示','Recent insights'))+'</section>';}
  if(k==='self')h+='<section class="card" style="'+cvars('self')+'">'+st('self',T('舊人與新人','Old self and new self'),T('看見自己，也看見恩典','See yourself, and see grace'))+
   jText('old',T('今天顯出的舊人（有己）','Where my old self showed today'),T('哪裡驕傲、離開本位、想抓住權力？','Where was I proud, out of place, grasping control?'))+jText('neu',T('新人無己的回應','How the new self responded'),T('怎樣謙卑、回到本位，讓神作神？','How did I humble myself and let God be God?'))+pastJ('neu',T('近日的得勝','Recent victories'))+'</section>'+lifeCard();
@@ -484,6 +484,7 @@ function ctxFor(mode){
   for(wk=weekKey(r.from);wk<=end;wk=addDays(wk,7)){rv=S.reviews[wk];if(!rv)continue;for(f in RF){if(rv[f])lines.push('- '+md(wk)+' '+RF[f]+'：'+String(rv[f]).slice(0,mode==='w'?300:120));}}}
  else lines.push(T('（使用者選擇不分享筆記內容）','(The user chose not to share journal notes)'));
  var lc=lifeCtx();if(lc)lines.push(lc);
+ var rc=readCtx();if(rc)lines.push(rc);
  var ws=S.wheels,wl=ws[ws.length-1];
  if(wl){var subs=allSubs(),pairs=[];for(i=0;i<subs.length;i++)pairs.push({n:subs[i].n,v:wl.v[i]});pairs.sort(function(x,y){return x.v-y.v;});
   lines.push(T('【生命之輪】最近 ','[Life wheel] latest ')+wl.date+T('，最低三項：','; lowest: ')+pairs[0].n+' '+pairs[0].v+'、'+pairs[1].n+' '+pairs[1].v+'、'+pairs[2].n+' '+pairs[2].v);}
@@ -572,6 +573,7 @@ function cloudPanel(){
   h+='<p class="empty"><b style="color:var(--self)">✓ '+T('已登入','Signed in')+'</b> · '+(at?T('上次同步：','Last sync: ')+new Date(at).toLocaleString():T('尚未同步','Not synced yet'))+(ui.acctErr&&ui.acctErr!=='busy'?' · <span style="color:var(--warn)">'+esc(cloudErr(ui.acctErr))+'</span>':'')+'</p>';
   h+='<div class="list">'+
    '<div class="row"><i class="bar2" style="background:#2d3a8c"></i><div class="grow"><div class="ttl">'+T('321每日得勝','321 Daily Victory')+'</div><div class="meta">'+(PUB.evs?T('時程已互通・更新於 ','Schedule shared · updated ')+new Date(PUB.at).toLocaleString():T('在每日得勝用同一組帳號碼登入，時程就會自動出現在管家','Sign in to Daily Victory with the same code to share its schedule'))+'</div></div></div>'+
+   '<div class="row"><i class="bar2" style="background:var(--god)"></i><div class="grow"><div class="ttl">'+T('晨讀321・321互動聖經','Morning Reading · Interactive Bible')+'</div><div class="meta">'+((RP.chendu||RP.bible)?T('讀經進度已互通，顯示在「與神」頁','Reading progress shared on the God page'):T('在晨讀321與互動聖經用同一組帳號碼登入，讀經進度就會出現在「與神」頁','Sign in to both with the same code to show reading progress on the God page'))+'</div></div></div>'+
    '<div class="row"><i class="bar2" style="background:var(--self)"></i><div class="grow"><div class="ttl">'+T('321生命操練','321 Life Practice')+'</div><div class="meta">'+(LIFE.pub?T('操練紀錄已互通・更新於 ','Practice shared · updated ')+new Date(LIFE.pub.at).toLocaleString():T('在生命操練用同一組帳號碼登入，進展就會出現在「與己」頁','Sign in to Life Practice with the same code to show your progress on the Self page'))+'</div></div></div>'+
    '<div class="row"><i class="bar2" style="background:var(--gold)"></i><div class="grow"><div class="ttl">'+T('國度321空中團契','Kingdom 321 Fellowship')+'</div><div class="meta">'+(fa?T('已開通，用同一組帳號的 App 都不必再輸入授權碼','Unlocked for every app using this account'):T('在管家裡開啟團契 App 輸入一次授權碼，其他 App 就通用','Enter the access code once inside the Steward; other apps will share it'))+'</div></div></div></div>';
   h+='<div class="btns"><button class="btn sm" data-act="cloudNow">'+T('立即同步','Sync now')+'</button><button class="btn ghost sm" data-act="acctOpen">'+T('帳號碼與登出','Account code / sign out')+'</button></div>';
@@ -681,10 +683,12 @@ function plusAct(act,id,el,e){
  case 'homeHide':S.home.hide[id]=!S.home.hide[id];ui.layout=true;break;
  case 'homeReset':S.home={order:['verse','top3','sched','habits','due','more','rings','care','evening','fel'],hide:{}};ui.layout=true;break;
  case 'remIcs':remIcs();return true;
+ case 'readOpen':openApp(id==='bible'?BIBLE_URL:CHENDU_URL,id==='bible'?T('321互動聖經','Interactive Bible'):T('晨讀321','Morning Reading 321'));return true;
+ case 'readRefresh':loadRead(true);toast(T('正在更新…','Updating…'));return true;
  case 'lifeOpen':openApp(LIFE_URL,T('321生命操練','321 Life Practice'));return true;
  case 'lifeRefresh':loadLife(true);toast(T('正在更新…','Updating…'));return true;
  case 'acctOpen':if(ACC)ACC.open({lang:L,onChange:acctChanged});return true;
- case 'cloudNow':toast(T('正在同步…','Syncing…'));acctPush(function(err){toast(err?cloudErr(err):T('已同步到 321 帳號','Synced'));});ACC.syncProfile();loadPub(true);loadLife(true);return true;
+ case 'cloudNow':toast(T('正在同步…','Syncing…'));acctPush(function(err){toast(err?cloudErr(err):T('已同步到 321 帳號','Synced'));});ACC.syncProfile();loadPub(true);loadLife(true);loadRead(true);return true;
  case 'restoreYes':applyRestore(ui.restore);return true;
  case 'restoreNo':ui.restore=null;ui.restoreCloud=null;render();return true;
  case 'fileBk':fileBackup();return true;
@@ -760,4 +764,47 @@ function lifeCtx(){
  return T('【321生命操練】近 30 天操練 ','[321 Life Practice] practice days in last 30: ')+lifeDays(30)+T(' 天；生命健檢 ','; life checks ')+(p.checks||0)+T(' 次',' total')+
   (ws.length?T('；舊人有己最重的：','; strongest old-self areas: ')+ws.slice(0,3).map(function(x){return x.n+' '+x.v+'/15';}).join('、'):'')+
   (bs.length?T('；新人無己最好的：','; best new-self areas: ')+bs.slice(0,3).map(function(x){return x.n+' '+x.v+'/15';}).join('、'):'');
+}
+
+/* ---------- 晨讀321（'chendu-pub'）與 321互動聖經（'bible-pub'） ---------- */
+var CHENDU_URL='https://spch321-sudo.github.io/chendu321/',BIBLE_URL='https://spch321-sudo.github.io/bible/';
+var RP={chendu:null,bible:null,busy:{},chk:{}};
+try{RP.chendu=JSON.parse(localStorage.getItem('steward321.chendu')||'null');RP.bible=JSON.parse(localStorage.getItem('steward321.bible')||'null');}catch(e){}
+function loadRead(force){
+ if(!acctOn())return;
+ var list=[['chendu','chendu-pub'],['bible','bible-pub']];
+ for(var i=0;i<list.length;i++)(function(k,slot){
+  if(RP.busy[k]||(!force&&RP.chk[k]&&Date.now()-RP.chk[k]<15*60000))return;
+  RP.busy[k]=1;RP.chk[k]=Date.now();
+  ACC.fetch(slot,function(err,o){RP.busy[k]=0;if(!err&&o){RP[k]=o;try{localStorage.setItem('steward321.'+k,JSON.stringify(o));}catch(e){}if(view==='god'||view==='review')render();}});
+ })(list[i][0],list[i][1]);
+}
+function readDays(arr,n){var c=0,from=addDays(ds(),-(n-1));if(!arr)return 0;for(var i=0;i<arr.length;i++)if(arr[i]>=from)c++;return c;}
+function nm3(o){if(!o)return '';return L==='en'?(o.en||o.zh):(L==='zs'?(o.zs||zs(o.zh||'')):(o.zh||''));}
+function readCard(){
+ var c=RP.chendu,b=RP.bible,h='<section class="card" style="'+cvars('god')+'">'+st('book',T('讀經與晨讀','Bible reading & Morning Reading'),T('晨讀321・321互動聖經','Morning Reading 321 · Interactive Bible'));
+ h+='<div class="rgrid">';
+ h+='<div class="rbox"><div class="rhd">'+T('晨讀321','Morning Reading 321')+'</div>';
+ if(c){var pc=c.total?Math.round(c.read/c.total*100):0;
+  h+='<div class="rbig">'+c.read+'<small> / '+c.total+T(' 課',' lessons')+'</small></div><div class="gbar" style="'+cvars('god')+'"><i><em style="width:'+pc+'%"></em></i><span>'+pc+'%</span></div>'+
+  '<div class="meta"><span class="chip gold">'+T('連續 '+c.streak+' 天',c.streak+'-day streak')+'</span>'+(c.best?'<span>'+T('最長 '+c.best+' 天','best '+c.best)+'</span>':'')+'</div>'+
+  (c.last?'<div class="meta">'+T('最近：第 '+esc(c.last.no)+' 課 ','Last: lesson '+esc(c.last.no)+' ')+esc(c.last.title)+'</div>':'');}
+ else h+='<p class="empty">'+T('在晨讀321用同一組 321 帳號登入就會顯示。','Sign in to Morning Reading 321 with the same account.')+'</p>';
+ h+='<button class="btn ghost sm" data-act="readOpen" data-id="chendu">'+T('開啟晨讀321','Open Morning Reading')+'</button></div>';
+ h+='<div class="rbox"><div class="rhd">'+T('321互動聖經','Interactive Bible')+'</div>';
+ if(b){var pb=Math.round(b.chapters/1189*1000)/10;
+  h+='<div class="rbig">'+b.chapters+'<small> / 1189'+T(' 章',' ch')+'</small></div><div class="gbar" style="'+cvars('god')+'"><i><em style="width:'+Math.min(100,pb)+'%"></em></i><span>'+pb+'%</span></div>'+
+  '<div class="meta"><span class="chip gold">'+T('近 7 天讀了 '+readDays(b.days,7)+' 天',readDays(b.days,7)+' of last 7 days')+'</span></div>'+
+  (b.last?'<div class="meta">'+T('最近：','Last: ')+esc(nm3(b.last))+' '+b.last.ch+T(' 章','')+'</div>':'')+
+  (b.plan?'<div class="meta">'+T('計畫：','Plan: ')+esc(nm3(b.plan.name))+(b.plan.total?' '+b.plan.done+'/'+b.plan.total:'')+'</div>':'');}
+ else h+='<p class="empty">'+T('在互動聖經用同一組 321 帳號登入就會顯示。','Sign in to the Interactive Bible with the same account.')+'</p>';
+ h+='<button class="btn ghost sm" data-act="readOpen" data-id="bible">'+T('開啟互動聖經','Open Interactive Bible')+'</button></div></div>';
+ if(c||b)h+='<div class="btns"><button class="btn ghost sm" data-act="readRefresh">'+T('重新整理','Refresh')+'</button></div>';
+ return h+'</section>';
+}
+function readCtx(){
+ var c=RP.chendu,b=RP.bible,o=[];
+ if(c)o.push(T('【晨讀321】讀過 ','[Morning Reading 321] read ')+c.read+'/'+c.total+T(' 課，連續 ',' lessons, streak ')+c.streak+T(' 天',' days')+(c.last?T('，最近：第 ',' , last: lesson ')+c.last.no+T(' 課 ',' ')+c.last.title:''));
+ if(b)o.push(T('【互動聖經】讀過 ','[Interactive Bible] read ')+b.chapters+T(' 章；近 30 天讀經 ',' chapters; reading days in last 30: ')+readDays(b.days,30)+T(' 天','')+(b.last?T('；最近：','; last: ')+nm3(b.last)+' '+b.last.ch:'')+(b.plan&&b.plan.total?T('；讀經計畫 ','; plan ')+b.plan.done+'/'+b.plan.total:''));
+ return o.join('\n');
 }

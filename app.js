@@ -1,6 +1,6 @@
 (function(){
 var KEY='steward321.v1',LKEY='steward321.lang';
-var ZS={"並":"并","亞":"亚","佔":"占","來":"来","係":"系","個":"个","們":"们","備":"备","傳":"传","傷":"伤","價":"价","優":"优","儲":"储","兒":"儿","內":"内","兩":"两","冊":"册","別":"别","刪":"删","則":"则","剛":"刚","劃":"划","動":"动","務":"务","勝":"胜","勵":"励","匯":"汇","區":"区","協":"协","參":"参","唸":"念","問":"问","啟":"启","單":"单","嗎":"吗","國":"国","圍":"围","圓":"圆","圖":"图","團":"团","報":"报","場":"场","塊":"块","媽":"妈","學":"学","寢":"寝","實":"实","寫":"写","將":"将","專":"专","對":"对","導":"导","層":"层","屬":"属","帳":"账","帶":"带","幣":"币","幫":"帮","幾":"几","強":"强","後":"后","從":"从","復":"复","悅":"悦","惡":"恶","愛":"爱","態":"态","慣":"惯","慮":"虑","憑":"凭","應":"应","懷":"怀","戰":"战","捨":"舍","掛":"挂","換":"换","撥":"拨","擇":"择","擋":"挡","據":"据","敗":"败","數":"数","斷":"断","於":"于","時":"时","暫":"暂","曆":"历","書":"书","會":"会","東":"东","條":"条","業":"业","榮":"荣","樂":"乐","樓":"楼","標":"标","樣":"样","樹":"树","機":"机","檔":"档","檢":"检","權":"权","歡":"欢","歸":"归","殺":"杀","氣":"气","沒":"没","況":"况","淺":"浅","減":"减","準":"准","溫":"温","滿":"满","潔":"洁","瀏":"浏","灣":"湾","為":"为","無":"无","熱":"热","狀":"状","獎":"奖","獻":"献","現":"现","環":"环","產":"产","畫":"画","異":"异","當":"当","疇":"畴","療":"疗","發":"发","確":"确","碼":"码","礎":"础","禱":"祷","稱":"称","穌":"稣","筆":"笔","節":"节","範":"范","簡":"简","糧":"粮","紀":"纪","約":"约","紐":"纽","純":"纯","紙":"纸","級":"级","組":"组","結":"结","絡":"络","給":"给","統":"统","經":"经","網":"网","緊":"紧","緒":"绪","線":"线","編":"编","練":"练","繳":"缴","續":"续","羅":"罗","義":"义","習":"习","聖":"圣","聯":"联","聰":"聪","職":"职","腦":"脑","與":"与","舊":"旧","華":"华","藍":"蓝","蘭":"兰","處":"处","虛":"虚","號":"号","蟲":"虫","補":"补","裝":"装","裡":"里","製":"制","複":"复","見":"见","規":"规","視":"视","親":"亲","覺":"觉","覽":"览","觀":"观","訂":"订","訊":"讯","討":"讨","託":"托","記":"记","設":"设","許":"许","訴":"诉","註":"注","評":"评","試":"试","詩":"诗","話":"话","誇":"夸","認":"认","語":"语","誠":"诚","說":"说","誰":"谁","課":"课","調":"调","請":"请","論":"论","謀":"谋","謙":"谦","謝":"谢","謹":"谨","證":"证","識":"识","議":"议","讀":"读","變":"变","讓":"让","豈":"岂","負":"负","財":"财","責":"责","買":"买","費":"费","貼":"贴","資":"资","賜":"赐","賴":"赖","踐":"践","載":"载","輕":"轻","輪":"轮","輯":"辑","輸":"输","轉":"转","這":"这","連":"连","週":"周","進":"进","運":"运","過":"过","達":"达","適":"适","選":"选","還":"还","邊":"边","醫":"医","釘":"钉","鈕":"钮","銀":"银","錄":"录","鍵":"键","鎖":"锁","鐘":"钟","鑰":"钥","長":"长","閉":"闭","開":"开","間":"间","閱":"阅","關":"关","陰":"阴","陳":"陈","階":"阶","隨":"随","險":"险","隱":"隐","離":"离","雲":"云","電":"电","靈":"灵","靜":"静","頁":"页","項":"项","順":"顺","預":"预","領":"领","頭":"头","頻":"频","題":"题","額":"额","願":"愿","類":"类","顧":"顾","顯":"显","飯":"饭","飲":"饮","飾":"饰","餘":"余","馬":"马","驕":"骄","驗":"验","驟":"骤","體":"体","麼":"么","點":"点","齒":"齿","著":"着","藉":"藉","「":"“","」":"”"};
+var ZS={"並":"并","亞":"亚","佔":"占","來":"来","係":"系","個":"个","們":"们","備":"备","傳":"传","傷":"伤","價":"价","優":"优","儲":"储","兒":"儿","內":"内","兩":"两","冊":"册","別":"别","刪":"删","則":"则","剛":"刚","劃":"划","動":"动","務":"务","勝":"胜","勵":"励","匯":"汇","區":"区","協":"协","參":"参","唸":"念","問":"问","啟":"启","單":"单","嗎":"吗","國":"国","圍":"围","圓":"圆","圖":"图","團":"团","報":"报","場":"场","塊":"块","媽":"妈","學":"学","寢":"寝","實":"实","寫":"写","將":"将","專":"专","對":"对","導":"导","層":"层","屬":"属","帳":"账","帶":"带","幣":"币","幫":"帮","幾":"几","強":"强","後":"后","從":"从","復":"复","悅":"悦","惡":"恶","愛":"爱","態":"态","慣":"惯","慮":"虑","憑":"凭","應":"应","懷":"怀","戰":"战","捨":"舍","掛":"挂","換":"换","撥":"拨","擇":"择","擋":"挡","據":"据","敗":"败","數":"数","斷":"断","於":"于","時":"时","暫":"暂","曆":"历","書":"书","會":"会","東":"东","條":"条","業":"业","榮":"荣","樂":"乐","樓":"楼","標":"标","樣":"样","樹":"树","機":"机","檔":"档","檢":"检","權":"权","歡":"欢","歸":"归","殺":"杀","氣":"气","沒":"没","況":"况","淺":"浅","減":"减","準":"准","溫":"温","滿":"满","潔":"洁","瀏":"浏","灣":"湾","為":"为","無":"无","熱":"热","狀":"状","獎":"奖","獻":"献","現":"现","環":"环","產":"产","畫":"画","異":"异","當":"当","疇":"畴","療":"疗","發":"发","確":"确","碼":"码","礎":"础","禱":"祷","稱":"称","穌":"稣","筆":"笔","節":"节","範":"范","簡":"简","糧":"粮","紀":"纪","約":"约","紐":"纽","純":"纯","紙":"纸","級":"级","組":"组","結":"结","絡":"络","給":"给","統":"统","經":"经","網":"网","緊":"紧","緒":"绪","線":"线","編":"编","練":"练","繳":"缴","續":"续","羅":"罗","義":"义","習":"习","聖":"圣","聯":"联","聰":"聪","職":"职","腦":"脑","與":"与","舊":"旧","華":"华","藍":"蓝","蘭":"兰","處":"处","虛":"虚","號":"号","蟲":"虫","補":"补","裝":"装","裡":"里","製":"制","複":"复","見":"见","規":"规","視":"视","親":"亲","覺":"觉","覽":"览","觀":"观","訂":"订","計":"计","訊":"讯","討":"讨","託":"托","記":"记","設":"设","許":"许","訴":"诉","註":"注","評":"评","試":"试","詩":"诗","話":"话","誇":"夸","認":"认","語":"语","誠":"诚","說":"说","誰":"谁","課":"课","調":"调","請":"请","論":"论","謀":"谋","謙":"谦","謝":"谢","謹":"谨","證":"证","識":"识","議":"议","讀":"读","變":"变","讓":"让","豈":"岂","負":"负","財":"财","責":"责","買":"买","費":"费","貼":"贴","資":"资","賜":"赐","賴":"赖","踐":"践","載":"载","輕":"轻","輪":"轮","輯":"辑","輸":"输","轉":"转","這":"这","連":"连","週":"周","進":"进","運":"运","過":"过","達":"达","適":"适","選":"选","還":"还","邊":"边","醫":"医","釘":"钉","鈕":"钮","銀":"银","錄":"录","鍵":"键","鎖":"锁","鐘":"钟","鑰":"钥","長":"长","閉":"闭","開":"开","間":"间","閱":"阅","關":"关","陰":"阴","陳":"陈","階":"阶","隨":"随","險":"险","隱":"隐","離":"离","雲":"云","電":"电","靈":"灵","靜":"静","頁":"页","項":"项","順":"顺","預":"预","領":"领","頭":"头","頻":"频","題":"题","額":"额","願":"愿","類":"类","顧":"顾","顯":"显","飯":"饭","飲":"饮","飾":"饰","餘":"余","馬":"马","驕":"骄","驗":"验","驟":"骤","體":"体","麼":"么","點":"点","齒":"齿","著":"着","藉":"藉","「":"“","」":"”"};
 var L='zh';
 try{L=localStorage.getItem(LKEY)||'';}catch(e){}
 if(L!=='zh'&&L!=='zs'&&L!=='en'){var nl=(navigator.language||'').toLowerCase();L=nl.indexOf('zh')===0?((nl.indexOf('cn')>0||nl.indexOf('hans')>0||nl.indexOf('sg')>0)?'zs':'zh'):(nl?'en':'zh');}
@@ -468,7 +468,7 @@ document.addEventListener('input',function(e){
 window.addEventListener('storage',function(e){if(e.key&&e.key.indexOf('p4_sched')===0&&view==='today')render();});
 
 /* ================= 321 App 共用功能（ES5）：字級、主題、朗讀、經文美圖、空中團契、自動更新、小智強化 ================= */
-var APPVER='v2026.1111.0847';
+var APPVER='v2026.1111.0930';
 var SETK='steward321.set',SET={font:0,theme:''};
 try{var _st=JSON.parse(localStorage.getItem(SETK)||'{}');if(_st){SET.font=+_st.font||0;SET.theme=_st.theme||'';}}catch(e){}
 function saveSet(){try{localStorage.setItem(SETK,JSON.stringify(SET));}catch(e){}}
@@ -1028,9 +1028,9 @@ function acctChanged(kind){
    if(err){toast(cloudErr(err));return;}
    ui.restore=o;ui.rtab='set';view='review';render();
   });
-  ACC.syncProfile(function(e,n){if(n)toast(T('已帶入共用設定（空中團契開通）','Shared settings applied'));});loadPub(true);loadLife(true);
+  ACC.syncProfile(function(e,n){if(n)toast(T('已帶入共用設定（空中團契開通）','Shared settings applied'));});loadPub(true);loadLife(true);loadRead(true);
  }
- else if(kind==='logout'){PUB={evs:null,at:0,busy:false};LIFE.pub=null;try{localStorage.removeItem('steward321.pub');localStorage.removeItem('steward321.life');}catch(e){}}
+ else if(kind==='logout'){PUB={evs:null,at:0,busy:false};LIFE.pub=null;RP.chendu=null;RP.bible=null;try{localStorage.removeItem('steward321.chendu');localStorage.removeItem('steward321.bible');localStorage.removeItem('steward321.pub');localStorage.removeItem('steward321.life');}catch(e){}}
  render();
 }
 function cloudErr(e){return e==='gone'?T('雲端找不到資料','No cloud data found'):e==='key'?T('帳號碼不正確','The account code is not correct'):e==='nocrypto'?T('這個瀏覽器不支援加密','This browser cannot encrypt'):e==='fmt'?T('雲端資料讀不出來','Cloud data could not be read'):e==='net'?T('網路連不上，稍後再試','No connection, try again later'):T('雲端暫時無法使用（','Cloud unavailable (')+e+T('）',')');}
@@ -1272,7 +1272,7 @@ function vArea(k){
  for(i=0;i<S.habits.length;i++){if(S.habits[i].area===k){h+=habitRow(S.habits[i],true);n++;}}
  if(!n)h+='<p class="empty">'+T('還沒有操練項目，從下面加一項開始。','No practices yet. Add one below.')+'</p>';
  h+='</div><div class="form"><input id="nh_t" class="full" placeholder="'+T('新的操練，例如：背一節經文','New practice, e.g. memorise a verse')+'" aria-label="'+T('操練名稱','Practice')+'"><select id="nh_s" aria-label="'+T('範疇','Area')+'">'+opts(a.subs,0)+'</select><select id="nh_per" aria-label="'+T('頻率','Frequency')+'">'+optsVal(PER_OPTS,7)+'</select><button class="btn full" data-act="addHab" data-id="'+k+'">'+T('加入操練','Add practice')+'</button></div></section>';
- if(k==='god'){h+=prayerCard();h+='<section class="card" style="'+cvars('god')+'">'+st('book',T('靈修筆記','Devotional notes'),T('資訊 → 啟示 → 信服 → 實踐','Information → revelation → conviction → practice'))+
+ if(k==='god'){h+=readCard();h+=prayerCard();h+='<section class="card" style="'+cvars('god')+'">'+st('book',T('靈修筆記','Devotional notes'),T('資訊 → 啟示 → 信服 → 實踐','Information → revelation → conviction → practice'))+
   jText('dv_ref',T('今日經文','Today\'s passage'),T('例如：約翰福音 15:5','e.g. John 15:5'))+jText('dv_rev',T('神給我的啟示','What God showed me'),T('聖靈讓我看見什麼？','What did the Spirit open my eyes to?'))+jText('dv_act',T('我要實踐','What I will do'),T('今天具體怎麼行出來？','How will I live it out today?'))+jText('dv_pray',T('禱告','Prayer'),T('把領受化成禱告','Turn it into prayer'))+pastJ('dv_rev',T('近日的啟示','Recent insights'))+'</section>';}
  if(k==='self')h+='<section class="card" style="'+cvars('self')+'">'+st('self',T('舊人與新人','Old self and new self'),T('看見自己，也看見恩典','See yourself, and see grace'))+
   jText('old',T('今天顯出的舊人（有己）','Where my old self showed today'),T('哪裡驕傲、離開本位、想抓住權力？','Where was I proud, out of place, grasping control?'))+jText('neu',T('新人無己的回應','How the new self responded'),T('怎樣謙卑、回到本位，讓神作神？','How did I humble myself and let God be God?'))+pastJ('neu',T('近日的得勝','Recent victories'))+'</section>'+lifeCard();
@@ -1440,6 +1440,7 @@ function ctxFor(mode){
   for(wk=weekKey(r.from);wk<=end;wk=addDays(wk,7)){rv=S.reviews[wk];if(!rv)continue;for(f in RF){if(rv[f])lines.push('- '+md(wk)+' '+RF[f]+'：'+String(rv[f]).slice(0,mode==='w'?300:120));}}}
  else lines.push(T('（使用者選擇不分享筆記內容）','(The user chose not to share journal notes)'));
  var lc=lifeCtx();if(lc)lines.push(lc);
+ var rc=readCtx();if(rc)lines.push(rc);
  var ws=S.wheels,wl=ws[ws.length-1];
  if(wl){var subs=allSubs(),pairs=[];for(i=0;i<subs.length;i++)pairs.push({n:subs[i].n,v:wl.v[i]});pairs.sort(function(x,y){return x.v-y.v;});
   lines.push(T('【生命之輪】最近 ','[Life wheel] latest ')+wl.date+T('，最低三項：','; lowest: ')+pairs[0].n+' '+pairs[0].v+'、'+pairs[1].n+' '+pairs[1].v+'、'+pairs[2].n+' '+pairs[2].v);}
@@ -1528,6 +1529,7 @@ function cloudPanel(){
   h+='<p class="empty"><b style="color:var(--self)">✓ '+T('已登入','Signed in')+'</b> · '+(at?T('上次同步：','Last sync: ')+new Date(at).toLocaleString():T('尚未同步','Not synced yet'))+(ui.acctErr&&ui.acctErr!=='busy'?' · <span style="color:var(--warn)">'+esc(cloudErr(ui.acctErr))+'</span>':'')+'</p>';
   h+='<div class="list">'+
    '<div class="row"><i class="bar2" style="background:#2d3a8c"></i><div class="grow"><div class="ttl">'+T('321每日得勝','321 Daily Victory')+'</div><div class="meta">'+(PUB.evs?T('時程已互通・更新於 ','Schedule shared · updated ')+new Date(PUB.at).toLocaleString():T('在每日得勝用同一組帳號碼登入，時程就會自動出現在管家','Sign in to Daily Victory with the same code to share its schedule'))+'</div></div></div>'+
+   '<div class="row"><i class="bar2" style="background:var(--god)"></i><div class="grow"><div class="ttl">'+T('晨讀321・321互動聖經','Morning Reading · Interactive Bible')+'</div><div class="meta">'+((RP.chendu||RP.bible)?T('讀經進度已互通，顯示在「與神」頁','Reading progress shared on the God page'):T('在晨讀321與互動聖經用同一組帳號碼登入，讀經進度就會出現在「與神」頁','Sign in to both with the same code to show reading progress on the God page'))+'</div></div></div>'+
    '<div class="row"><i class="bar2" style="background:var(--self)"></i><div class="grow"><div class="ttl">'+T('321生命操練','321 Life Practice')+'</div><div class="meta">'+(LIFE.pub?T('操練紀錄已互通・更新於 ','Practice shared · updated ')+new Date(LIFE.pub.at).toLocaleString():T('在生命操練用同一組帳號碼登入，進展就會出現在「與己」頁','Sign in to Life Practice with the same code to show your progress on the Self page'))+'</div></div></div>'+
    '<div class="row"><i class="bar2" style="background:var(--gold)"></i><div class="grow"><div class="ttl">'+T('國度321空中團契','Kingdom 321 Fellowship')+'</div><div class="meta">'+(fa?T('已開通，用同一組帳號的 App 都不必再輸入授權碼','Unlocked for every app using this account'):T('在管家裡開啟團契 App 輸入一次授權碼，其他 App 就通用','Enter the access code once inside the Steward; other apps will share it'))+'</div></div></div></div>';
   h+='<div class="btns"><button class="btn sm" data-act="cloudNow">'+T('立即同步','Sync now')+'</button><button class="btn ghost sm" data-act="acctOpen">'+T('帳號碼與登出','Account code / sign out')+'</button></div>';
@@ -1637,10 +1639,12 @@ function plusAct(act,id,el,e){
  case 'homeHide':S.home.hide[id]=!S.home.hide[id];ui.layout=true;break;
  case 'homeReset':S.home={order:['verse','top3','sched','habits','due','more','rings','care','evening','fel'],hide:{}};ui.layout=true;break;
  case 'remIcs':remIcs();return true;
+ case 'readOpen':openApp(id==='bible'?BIBLE_URL:CHENDU_URL,id==='bible'?T('321互動聖經','Interactive Bible'):T('晨讀321','Morning Reading 321'));return true;
+ case 'readRefresh':loadRead(true);toast(T('正在更新…','Updating…'));return true;
  case 'lifeOpen':openApp(LIFE_URL,T('321生命操練','321 Life Practice'));return true;
  case 'lifeRefresh':loadLife(true);toast(T('正在更新…','Updating…'));return true;
  case 'acctOpen':if(ACC)ACC.open({lang:L,onChange:acctChanged});return true;
- case 'cloudNow':toast(T('正在同步…','Syncing…'));acctPush(function(err){toast(err?cloudErr(err):T('已同步到 321 帳號','Synced'));});ACC.syncProfile();loadPub(true);loadLife(true);return true;
+ case 'cloudNow':toast(T('正在同步…','Syncing…'));acctPush(function(err){toast(err?cloudErr(err):T('已同步到 321 帳號','Synced'));});ACC.syncProfile();loadPub(true);loadLife(true);loadRead(true);return true;
  case 'restoreYes':applyRestore(ui.restore);return true;
  case 'restoreNo':ui.restore=null;ui.restoreCloud=null;render();return true;
  case 'fileBk':fileBackup();return true;
@@ -1718,6 +1722,49 @@ function lifeCtx(){
   (bs.length?T('；新人無己最好的：','; best new-self areas: ')+bs.slice(0,3).map(function(x){return x.n+' '+x.v+'/15';}).join('、'):'');
 }
 
+/* ---------- 晨讀321（'chendu-pub'）與 321互動聖經（'bible-pub'） ---------- */
+var CHENDU_URL='https://spch321-sudo.github.io/chendu321/',BIBLE_URL='https://spch321-sudo.github.io/bible/';
+var RP={chendu:null,bible:null,busy:{},chk:{}};
+try{RP.chendu=JSON.parse(localStorage.getItem('steward321.chendu')||'null');RP.bible=JSON.parse(localStorage.getItem('steward321.bible')||'null');}catch(e){}
+function loadRead(force){
+ if(!acctOn())return;
+ var list=[['chendu','chendu-pub'],['bible','bible-pub']];
+ for(var i=0;i<list.length;i++)(function(k,slot){
+  if(RP.busy[k]||(!force&&RP.chk[k]&&Date.now()-RP.chk[k]<15*60000))return;
+  RP.busy[k]=1;RP.chk[k]=Date.now();
+  ACC.fetch(slot,function(err,o){RP.busy[k]=0;if(!err&&o){RP[k]=o;try{localStorage.setItem('steward321.'+k,JSON.stringify(o));}catch(e){}if(view==='god'||view==='review')render();}});
+ })(list[i][0],list[i][1]);
+}
+function readDays(arr,n){var c=0,from=addDays(ds(),-(n-1));if(!arr)return 0;for(var i=0;i<arr.length;i++)if(arr[i]>=from)c++;return c;}
+function nm3(o){if(!o)return '';return L==='en'?(o.en||o.zh):(L==='zs'?(o.zs||zs(o.zh||'')):(o.zh||''));}
+function readCard(){
+ var c=RP.chendu,b=RP.bible,h='<section class="card" style="'+cvars('god')+'">'+st('book',T('讀經與晨讀','Bible reading & Morning Reading'),T('晨讀321・321互動聖經','Morning Reading 321 · Interactive Bible'));
+ h+='<div class="rgrid">';
+ h+='<div class="rbox"><div class="rhd">'+T('晨讀321','Morning Reading 321')+'</div>';
+ if(c){var pc=c.total?Math.round(c.read/c.total*100):0;
+  h+='<div class="rbig">'+c.read+'<small> / '+c.total+T(' 課',' lessons')+'</small></div><div class="gbar" style="'+cvars('god')+'"><i><em style="width:'+pc+'%"></em></i><span>'+pc+'%</span></div>'+
+  '<div class="meta"><span class="chip gold">'+T('連續 '+c.streak+' 天',c.streak+'-day streak')+'</span>'+(c.best?'<span>'+T('最長 '+c.best+' 天','best '+c.best)+'</span>':'')+'</div>'+
+  (c.last?'<div class="meta">'+T('最近：第 '+esc(c.last.no)+' 課 ','Last: lesson '+esc(c.last.no)+' ')+esc(c.last.title)+'</div>':'');}
+ else h+='<p class="empty">'+T('在晨讀321用同一組 321 帳號登入就會顯示。','Sign in to Morning Reading 321 with the same account.')+'</p>';
+ h+='<button class="btn ghost sm" data-act="readOpen" data-id="chendu">'+T('開啟晨讀321','Open Morning Reading')+'</button></div>';
+ h+='<div class="rbox"><div class="rhd">'+T('321互動聖經','Interactive Bible')+'</div>';
+ if(b){var pb=Math.round(b.chapters/1189*1000)/10;
+  h+='<div class="rbig">'+b.chapters+'<small> / 1189'+T(' 章',' ch')+'</small></div><div class="gbar" style="'+cvars('god')+'"><i><em style="width:'+Math.min(100,pb)+'%"></em></i><span>'+pb+'%</span></div>'+
+  '<div class="meta"><span class="chip gold">'+T('近 7 天讀了 '+readDays(b.days,7)+' 天',readDays(b.days,7)+' of last 7 days')+'</span></div>'+
+  (b.last?'<div class="meta">'+T('最近：','Last: ')+esc(nm3(b.last))+' '+b.last.ch+T(' 章','')+'</div>':'')+
+  (b.plan?'<div class="meta">'+T('計畫：','Plan: ')+esc(nm3(b.plan.name))+(b.plan.total?' '+b.plan.done+'/'+b.plan.total:'')+'</div>':'');}
+ else h+='<p class="empty">'+T('在互動聖經用同一組 321 帳號登入就會顯示。','Sign in to the Interactive Bible with the same account.')+'</p>';
+ h+='<button class="btn ghost sm" data-act="readOpen" data-id="bible">'+T('開啟互動聖經','Open Interactive Bible')+'</button></div></div>';
+ if(c||b)h+='<div class="btns"><button class="btn ghost sm" data-act="readRefresh">'+T('重新整理','Refresh')+'</button></div>';
+ return h+'</section>';
+}
+function readCtx(){
+ var c=RP.chendu,b=RP.bible,o=[];
+ if(c)o.push(T('【晨讀321】讀過 ','[Morning Reading 321] read ')+c.read+'/'+c.total+T(' 課，連續 ',' lessons, streak ')+c.streak+T(' 天',' days')+(c.last?T('，最近：第 ',' , last: lesson ')+c.last.no+T(' 課 ',' ')+c.last.title:''));
+ if(b)o.push(T('【互動聖經】讀過 ','[Interactive Bible] read ')+b.chapters+T(' 章；近 30 天讀經 ',' chapters; reading days in last 30: ')+readDays(b.days,30)+T(' 天','')+(b.last?T('；最近：','; last: ')+nm3(b.last)+' '+b.last.ch:'')+(b.plan&&b.plan.total?T('；讀經計畫 ','; plan ')+b.plan.done+'/'+b.plan.total:''));
+ return o.join('\n');
+}
+
 var SKEY='steward321.splash';
 function showSplash(){
  var now=new Date(),hr=now.getHours(),greet=hr<5?T('夜深了','Late night'):hr<11?T('早安','Good morning'):hr<18?T('午安','Good afternoon'):T('晚安','Good evening');
@@ -1730,7 +1777,7 @@ applyChrome();
 render();
 refreshCals(false);
 felLoad();
-if(acctOn()){ACC.syncProfile(function(e,n){if(n&&view==='today')render();});loadPub(false);loadLife(false);}
+if(acctOn()){ACC.syncProfile(function(e,n){if(n&&view==='today')render();});loadPub(false);loadLife(false);loadRead(false);}
 updInit();
 (function(){var seen='';try{seen=localStorage.getItem(SKEY)||'';}catch(e){}if(!S.onb)showOnb();else if(seen!==ds())showSplash();if(lockOn())showLock();})();
 })();

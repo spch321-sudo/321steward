@@ -482,7 +482,7 @@ applyChrome();
 render();
 refreshCals(false);
 felLoad();
-if(acctOn()){ACC.syncProfile(function(e,n){if(n&&view==='today')render();});loadPub(false);loadLife(false);}
+if(acctOn()){ACC.syncProfile(function(e,n){if(n&&view==='today')render();});loadPub(false);loadLife(false);loadRead(false);}
 updInit();
 (function(){var seen='';try{seen=localStorage.getItem(SKEY)||'';}catch(e){}if(!S.onb)showOnb();else if(seen!==ds())showSplash();if(lockOn())showLock();})();
 })();
